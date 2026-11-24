@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WrenchMate case study by Mariyam Nesha – car-service user app, driver app and website UX/UI design.">
+  <title>Wrenchmate | Mariyam Nesha</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Mariyam Nesha – WrenchMate case study
+       ========================================================= */
+
+    /* ---------- 1. Variables & reset ---------- */
+    :root {
+      --orange: #F47B20;
+      --brown: #7A3E10;
+      --brown-2: #8C4A10;
+      --text-brown: #5A2A0A;
+      --soft: #FCE8DC;
+      --soft-2: #FDF2EA;
+      --label: #F9CDAE;
+      --dash: #D9B49B;
+      --dark: #161616;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- 2. Navbar ---------- */
+    .nav-wrap { padding: 40px 70px 0; }
+    .navbar {
+      max-width: 1300px; margin: 0 auto; height: 86px; padding: 0 8px 0 34px;
+      background: var(--dark); border-radius: 50px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar .logo img { height: 100px; }
+    .nav-links { display: flex; list-style: none; gap: 10px; }
+    .nav-links a {
+      display: block; color: #fff; font-size: 20px; padding: 18px 40px; border-radius: 40px;
+      transition: background .25s, color .25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { background: var(--orange); color: #fff; }
+
+    /* ---------- 3. Layout & section titles ---------- */
+    main { max-width: 1300px; margin: 0 auto; padding: 0 70px 100px; box-sizing: content-box; }
+    section.block { margin-top: 110px; position: relative; }
+    .soft-box { background: var(--soft); border-radius: 36px; padding: 70px 70px 80px; position: relative; }
+
+    .sec-title { text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -0.5px; }
+    .sec-title span { color: var(--orange); }
+    .sec-title span.alt { color: #C0601A; }
+    .sec-sub { text-align: center; font-size: 18px; line-height: 1.6; color: #333; max-width: 760px; margin: 18px auto 0; }
+    .sec-sub.w-860 { max-width: 860px; }
+    .sec-sub.w-820 { max-width: 820px; }
+    .sec-sub.w-780 { max-width: 780px; }
+    .sec-sub.w-720 { max-width: 720px; }
+    .sec-sub.w-640 { max-width: 640px; }
+    .sec-sub.w-560 { max-width: 560px; }
+
+    /* ---------- 4. Hero & overview ---------- */
+    .page-title { display: flex; align-items: center; justify-content: center; margin: 70px 0 44px; }
+    .page-title h1 { font-size: 52px; font-weight: 600; letter-spacing: -0.5px; }
+
+    .hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.58fr); gap: 48px; align-items: stretch; }
+
+    /* Photo with see-through white frame */
+    .hero-img { position: relative; height: 100%; border-radius: 30px; overflow: hidden; background: #F1E6DD; box-shadow: 0 10px 30px rgba(0,0,0,.08); cursor: zoom-in; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-img::after { content: ""; position: absolute; inset: 0; border: 16px solid rgba(255,255,255,.35); border-radius: 30px; pointer-events: none; }
+
+    .overview { background: #F5E7DC; border-radius: 30px; padding: 44px 44px 40px; }
+    .overview h2 { color: var(--brown); font-size: 30px; font-weight: 600; margin-bottom: 14px; }
+    .overview > p { font-size: 18px; line-height: 1.6; color: #333; margin-bottom: 30px; }
+    .ov-row { display: grid; grid-template-columns: minmax(0,0.62fr) minmax(0,1fr); gap: 26px; margin-bottom: 26px; }
+
+    .fieldset { min-width: 0; border: 1.5px solid #E2C9B8; border-radius: 14px; padding: 0 22px 18px; position: relative; }
+    .fieldset legend { font-size: 22px; font-weight: 600; padding: 0 8px; margin-left: -8px; }
+    .fieldset .tools { display: flex; gap: 36px; padding: 8px 26px 0; }
+    .fieldset .tools img { width: 50px; height: 50px; border-radius: 10px; }
+    .fieldset .val { font-size: 17px; font-weight: 500; padding-top: 16px; line-height: 1.7; }
+    .overview > .fieldset .val { text-align: justify; }
+
+    /* ---------- 5. Design process ---------- */
+    .process { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; max-width: 1150px; margin: 50px auto 0; position: relative; }
+    .step {
+      --c: #EF6C98; --bg: #FDE3EE;
+      position: relative; padding: 26px 16px 28px; text-align: center;
+      border: 2px solid var(--c); border-radius: 30px;
+      background: linear-gradient(180deg, var(--bg), #fff 120%);
+      box-shadow: 0 8px 20px rgba(0,0,0,.04);
+    }
+    .step:nth-child(2), .step:nth-child(4) { --c: #F2853A; --bg: #FDE6D6; }
+    .step:nth-child(3) { --c: #F4C23A; --bg: #FFF4D4; }
+    .step .ic {
+      width: 92px; height: 92px; border-radius: 50%; margin: 0 auto 18px;
+      background: rgba(255,255,255,.75); box-shadow: 0 6px 16px rgba(0,0,0,.06);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step .ic svg { width: 46px; height: 46px; }
+    .step h4 { font-size: 20px; font-weight: 600; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 2px dotted var(--c); }
+    .step p { font-size: 15px; font-weight: 500; line-height: 1.45; color: #222; }
+    /* connector line + dots between steps */
+    .step:not(:last-child)::after { content: ""; position: absolute; top: 46%; right: -42px; width: 42px; height: 2px; background: var(--c); }
+    .step:not(:last-child)::before {
+      content: ""; position: absolute; top: calc(46% - 5px); right: -10px; z-index: 1;
+      width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: -20px 0 0 var(--c);
+    }
+
+    /* ---------- 6. Quantitative research (donut charts) ---------- */
+    .charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1000px; margin: 46px auto 0; }
+    .chart {
+      --c: #3B8CE8; padding: 18px 20px 22px; border-radius: 14px;
+      border: 2px dashed color-mix(in srgb, var(--c) 45%, white);
+      background: color-mix(in srgb, var(--c) 4%, white);
+    }
+    .chart h4 { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 600; margin-bottom: 14px; }
+    .chart h4 i {
+      font-style: normal; width: 30px; height: 30px; border-radius: 8px; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: color-mix(in srgb, var(--c) 15%, white);
+    }
+    .chart .body { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; }
+    .donut { width: 120px; aspect-ratio: 1; border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; }
+    .donut::before { content: ""; position: absolute; inset: 26px; background: #fff; border-radius: 50%; }
+    .donut span { position: relative; font-size: 28px; }
+    .legend2 { list-style: none; font-size: 13px; color: #333; display: flex; flex-direction: column; gap: 8px; }
+    .legend2 li { display: grid; grid-template-columns: 12px 1fr auto; gap: 8px; align-items: center; line-height: 1.3; }
+    .legend2 li::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--d); }
+    .legend2 b { font-weight: 600; }
+
+    /* ---------- 7. Competitor analysis ---------- */
+    .comp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 22px; max-width: 1100px; margin: 46px auto 0; }
+    .comp .brand { border-radius: 10px; overflow: hidden; aspect-ratio: 2.5 / 1; background: #fff; border: 3px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,.08); }
+    .comp .brand img { width: 100%; height: 100%; object-fit: cover; }
+    .comp .cell {
+      background: #fff; border-radius: 10px; min-height: 64px; padding: 10px 16px;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      font-size: 16px; font-weight: 500; line-height: 1.35; color: #222; box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    }
+    .comp .cell.head { background: var(--label); border: 3px solid #fff; }
+
+    /* ---------- 8. User persona ---------- */
+    .persona { display: grid; grid-template-columns: 0.75fr 1fr; gap: 22px; max-width: 1100px; margin: 46px auto 0; }
+    .p-col { display: flex; flex-direction: column; gap: 18px; }
+    .p-card { background: var(--soft); border-radius: 22px; padding: 28px 32px; }
+    .p-card h5 { color: #666; font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+    .p-card p, .p-card li { color: var(--text-brown); font-size: 17px; line-height: 1.6; font-weight: 500; }
+    .p-card ul { padding-left: 22px; }
+    .p-card.wide { max-width: 1100px; margin: 18px auto 0; }
+    .avatar { width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 16px; background: #eadbd0; cursor: zoom-in; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .p-name { text-align: center; color: #B5642A; font-size: 24px; font-weight: 600; margin-bottom: 18px; }
+    .facts { display: grid; grid-template-columns: auto 1fr; gap: 12px 40px; font-size: 18px; }
+    .facts dt { color: #777; font-weight: 500; }
+    .facts dd { color: var(--text-brown); font-weight: 600; }
+    .quote { position: relative; padding: 0 20px 22px; font-size: 17px; line-height: 1.6; text-align: center; color: var(--text-brown); font-weight: 500; }
+    .quote::before { content: "“"; position: absolute; left: -6px; top: -16px; font-size: 54px; font-weight: 700; color: #222; }
+    .quote::after  { content: "”"; position: absolute; right: 6px; bottom: -34px; font-size: 54px; font-weight: 700; color: #222; }
+    .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+    .chips span { background: #fff; border-radius: 30px; padding: 8px 22px; font-size: 16px; font-weight: 500; color: var(--text-brown); }
+
+    /* ---------- 9. Storyboard ---------- */
+    .storyboard { max-width: 900px; min-height: 300px; margin: 40px auto 0; border-radius: 6px; overflow: hidden; background: #F2F0EC; cursor: zoom-in; }
+    .storyboard img { width: 100%; height: auto; }
+
+    /* ---------- 10. Empathy map ---------- */
+    .empathy { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; max-width: 1150px; margin: 50px auto 0; }
+    .emp-col { display: flex; flex-direction: column; gap: 22px; }
+    .emp-col.side { padding-top: 54px; }
+    .emp-col.mid  { padding-top: 26px; }
+    .emp { border: 2px dashed var(--dash); border-radius: 22px; padding: 30px 34px 32px; }
+    .emp h4 { color: var(--brown); font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 16px; }
+    .emp h4 .em { font-size: 22px; margin-right: 6px; }
+    .emp ul { padding-left: 20px; }
+    .emp li { font-size: 16px; line-height: 1.75; color: #333; }
+
+    /* ---------- 11. Experience map ---------- */
+    .map-img { background: var(--soft-2); border-radius: 24px; margin-top: 44px; padding: 26px; cursor: zoom-in; }
+    .map-img img { width: 100%; height: auto; min-height: 200px; margin: 0 auto; object-fit: contain; }
+
+    /* ---------- 12. Wireframes ---------- */
+    .wires { display: grid; grid-template-columns: 1fr 70px 1fr 70px 1fr; align-items: center; max-width: 1050px; margin: 46px auto 0; }
+    .wire { text-align: center; }
+    /* whole wireframe shown as it is: no extra box, background or shadow
+       (your images already have their own rounded corners, frame and shadow) */
+    .wire .shot { cursor: zoom-in; }
+    .wire .shot img { width: 100%; height: auto; }
+    .wire span { display: block; font-size: 18px; margin-top: 18px; }
+    .arrow { height: 2px; background: #C0753E; position: relative; margin: 0 10px; top: -22px; }
+    .arrow::after {
+      content: ""; position: absolute; right: -2px; top: -5px; width: 10px; height: 10px;
+      border-right: 2px solid #C0753E; border-top: 2px solid #C0753E; transform: rotate(45deg);
+    }
+
+    /* ---------- 13. Design system ---------- */
+    .ds-box { padding-bottom: 150px; }
+    .typo { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; margin-top: 50px; padding: 0 60px; }
+    .typo h5 { font-size: 22px; font-weight: 500; }
+    .typo .fname { font-size: 96px; font-weight: 500; line-height: 1.15; margin: 6px 0 14px; }
+    .typo .chars { font-weight: 300; font-size: 30px; line-height: 1.2; color: #8a8a8a; word-break: break-all; }
+
+    .aa-wrap { text-align: center; }
+    .aa {
+      display: inline-flex; align-items: flex-end; gap: 2px; line-height: .8;
+      padding: 18px 14px 10px; position: relative;
+      background-image:   /* dashed frame around "Aa" */
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px);
+      background-size: 100% 1.5px, 100% 1.5px, 1.5px 100%, 1.5px 100%;
+      background-position: 0 6px, 0 calc(100% - 4px), 6px 0, calc(100% - 6px) 0;
+      background-repeat: no-repeat;
+    }
+    .aa .A { font-size: 220px; font-weight: 700; color: #7E4A1E; }
+    .aa .a { font-size: 175px; font-weight: 600; color: transparent; -webkit-text-stroke: 3px #7E4A1E; }
+    .weights { display: flex; justify-content: center; gap: 34px; margin-top: 18px; font-size: 18px; }
+    .weights span:nth-child(1) { font-weight: 400; }
+    .weights span:nth-child(2) { font-weight: 500; }
+    .weights span:nth-child(3) { font-weight: 600; }
+    .weights span:nth-child(4) { font-weight: 700; }
+
+    .swatches { display: flex; justify-content: center; gap: 18px; margin-top: -110px; position: relative; z-index: 2; padding: 0 40px; }
+    .sw {
+      width: 170px; aspect-ratio: 1; border: 10px solid #fff; border-radius: 6px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12); transition: transform .3s;
+    }
+    /* WrenchMate colour palette */
+    .sw:nth-child(1) { background: #3076E8; transform: rotate(-14deg); }
+    .sw:nth-child(2) { background: #121212; transform: rotate(20deg) translateY(14px); }
+    .sw:nth-child(3) { background: #FF5402; transform: rotate(-8deg) translateY(6px); }
+    .sw:nth-child(4) { background: #4CDA64; transform: rotate(24deg) translateY(30px); }
+    .sw:nth-child(5) { background: #4B43BD; transform: rotate(-16deg) translateY(14px); }
+    .sw:hover { transform: rotate(0) scale(1.05); }
+
+    /* ---------- 14. UI gallery (collapsible) ---------- */
+    .gallery { margin-top: 56px; border: 1.5px solid #e6e6e6; border-radius: 28px; position: relative; }
+    .gallery:not(.open) { min-height: 40px; }
+    .gallery-head {
+      position: absolute; top: -22px; left: 26px; padding: 0 14px;
+      background: #fff; border: none; cursor: pointer;
+      font-size: 28px; font-weight: 500; color: #111;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .chev {
+      width: 13px; height: 13px; border-left: 3px solid #111; border-top: 3px solid #111;
+      transform: rotate(45deg) translate(3px, 3px); transition: transform .3s;
+    }
+    .gallery:not(.open) .chev { transform: rotate(225deg) translate(3px, 3px); }
+    .gallery-body { overflow: hidden; transition: max-height .45s ease; }
+    .gallery:not(.open) .gallery-body { max-height: 0 !important; }
+    .g-in { padding: 56px 40px 40px; }
+
+    /* ----- App screens ----- */
+    /* phone screen: whole screen shown, nothing cropped (tops lined up) */
+    .ry-ph { position: relative; z-index: 1; border-radius: 10px; overflow: hidden; background: #fff; border: 1.5px solid #D2D9E3; cursor: zoom-in; }
+    .ry-ph img { width: 100%; height: auto; }
+
+    .ry-row { display: grid; gap: 12px; align-items: start; }
+    .ry-row.c3 { grid-template-columns: repeat(3, 1fr); }
+    .ry-row.c4 { grid-template-columns: repeat(4, 1fr); }
+    .ry-row.c5 { grid-template-columns: repeat(5, 1fr); }
+    .ry-row + .ry-row { margin-top: 14px; }
+
+    /* beige box around a group of screens */
+    .ry-box { background: var(--soft); border-radius: 22px; padding: 22px; margin: 50px auto 0; max-width: 1050px; }
+    .ry-box:first-child { margin-top: 0; }
+    .ry-box > .ry-row.c4 { max-width: 860px; margin-left: auto; margin-right: auto; }
+    .ry-cap { text-align: center; color: var(--brown); font-size: 20px; font-weight: 600; margin: 0 0 16px; }
+
+    /* text note (outlined, brown title) */
+    .ry-note { background: #fff; border: 2px solid var(--text-brown); border-radius: 22px; padding: 26px 30px; text-align: center; font-size: 16px; line-height: 1.6; color: #3a1f0a; }
+    .ry-note h4 { color: var(--brown-2); font-size: 22px; font-weight: 600; margin-bottom: 12px; }
+
+    /* screens + text side by side */
+    .ry-split { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: center; max-width: 1050px; margin: 60px auto 0; }
+    .ry-split.r { grid-template-columns: 1fr 2fr; }     /* text on the left */
+    .ry-split.mid { grid-template-columns: 0.6fr 1.2fr 0.6fr; max-width: 800px; }   /* screen | text | screen */
+
+    /* Profile: screen | note | screen, then 4 screens */
+    .wm-profile { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; max-width: 1050px; margin: 60px auto 0; }
+    .wm-profile .ry-note { grid-column: 2 / 4; align-self: center; margin: 0 20px; }
+
+    /* Home & Search, Product & My Car: screen | two notes | screen
+       (each note is tucked under the screen next to it) */
+    .wm-dual { display: grid; grid-template-columns: 1fr 2.6fr 1fr; align-items: center; max-width: 1050px; margin: 60px auto 0; }
+    .wm-dual .notes { display: flex; flex-direction: column; gap: 40px; }
+    .wm-dual .notes .ry-note:first-child { margin: 0 70px 0 -30px; padding-left: 56px; }   /* tucked under the left screen */
+    .wm-dual .notes .ry-note:last-child  { margin: 0 -30px 0 70px; padding-right: 56px; }  /* tucked under the right screen */
+
+    /* Website pages: whole page shown, nothing cropped */
+    .ry-web-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; max-width: 900px; margin: 0 auto; align-items: start; }
+    .ry-web { border-radius: 8px; overflow: hidden; background: #fff; border: 1.5px solid #D2D9E3; box-shadow: 0 4px 14px rgba(0,0,0,.06); cursor: zoom-in; }
+    .ry-web img { width: 100%; height: auto; }
+
+    /* ---------- 15. Usability testing ---------- */
+    .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 46px; }
+    .cards3 > div { background: var(--soft); border-radius: 22px; padding: 36px 34px; text-align: center; font-size: 17px; line-height: 1.65; color: #333; }
+    .cards3 h4 { color: var(--brown-2); font-size: 22px; font-weight: 600; line-height: 1.4; margin-bottom: 18px; }
+
+    /* ---------- 16. Lightbox ---------- */
+    .lightbox { position: fixed; inset: 0; z-index: 100; padding: 30px; background: rgba(0,0,0,.88); display: none; align-items: center; justify-content: center; }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 10px; }
+    .lightbox .close { position: absolute; top: 20px; right: 28px; background: none; border: none; color: #fff; font-size: 44px; line-height: 1; cursor: pointer; }
+
+    /* ---------- 17. Footer ---------- */
+    footer { background: #000; color: #fff; padding: 16px 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+    footer .copy { font-size: 18px; }
+    footer .f-logo img { height: 100px; }
+    footer .social { display: flex; align-items: center; justify-content: flex-end; gap: 23px; }
+    footer .social span { font-size: 18px; font-weight: 500; margin-right: -8px; }
+    footer .social img { width: 50px; height: 50px; border-radius: 6px; transition: transform .25s; }
+    footer .social a:hover img { transform: translateY(-4px); }
+
+    /* ---------- 18. Responsive: tablet ---------- */
+    @media (max-width: 1100px) {
+      .nav-links a { padding: 14px 24px; font-size: 18px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-img { max-width: 520px; width: 100%; margin: 0 auto; }
+      .ov-row { grid-template-columns: 1fr; }
+      .soft-box { padding: 56px 30px 60px; }
+      .process { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .step::after, .step::before { display: none; }
+      .charts { grid-template-columns: repeat(2, 1fr); }
+      .persona { grid-template-columns: 1fr; }
+      .empathy { grid-template-columns: 1fr; max-width: 560px; }
+      .emp-col.side, .emp-col.mid { padding-top: 0; }
+      .typo { grid-template-columns: 1fr; padding: 0; }
+      .sw { width: 130px; }
+      .g-in { padding: 50px 18px 24px; }
+      .ry-split, .ry-split.r, .ry-split.mid { grid-template-columns: 1fr; gap: 20px; }
+      .ry-split .ry-note { order: -1; }   /* text above the screens */
+      .ry-row.c5 { grid-template-columns: repeat(3, 1fr); }
+      .wm-profile { grid-template-columns: repeat(2, 1fr); }
+      .wm-profile .ry-note { grid-column: 1 / -1; order: -1; margin: 0; }
+      .wm-dual { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .wm-dual .notes { grid-column: 1 / -1; order: -1; gap: 16px; }
+      .wm-dual .notes .ry-note:first-child, .wm-dual .notes .ry-note:last-child { margin: 0; padding: 22px; }
+      .ry-web-grid { grid-template-columns: 1fr; }
+      .cards3 { grid-template-columns: 1fr; }
+    }
+
+    /* ---------- 19. Responsive: mobile ---------- */
+    @media (max-width: 720px) {
+      .nav-wrap { padding: 20px 16px 0; }
+      .navbar { height: auto; padding: 14px 16px; flex-direction: column; gap: 12px; border-radius: 30px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .nav-links a { padding: 10px 18px; font-size: 16px; }
+
+      main { padding: 0 16px 60px; }
+      .page-title { margin-top: 44px; }
+      .page-title h1 { font-size: 34px; }
+      .overview { padding: 28px 22px; }
+      .sec-title { font-size: 30px; }
+      .sec-sub { font-size: 16px; }
+      section.block { margin-top: 80px; }
+
+      .process { grid-template-columns: 1fr 1fr; }
+      .charts { grid-template-columns: 1fr; }
+      .comp { grid-template-columns: repeat(4, minmax(150px, 1fr)); overflow-x: auto; padding-bottom: 8px; }
+      .comp .cell { font-size: 14px; }
+
+      .wires { grid-template-columns: 1fr; gap: 30px; max-width: 280px; }
+      .arrow { display: none; }
+
+      .typo .fname { font-size: 64px; }
+      .typo .chars { font-size: 20px; }
+      .aa .A { font-size: 140px; }
+      .aa .a { font-size: 112px; }
+      .weights { gap: 16px; font-size: 15px; }
+      .swatches { flex-wrap: wrap; gap: 10px; margin-top: -80px; padding: 0; }
+      .sw { width: 30%; border-width: 6px; }
+      .ds-box { padding-bottom: 110px; }
+
+      .gallery-head { font-size: 22px; }
+      .ry-row.c3, .ry-row.c4, .ry-row.c5 { grid-template-columns: repeat(2, 1fr); }
+
+      footer { grid-template-columns: 1fr; gap: 22px; text-align: center; padding: 20px 20px; }
+      footer .f-logo img { margin: 0 auto; }
+      footer .social { justify-content: center; flex-wrap: wrap; gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="ux-ui-design.html" class="active" aria-current="page">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== Hero & overview ===== -->
+    <div class="page-title"><h1>Wrenchmate</h1></div>
+
+    <div class="hero">
+      <div class="hero-img zoom"><img src="Image/Wrenchmate/1.png" alt="Wrenchmate"></div>
+      <div class="overview">
+        <h2>Product Overview</h2>
+        <p>Designed the complete WrenchMate experience across the user app, driver app, and website, focusing on creating a simple, consistent, and intuitive experience across all platforms.</p>
+        <div class="ov-row">
+          <fieldset class="fieldset">
+            <legend>Tools</legend>
+            <div class="tools"><img src="Image/Common/Figma.png" alt="Figma"><img src="Image/Common/Photoshop.png" alt="Photoshop"></div>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend>Role</legend>
+            <div class="val">UX/UI DESIGNER | GRAPHIC DESIGNER</div>
+          </fieldset>
+        </div>
+        <fieldset class="fieldset">
+          <legend>Focus</legend><div class="val">UX Architecture | User Flow | Wireframing | UI Design | Visual Design | Prototyping | Responsive Design</div>
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- ===== Design Process ===== -->
+    <section class="block">
+      <h2 class="sec-title">Design <span>Process</span></h2>
+      <p class="sec-sub w-820">A user-centered design process that turns research and insights into a seamless car-service experience across the user app, driver app, and website.</p>
+      <div class="process">
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#EF4F8C"/><path d="M31 17l-4.5 9.5L17 31l4.5-9.5z" fill="#fff"/><circle cx="24" cy="24" r="2" fill="#EF4F8C"/></svg></div>
+          <h4>Discover</h4>
+          <p>User Research, Competitive Analysis</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#F06A1E" stroke-width="4" stroke-linecap="round"><path d="M15 15a14 14 0 1 0 18 0"/><path d="M19.5 20a7.5 7.5 0 1 0 9 0"/><path d="M24 6v14"/><circle cx="24" cy="27" r="2" fill="#F06A1E"/></svg></div>
+          <h4>Define</h4>
+          <p>User Persona, Empathy Map</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M24 5a14 14 0 0 0-8 25.5V35h16v-4.5A14 14 0 0 0 24 5z" fill="#F7B500"/><rect x="17" y="37" width="14" height="3" rx="1.5" fill="#F7B500"/><rect x="19" y="42" width="10" height="3" rx="1.5" fill="#F7B500"/><path d="M19 15l5 6 5-6M24 21v9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Ideate</h4>
+          <p>User Flow</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M30 10l8 8-16 16-9 2 2-9z" fill="#F2622B"/><path d="M14 30c-6 0-8 4-5 6s9-1 4 5" stroke="#F2622B" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Design</h4>
+          <p>Lo-fi Wireframe, Hi-fi Wireframe</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M10 5h18l10 10v26a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#EF4F6E"/><path d="M28 5v10h10" fill="#F9A3B3"/><rect x="13" y="22" width="9" height="3" rx="1.5" fill="#fff"/><rect x="13" y="29" width="7" height="3" rx="1.5" fill="#fff"/><circle cx="31" cy="32" r="6" fill="#fff" stroke="#EF4F6E" stroke-width="3"/><path d="M35.5 36.5l5 5" stroke="#EF4F6E" stroke-width="3.5" stroke-linecap="round"/></svg></div>
+          <h4>Test</h4>
+          <p>Usability Testing</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== Quantitative Research ===== -->
+    <section class="block">
+      <h2 class="sec-title">Quantitative <span>Research</span></h2>
+      <p class="sec-sub w-860">Understanding customer preferences and car-service habits helps shape a convenient service experience, focusing on accessibility, trust, affordability, and ease of booking.</p>
+      <div class="charts">
+        <div class="chart" style="--c:#8E62E8"><h4>Age Group</h4><div class="body"><div class="donut" style="background:conic-gradient(#E3D2FA 0% 12%, #B48EF4 12% 58%, #9C6CF0 58% 84%, #7E4FDB 84% 96%, #5B2DB8 96% 100%)"><span></span></div><ul class="legend2"><li style="--d:#E3D2FA">18–24<b>12%</b></li><li style="--d:#B48EF4">25–34<b>46%</b></li><li style="--d:#9C6CF0">35–44<b>26%</b></li><li style="--d:#7E4FDB">45–54<b>12%</b></li><li style="--d:#5B2DB8">55+<b>4%</b></li></ul></div></div>
+        <div class="chart" style="--c:#F08A3C"><h4>Gender</h4><div class="body"><div class="donut" style="background:conic-gradient(#F9B472 0% 62%, #F07A12 62% 97%, #FBD9B6 97% 100%)"><span></span></div><ul class="legend2"><li style="--d:#F9B472">Male<b>62%</b></li><li style="--d:#F07A12">Female<b>35%</b></li><li style="--d:#FBD9B6">Prefer not to say<b>3%</b></li></ul></div></div>
+        <div class="chart" style="--c:#5CC45A"><h4>Primary Device</h4><div class="body"><div class="donut" style="background:conic-gradient(#A8E59A 0% 68%, #5CC45A 68% 95%, #2E7D32 95% 100%)"><span></span></div><ul class="legend2"><li style="--d:#A8E59A">Android<b>68%</b></li><li style="--d:#5CC45A">iOS<b>27%</b></li><li style="--d:#2E7D32">Other<b>5%</b></li></ul></div></div>
+        <div class="chart" style="--c:#F2B632"><h4>Service Frequency</h4><div class="body"><div class="donut" style="background:conic-gradient(#FFE07A 0% 18%, #F8C94A 18% 54%, #F2A91E 54% 83%, #EE8A1F 83% 100%)"><span></span></div><ul class="legend2"><li style="--d:#FFE07A">Monthly<b>18%</b></li><li style="--d:#F8C94A">Every 2–3 months<b>36%</b></li><li style="--d:#F2A91E">Twice a year<b>29%</b></li><li style="--d:#EE8A1F">Occasionally<b>17%</b></li></ul></div></div>
+        <div class="chart" style="--c:#EE4F96"><h4>Preferred Service Type</h4><div class="body"><div class="donut" style="background:conic-gradient(#F9C6DD 0% 32%, #F38AB9 32% 59%, #EE5B9C 59% 77%, #E1307A 77% 90%, #F57BB5 90% 100%)"><span></span></div><ul class="legend2"><li style="--d:#F9C6DD">General Service<b>32%</b></li><li style="--d:#F38AB9">Repair &amp; Maintenance<b>27%</b></li><li style="--d:#EE5B9C">Car Wash<b>18%</b></li><li style="--d:#E1307A">Denting &amp; Painting<b>13%</b></li><li style="--d:#F57BB5">Other<b>10%</b></li></ul></div></div>
+        <div class="chart" style="--c:#8E62E8"><h4>Most Wanted App Features</h4><div class="body"><div class="donut" style="background:conic-gradient(#C9ADF7 0% 34%, #7E4FDB 34% 60%, #9C6CF0 60% 82%, #B48EF4 82% 100%)"><span></span></div><ul class="legend2"><li style="--d:#C9ADF7">Home Pickup &amp; Drop<b>34%</b></li><li style="--d:#7E4FDB">Service Tracking<b>26%</b></li><li style="--d:#9C6CF0">Transparent Pricing<b>22%</b></li><li style="--d:#B48EF4">Service History<b>18%</b></li></ul></div></div>
+      </div>
+    </section>
+
+    <!-- ===== Competitor Analysis ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Competitor <span class="alt">Analysis</span></h2>
+      <p class="sec-sub">Understanding the competitive landscape to identify opportunities for differentiation and improvement.</p>
+      <div class="comp">
+        <div></div>
+        <div class="brand"><img src="Image/Wrenchmate/2.png" alt="myTVS"></div>
+        <div class="brand"><img src="Image/Wrenchmate/3.png" alt="Simply Auto"></div>
+        <div class="brand"><img src="Image/Wrenchmate/4.png" alt="GoMechanic"></div>
+        <div class="cell head">User Goal</div><div class="cell">Find and book vehicle services</div><div class="cell">Manage vehicle maintenance</div><div class="cell">Find and book car services</div>
+        <div class="cell head">User Journey</div><div class="cell">Service-focused but information-heavy</div><div class="cell">More utility/data-driven</div><div class="cell">Fast, booking-focused</div>
+        <div class="cell head">Service Discovery</div><div class="cell">Multiple categories can feel overwhelming</div><div class="cell">Simple but less service-oriented</div><div class="cell">Easy to discover services</div>
+        <div class="cell head">Decision Making</div><div class="cell">Requires scanning more information</div><div class="cell">Data helps users manage their vehicle</div><div class="cell">Strong CTAs guide users quickly</div>
+        <div class="cell head">Booking Experience</div><div class="cell">Structured but can feel lengthy</div><div class="cell">Not the primary focus</div><div class="cell">Direct and conversion-focused</div>
+        <div class="cell head">Trust &amp; Transparency</div><div class="cell">Professional and established</div><div class="cell">Practical and record-based</div><div class="cell">Strong service-oriented communication</div>
+        <div class="cell head">UX Strength</div><div class="cell">Comprehensive service ecosystem</div><div class="cell">Simple vehicle management</div><div class="cell">Fast and action-oriented</div>
+        <div class="cell head">UX Gap</div><div class="cell">Can be simplified</div><div class="cell">Limited service-booking experience</div><div class="cell">Can feel promotional</div>
+        <div class="cell head">Accessibility</div><div class="cell">Clear interface, but information density can make scanning harder</div><div class="cell">Simple interface with straightforward controls</div><div class="cell">Strong visual hierarchy, but promotional elements can compete for attention</div>
+        <div class="cell head">Opportunity</div><div class="cell">Simplify information and improve scanability</div><div class="cell">Keep controls simple and easy to understand</div><div class="cell">Maintain clear CTAs without overwhelming the user</div>
+      </div>
+    </section>
+
+
+    <!-- ===== User Persona ===== -->
+    <section class="block">
+      <h2 class="sec-title">User <span>Persona</span></h2>
+      <p class="sec-sub w-780">Understanding customer needs and service habits helps create a convenient car-service experience that makes booking, pickup, service tracking, and vehicle delivery simple and reliable.</p>
+      <div class="persona">
+        <div class="p-col">
+          <div class="p-card">
+            <div class="avatar zoom"><img src="Image/Wrenchmate/5.png" alt="Rahul Sharma"></div>
+            <div class="p-name">Rahul Sharma</div>
+            <dl class="facts"><dt>Age</dt><dd>32</dd><dt>Location</dt><dd>Hyderabad</dd><dt>Occupation</dt><dd>Working Professional</dd><dt>Tech Literacy</dt><dd>High</dd></dl>
+          </div>
+          <div class="p-card"><p class="quote">I want a reliable car service that saves my time and keeps me informed without having to visit the workshop repeatedly.</p></div>
+        </div>
+        <div class="p-col">
+          <div class="p-card"><h5>Bio</h5><p>Rahul is a working professional who uses his car regularly for commuting and personal travel. He prefers convenient car servicing that saves time and allows him to manage the service without visiting a workshop multiple times.</p></div>
+          <div class="p-card"><h5>Core Needs</h5><ul><li>Book reliable car services easily.</li><li>Compare services and pricing before booking.</li><li>Schedule convenient pickup and drop-off.</li><li>Track the vehicle service progress.</li><li>Receive clear updates throughout the service.</li></ul></div>
+          <div class="p-card"><h5>Frustrations</h5><ul><li>Spending time visiting workshops for service.</li><li>Unclear service pricing or additional charges.</li><li>Difficulty knowing the vehicle’s service status.</li><li>Delays in pickup or vehicle delivery.</li><li>Lack of clear communication from the workshop.</li></ul></div>
+        </div>
+      </div>
+      <div class="p-card wide"><h5>Personality</h5><div class="chips"><span>Convenience-focused</span><span>Time-conscious</span><span>Practical</span><span>Trust-oriented</span></div></div>
+    </section>
+
+    <!-- ===== Storyboard ===== -->
+    <section class="block">
+      <h2 class="sec-title">Story<span>board</span></h2>
+      <p class="sec-sub w-560">A simple journey from identifying a car-service need to booking, tracking, and receiving the car back hassle-free.</p>
+      <div class="storyboard zoom"><img src="Image/Wrenchmate/6.png" alt="Storyboard"></div>
+    </section>
+
+    <!-- ===== Empathy Map ===== -->
+    <section class="block">
+      <h2 class="sec-title">Empathy <span class="alt">Map</span></h2>
+      <p class="sec-sub">Understanding customers’ behaviors, thoughts, and challenges to create a convenient and reliable car-service experience.</p>
+      <div class="empathy">
+        <div class="emp-col side">
+          <div class="emp"><h4><span class="em">👣</span>DOES</h4><ul><li>Uses the app to find and book car services.</li><li>Checks service packages and pricing.</li><li>Schedules pickup and drop-off.</li><li>Tracks the vehicle during servicing.</li><li>Reviews service details and updates.</li></ul></div>
+          <div class="emp"><h4><span class="em">😣</span>PAINS</h4><ul><li>Time-consuming workshop visits.</li><li>Unclear pricing or additional charges.</li><li>Delays in pickup or delivery.</li><li>Limited visibility into service progress.</li><li>Difficulty communicating with the service center.</li></ul></div>
+        </div>
+        <div class="emp-col mid">
+          <div class="emp"><h4><span class="em">🧠</span>THINKS</h4><ul><li>“Is this service reliable?”</li><li>“How much will the service cost?”</li><li>“When will my car be picked up?”</li><li>“What is happening with my car?”</li><li>“When will I get my car back?”</li></ul></div>
+          <div class="emp"><h4><span class="em">❤️</span>FEELS</h4><ul><li>Confident when the service process is clear.</li><li>Relieved when pickup and drop are handled.</li><li>Anxious when there are no service updates.</li><li>Frustrated by unexpected charges or delays.</li><li>Satisfied when the car is returned on time.</li></ul></div>
+        </div>
+        <div class="emp-col side">
+          <div class="emp"><h4><span class="em">💬</span>SAYS</h4><ul><li>“I want the pricing to be clear.”</li><li>“I don’t have time to visit a workshop.”</li><li>“I want to know my car’s service status.”</li><li>“Pickup and drop should be convenient.”</li><li>“I want a reliable service experience.”</li></ul></div>
+          <div class="emp"><h4><span class="em">✨</span>GAINS</h4><ul><li>Convenient doorstep pickup and drop.</li><li>Transparent service pricing.</li><li>Real-time service updates.</li><li>Saves time and reduces workshop visits.</li><li>Reliable and hassle-free car servicing.</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Mapping the Experience ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Mapping <span class="alt">the Experience</span></h2>
+      <p class="sec-sub">The experience map connects the key steps of the car-service journey, from discovering a service and booking pickup to tracking the service and receiving the car back, creating a smooth and hassle-free experience.</p>
+      <div class="map-img zoom"><img src="Image/Wrenchmate/7.png" alt="Experience map"></div>
+    </section>
+
+    <!-- ===== Building the app (wireframes) ===== -->
+    <section class="block">
+      <h2 class="sec-title">Building the <span>App</span></h2>
+      <p class="sec-sub w-640">Transforming initial wireframes into a clear and intuitive car-service experience, focusing on easy service discovery, seamless booking, service tracking, and convenient pickup and drop-off.</p>
+      <div class="wires">
+        <div class="wire"><div class="shot zoom"><img src="Image/Wrenchmate/8.png" alt="Paper wireframe"></div><span>Paper wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/Wrenchmate/9.png" alt="Lo-fi wireframe"></div><span>Lo-fi wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/Wrenchmate/10.png" alt="Hi-fi wireframe"></div><span>Hi-fi wireframe</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Design System ===== -->
+    <section class="block">
+      <div class="soft-box ds-box">
+        <h2 class="sec-title">Design <span>System</span></h2>
+        <p class="sec-sub">Establishing a consistent visual language through typography, colors, and reusable components to create a clear, accessible, and cohesive experience.</p>
+        <div class="typo">
+          <div>
+            <h5>Typography</h5>
+            <div class="fname">Poppins</div>
+            <div class="chars">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890</div>
+          </div>
+          <div class="aa-wrap">
+            <div class="aa"><span class="A">A</span><span class="a">a</span></div>
+            <div class="weights"><span>Regular</span><span>Medium</span><span>Semibold</span><span>Bold</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="swatches"><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span></div>
+    </section>
+
+    <!-- ===== UI Design ===== -->
+    <section class="block">
+      <h2 class="sec-title">UI <span>Design</span></h2>
+      <p class="sec-sub">A clear and intuitive interface designed to make car-service discovery, booking, vehicle tracking, and payment simple and seamless.</p>
+      <!-- User app gallery -->
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">User App <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+
+          <!-- 1. Onboarding -->
+          <div class="ry-box">
+            <div class="ry-row c4">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/11.png" alt="Onboarding 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/12.png" alt="Onboarding 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/13.png" alt="Onboarding 3" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/14.png" alt="Onboarding 4" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- 2. Profile: screen | note | screen, then 4 screens -->
+          <div class="wm-profile">
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/15.png" alt="Profile 1" loading="lazy"></div>
+            <div class="ry-note">
+              <h4>Profile</h4>
+              A simple onboarding flow that helps users add their personal details, location, and vehicle information to create a personalized car-service experience.
+            </div>
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/16.png" alt="Profile 2" loading="lazy"></div>
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/17.png" alt="Profile 3" loading="lazy"></div>
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/18.png" alt="Profile 4" loading="lazy"></div>
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/19.png" alt="Profile 5" loading="lazy"></div>
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/20.png" alt="Profile 6" loading="lazy"></div>
+          </div>
+
+          <!-- 3. Home & Search: screen | two notes | screen -->
+          <div class="wm-dual">
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/21.png" alt="Home" loading="lazy"></div>
+            <div class="notes">
+              <div class="ry-note">
+                <h4>Home</h4>
+                A personalized home screen that helps users quickly discover car services, explore recommendations, and access essential service options.
+              </div>
+              <div class="ry-note">
+                <h4>Search</h4>
+                A focused search and filter experience that helps users find the right service by price, service type, discount, and rating.
+              </div>
+            </div>
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/22.png" alt="Search and filter" loading="lazy"></div>
+          </div>
+
+          <!-- 4. Service -->
+          <div class="ry-box">
+            <div class="ry-cap">Service</div>
+            <div class="ry-row c5">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/23.png" alt="Service 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/24.png" alt="Service 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/25.png" alt="Service 3" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/26.png" alt="Service 4" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/27.png" alt="Service 5" loading="lazy"></div>
+            </div>
+            <div class="ry-row c5">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/28.png" alt="Service 6" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/29.png" alt="Service 7" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/30.png" alt="Service 8" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/31.png" alt="Service 9" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/32.png" alt="Service 10" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- 5. Product & My Car: screen | two notes | screen -->
+          <div class="wm-dual">
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/33.png" alt="Product" loading="lazy"></div>
+            <div class="notes">
+              <div class="ry-note">
+                <h4>Product</h4>
+                A simple product browsing experience that helps users explore car-care products, compare options, and quickly select the right products for their vehicle.
+              </div>
+              <div class="ry-note">
+                <h4>My Car</h4>
+                A personalized vehicle section where users can view their car details, manage vehicle information, and access service history for easier maintenance.
+              </div>
+            </div>
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/34.png" alt="My car" loading="lazy"></div>
+          </div>
+
+          <!-- 6. Booking -->
+          <div class="ry-box">
+            <div class="ry-cap">Booking</div>
+            <div class="ry-row c5">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/35.png" alt="Booking 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/36.png" alt="Booking 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/37.png" alt="Booking 3" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/38.png" alt="Booking 4" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/39.png" alt="Booking 5" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- 7. Track your car (text left) -->
+          <div class="ry-split r">
+            <div class="ry-note">
+              <h4>Track your car</h4>
+              A real-time tracking experience that keeps users informed about their vehicle’s pickup, service progress, and delivery, with clear status updates and direct communication with the driver.
+            </div>
+            <div class="ry-row c3">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/40.png" alt="Track your car 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/41.png" alt="Track your car 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/42.png" alt="Track your car 3" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- 8. Payments & Support (text right) -->
+          <div class="ry-split">
+            <div class="ry-row c3">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/43.png" alt="Subscription and payment 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/44.png" alt="Subscription and payment 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/45.png" alt="Subscription and payment 3" loading="lazy"></div>
+            </div>
+            <div class="ry-note">
+              <h4>Payments &amp; Support</h4>
+              A seamless experience for managing subscriptions, making secure payments, and getting quick assistance whenever users need support.
+            </div>
+          </div>
+
+          <!-- 9. Other screens -->
+          <div class="ry-box">
+            <div class="ry-cap">Other Screens</div>
+            <div class="ry-row c5">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/46.png" alt="Other screen 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/47.png" alt="Other screen 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/48.png" alt="Other screen 3" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/49.png" alt="Other screen 4" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/50.png" alt="Other screen 5" loading="lazy"></div>
+            </div>
+          </div>
+
+        </div></div>
+      </div>
+
+      <!-- Driver app gallery -->
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">Driver App <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+
+          <!-- 1. Driver dashboard: screen | note | screen -->
+          <div class="ry-split mid">
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/51.png" alt="Driver login" loading="lazy"></div>
+            <div class="ry-note">
+              <h4>Drivers Dashboard</h4>
+              A simple driver experience designed to manage daily orders, view customer details, accept service requests, and stay updated on current and upcoming jobs.
+            </div>
+            <div class="ry-ph zoom"><img src="Image/Wrenchmate/52.png" alt="Driver dashboard" loading="lazy"></div>
+          </div>
+
+          <!-- 2. Car pick -->
+          <div class="ry-box">
+            <div class="ry-cap">Car Pick</div>
+            <div class="ry-row c5">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/53.png" alt="Car pick 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/54.png" alt="Car pick 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/55.png" alt="Car pick 3" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/56.png" alt="Car pick 4" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/57.png" alt="Car pick 5" loading="lazy"></div>
+            </div>
+            <div class="ry-row c5">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/58.png" alt="Car pick 6" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/59.png" alt="Car pick 7" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/60.png" alt="Car pick 8" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/61.png" alt="Car pick 9" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/62.png" alt="Car pick 10" loading="lazy"></div>
+            </div>
+            <div class="ry-row c5">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/63.png" alt="Car pick 11" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/64.png" alt="Car pick 12" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/65.png" alt="Car pick 13" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/66.png" alt="Car pick 14" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/67.png" alt="Car pick 15" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- 3. Menu (text left) -->
+          <div class="ry-split r">
+            <div class="ry-note">
+              <h4>Menu</h4>
+              A simple menu that gives drivers quick access to their profile, documents, attendance, and account-related information.
+            </div>
+            <div class="ry-row c3">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/68.png" alt="Driver menu 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/69.png" alt="Driver menu 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/70.png" alt="Driver menu 3" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- 4. Notifications & Messages (text right) -->
+          <div class="ry-split">
+            <div class="ry-row c3">
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/71.png" alt="Driver notifications 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/72.png" alt="Driver notifications 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/Wrenchmate/73.png" alt="Driver notifications 3" loading="lazy"></div>
+            </div>
+            <div class="ry-note">
+              <h4>Notifications &amp; Messages</h4>
+              A connected communication experience that keeps drivers updated on important notifications, order history, and customer conversations, helping them stay informed and respond efficiently.
+            </div>
+          </div>
+
+        </div></div>
+      </div>
+
+      <!-- Website gallery -->
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">Website <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+          <div class="ry-web-grid">
+            <div class="ry-web zoom"><img src="Image/Wrenchmate/74.png" alt="Website homepage" loading="lazy"></div>
+            <div class="ry-web zoom"><img src="Image/Wrenchmate/75.png" alt="About us" loading="lazy"></div>
+          </div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Usability testing ===== -->
+    <section class="block">
+      <h2 class="sec-title">Usability <span>Testing</span></h2>
+      <p class="sec-sub w-720">Evaluated the app’s key interactions, including service discovery, booking, vehicle tracking, and payment, to identify usability issues and improve the overall user experience.</p>
+      <div class="cards3">
+        <div><h4>Smooth Service<br>Booking</h4>Service selection, package details, scheduling, and pickup options should be presented in a clear and logical flow.</div>
+        <div><h4>Better Service<br>Communication</h4>Timely notifications, service updates, and chat access help users stay informed throughout the servicing process.</div>
+        <div><h4>Seamless Service<br>Tracking</h4>Clear pickup status, service progress, delivery updates, and direct communication help users feel informed throughout the service journey.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="copy">© 2026 By Mariyam Nesha</div>
+    <a href="index.html" class="f-logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+    <div class="social">
+      <span>Follow :</span>
+      <a href="https://www.behance.net/mariyamnesha3" target="_blank" rel="noopener" aria-label="Behance"><img src="Image/Common/Behance.png" alt="Behance"></a>
+      <a href="https://dribbble.com/mary333333333" target="_blank" rel="noopener" aria-label="Dribbble"><img src="Image/Common/Dribbble.png" alt="Dribbble"></a>
+      <a href="mailto:mariyamnesha3@gmail.com" aria-label="Gmail"><img src="Image/Common/Gmail.png" alt="Gmail"></a>
+      <a href="https://www.linkedin.com/in/mariyam-nesha-05b04a190/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="Image/Common/LinkedIn.png" alt="LinkedIn"></a>
+    </div>
+  </footer>
+
+  <!-- ===== Lightbox (click an image to enlarge) ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </div>
+
+  <script>
+    /* ----- Collapsible gallery ----- */
+    function fit() {
+      document.querySelectorAll('.gallery-body').forEach(function (b) {
+        b.style.maxHeight = b.scrollHeight + 'px';
+      });
+    }
+
+    document.querySelectorAll('.gallery').forEach(function (g) {
+      var head = g.querySelector('.gallery-head');
+      head.addEventListener('click', function () {
+        fit();
+        var open = g.classList.toggle('open');
+        head.setAttribute('aria-expanded', open);
+      });
+    });
+
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    /* lazy images can change the height after loading – re-measure each time one loads */
+    document.querySelectorAll('.gallery img').forEach(function (img) {
+      img.addEventListener('load', fit);
+    });
+
+    /* ----- Lightbox ----- */
+    var lb = document.getElementById('lightbox');
+    var lbImg = lb.querySelector('img');
+
+    document.querySelectorAll('.zoom').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var img = el.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('show');
+      });
+    });
+
+    function closeLb() { lb.classList.remove('show'); }
+    lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  </script>
+</body>
+</html>

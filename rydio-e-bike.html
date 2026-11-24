@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rydio e-bike case study by Mariyam Nesha – e-bike rental app and website UX/UI design.">
+  <title>Rydio- e bike | Mariyam Nesha</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Mariyam Nesha – Rydio e-bike case study
+       ========================================================= */
+
+    /* ---------- 1. Variables & reset ---------- */
+    :root {
+      --orange: #F47B20;
+      --brown: #7A3E10;
+      --brown-2: #8C4A10;
+      --text-brown: #5A2A0A;
+      --soft: #FCE8DC;
+      --soft-2: #FDF2EA;
+      --label: #F9CDAE;
+      --dash: #D9B49B;
+      --dark: #161616;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- 2. Navbar ---------- */
+    .nav-wrap { padding: 40px 70px 0; }
+    .navbar {
+      max-width: 1300px; margin: 0 auto; height: 86px; padding: 0 8px 0 34px;
+      background: var(--dark); border-radius: 50px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar .logo img { height: 100px; }
+    .nav-links { display: flex; list-style: none; gap: 10px; }
+    .nav-links a {
+      display: block; color: #fff; font-size: 20px; padding: 18px 40px; border-radius: 40px;
+      transition: background .25s, color .25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { background: var(--orange); color: #fff; }
+
+    /* ---------- 3. Layout & section titles ---------- */
+    main { max-width: 1300px; margin: 0 auto; padding: 0 70px 100px; box-sizing: content-box; }
+    section.block { margin-top: 110px; position: relative; }
+    .soft-box { background: var(--soft); border-radius: 36px; padding: 70px 70px 80px; position: relative; }
+
+    .sec-title { text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -0.5px; }
+    .sec-title span { color: var(--orange); }
+    .sec-title span.alt { color: #C0601A; }
+    .sec-sub { text-align: center; font-size: 18px; line-height: 1.6; color: #333; max-width: 760px; margin: 18px auto 0; }
+    .sec-sub.w-860 { max-width: 860px; }
+    .sec-sub.w-820 { max-width: 820px; }
+    .sec-sub.w-780 { max-width: 780px; }
+    .sec-sub.w-720 { max-width: 720px; }
+    .sec-sub.w-640 { max-width: 640px; }
+    .sec-sub.w-560 { max-width: 560px; }
+
+    /* ---------- 4. Hero & overview ---------- */
+    .page-title { display: flex; align-items: center; justify-content: center; margin: 70px 0 44px; }
+    .page-title h1 { font-size: 52px; font-weight: 600; letter-spacing: -0.5px; }
+
+    .hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.58fr); gap: 48px; align-items: stretch; }
+
+    /* Photo with see-through white frame */
+    .hero-img { position: relative; height: 100%; border-radius: 30px; overflow: hidden; background: #F1E6DD; box-shadow: 0 10px 30px rgba(0,0,0,.08); cursor: zoom-in; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-img::after { content: ""; position: absolute; inset: 0; border: 16px solid rgba(255,255,255,.35); border-radius: 30px; pointer-events: none; }
+
+    .overview { background: #F5E7DC; border-radius: 30px; padding: 44px 44px 40px; }
+    .overview h2 { color: var(--brown); font-size: 30px; font-weight: 600; margin-bottom: 14px; }
+    .overview > p { font-size: 18px; line-height: 1.6; color: #333; margin-bottom: 30px; }
+    .ov-row { display: grid; grid-template-columns: minmax(0,0.62fr) minmax(0,1fr); gap: 26px; margin-bottom: 26px; }
+
+    .fieldset { min-width: 0; border: 1.5px solid #E2C9B8; border-radius: 14px; padding: 0 22px 18px; position: relative; }
+    .fieldset legend { font-size: 22px; font-weight: 600; padding: 0 8px; margin-left: -8px; }
+    .fieldset .tools { display: flex; gap: 36px; padding: 8px 26px 0; }
+    .fieldset .tools img { width: 50px; height: 50px; border-radius: 10px; }
+    .fieldset .val { font-size: 17px; font-weight: 500; padding-top: 16px; line-height: 1.7; }
+    .overview > .fieldset .val { text-align: justify; }
+
+    /* ---------- 5. Design process ---------- */
+    .process { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; max-width: 1150px; margin: 50px auto 0; position: relative; }
+    .step {
+      --c: #EF6C98; --bg: #FDE3EE;
+      position: relative; padding: 26px 16px 28px; text-align: center;
+      border: 2px solid var(--c); border-radius: 30px;
+      background: linear-gradient(180deg, var(--bg), #fff 120%);
+      box-shadow: 0 8px 20px rgba(0,0,0,.04);
+    }
+    .step:nth-child(2), .step:nth-child(4) { --c: #F2853A; --bg: #FDE6D6; }
+    .step:nth-child(3) { --c: #F4C23A; --bg: #FFF4D4; }
+    .step .ic {
+      width: 92px; height: 92px; border-radius: 50%; margin: 0 auto 18px;
+      background: rgba(255,255,255,.75); box-shadow: 0 6px 16px rgba(0,0,0,.06);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step .ic svg { width: 46px; height: 46px; }
+    .step h4 { font-size: 20px; font-weight: 600; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 2px dotted var(--c); }
+    .step p { font-size: 15px; font-weight: 500; line-height: 1.45; color: #222; }
+    /* connector line + dots between steps */
+    .step:not(:last-child)::after { content: ""; position: absolute; top: 46%; right: -42px; width: 42px; height: 2px; background: var(--c); }
+    .step:not(:last-child)::before {
+      content: ""; position: absolute; top: calc(46% - 5px); right: -10px; z-index: 1;
+      width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: -20px 0 0 var(--c);
+    }
+
+    /* ---------- 6. Quantitative research (donut charts) ---------- */
+    .charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1000px; margin: 46px auto 0; }
+    .chart {
+      --c: #3B8CE8; padding: 18px 20px 22px; border-radius: 14px;
+      border: 2px dashed color-mix(in srgb, var(--c) 45%, white);
+      background: color-mix(in srgb, var(--c) 4%, white);
+    }
+    .chart h4 { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 600; margin-bottom: 14px; }
+    .chart h4 i {
+      font-style: normal; width: 30px; height: 30px; border-radius: 8px; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: color-mix(in srgb, var(--c) 15%, white);
+    }
+    .chart .body { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; }
+    .donut { width: 120px; aspect-ratio: 1; border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; }
+    .donut::before { content: ""; position: absolute; inset: 26px; background: #fff; border-radius: 50%; }
+    .donut span { position: relative; font-size: 28px; }
+    .legend2 { list-style: none; font-size: 13px; color: #333; display: flex; flex-direction: column; gap: 8px; }
+    .legend2 li { display: grid; grid-template-columns: 12px 1fr auto; gap: 8px; align-items: center; line-height: 1.3; }
+    .legend2 li::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--d); }
+    .legend2 b { font-weight: 600; }
+
+    /* ---------- 7. Competitor analysis ---------- */
+    .comp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 22px; max-width: 1100px; margin: 46px auto 0; }
+    .comp .brand { border-radius: 10px; overflow: hidden; aspect-ratio: 2.5 / 1; background: #fff; border: 3px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,.08); }
+    .comp .brand img { width: 100%; height: 100%; object-fit: contain; }   /* whole logo shown */
+    .comp .cell {
+      background: #fff; border-radius: 10px; min-height: 64px; padding: 10px 16px;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      font-size: 16px; font-weight: 500; line-height: 1.35; color: #222; box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    }
+    .comp .cell.head { background: var(--label); border: 3px solid #fff; }
+
+    /* ---------- 8. User persona ---------- */
+    .persona { display: grid; grid-template-columns: 0.75fr 1fr; gap: 22px; max-width: 1100px; margin: 46px auto 0; }
+    .p-col { display: flex; flex-direction: column; gap: 18px; }
+    .p-card { background: var(--soft); border-radius: 22px; padding: 28px 32px; }
+    .p-card h5 { color: #666; font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+    .p-card p, .p-card li { color: var(--text-brown); font-size: 17px; line-height: 1.6; font-weight: 500; }
+    .p-card ul { padding-left: 22px; }
+    .avatar { width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 16px; background: #eadbd0; cursor: zoom-in; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .p-name { text-align: center; color: #B5642A; font-size: 24px; font-weight: 600; margin-bottom: 18px; }
+    .facts { display: grid; grid-template-columns: auto 1fr; gap: 12px 40px; font-size: 18px; }
+    .facts dt { color: #777; font-weight: 500; }
+    .facts dd { color: var(--text-brown); font-weight: 600; }
+    .quote { position: relative; padding: 0 20px 22px; font-size: 17px; line-height: 1.6; text-align: center; color: var(--text-brown); font-weight: 500; }
+    .quote::before { content: "“"; position: absolute; left: -6px; top: -16px; font-size: 54px; font-weight: 700; color: #222; }
+    .quote::after  { content: "”"; position: absolute; right: 6px; bottom: -34px; font-size: 54px; font-weight: 700; color: #222; }
+    .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+    .chips span { background: #fff; border-radius: 30px; padding: 8px 22px; font-size: 16px; font-weight: 500; color: var(--text-brown); }
+
+    /* ---------- 9. Storyboard ---------- */
+    .storyboard { max-width: 900px; min-height: 300px; margin: 40px auto 0; border-radius: 6px; overflow: hidden; background: #F2F0EC; cursor: zoom-in; }
+    .storyboard img { width: 100%; height: auto; }
+
+    /* ---------- 10. Empathy map ---------- */
+    .empathy { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; max-width: 1150px; margin: 50px auto 0; }
+    .emp-col { display: flex; flex-direction: column; gap: 22px; }
+    .emp-col.side { padding-top: 54px; }
+    .emp-col.mid  { padding-top: 26px; }
+    .emp { border: 2px dashed var(--dash); border-radius: 22px; padding: 30px 34px 32px; }
+    .emp h4 { color: var(--brown); font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 16px; }
+    .emp h4 .em { font-size: 22px; margin-right: 6px; }
+    .emp ul { padding-left: 20px; }
+    .emp li { font-size: 16px; line-height: 1.75; color: #333; }
+
+    /* ---------- 11. Experience map ---------- */
+    .map-img { background: var(--soft-2); border-radius: 24px; margin-top: 44px; padding: 26px; cursor: zoom-in; }
+    .map-img img { width: 100%; height: auto; min-height: 200px; margin: 0 auto; object-fit: contain; }
+
+    /* ---------- 12. Wireframes ---------- */
+    .wires { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; max-width: 1150px; margin: 50px auto 0; }
+    .wire { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    /* same-size box for every wireframe, so the captions line up */
+    .wire .shot { width: 100%; max-width: 290px; aspect-ratio: 0.45 / 1; display: flex; align-items: center; justify-content: center; cursor: zoom-in; }
+    .wire .shot img { width: 100%; height: 100%; object-fit: contain; }   /* real shape kept, nothing cut */
+    .wire span { display: block; font-size: 22px; margin-top: 30px; }
+
+    /* ---------- 13. Design system ---------- */
+    .ds-box { padding-bottom: 150px; }
+    .typo { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; margin-top: 50px; padding: 0 60px; }
+    .typo h5 { font-size: 22px; font-weight: 500; }
+    .typo .fname { font-size: 96px; font-weight: 500; line-height: 1.15; margin: 6px 0 14px; }
+    .typo .chars { font-weight: 300; font-size: 30px; line-height: 1.2; color: #8a8a8a; word-break: break-all; }
+
+    .aa-wrap { text-align: center; }
+    .aa {
+      display: inline-flex; align-items: flex-end; gap: 2px; line-height: .8;
+      padding: 18px 14px 10px; position: relative;
+      background-image:   /* dashed frame around "Aa" */
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px);
+      background-size: 100% 1.5px, 100% 1.5px, 1.5px 100%, 1.5px 100%;
+      background-position: 0 6px, 0 calc(100% - 4px), 6px 0, calc(100% - 6px) 0;
+      background-repeat: no-repeat;
+    }
+    .aa .A { font-size: 220px; font-weight: 700; color: #7E4A1E; }
+    .aa .a { font-size: 175px; font-weight: 600; color: transparent; -webkit-text-stroke: 3px #7E4A1E; }
+    .weights { display: flex; justify-content: center; gap: 34px; margin-top: 18px; font-size: 18px; }
+    .weights span:nth-child(1) { font-weight: 400; }
+    .weights span:nth-child(2) { font-weight: 500; }
+    .weights span:nth-child(3) { font-weight: 600; }
+    .weights span:nth-child(4) { font-weight: 700; }
+
+    .swatches { display: flex; justify-content: center; gap: 18px; margin-top: -110px; position: relative; z-index: 2; padding: 0 40px; }
+    .sw {
+      width: 170px; aspect-ratio: 1; border: 10px solid #fff; border-radius: 6px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12); transition: transform .3s;
+    }
+    /* Rydio colour palette */
+    .sw:nth-child(1) { background: #009A88; transform: rotate(-14deg); }
+    .sw:nth-child(2) { background: #121212; transform: rotate(20deg) translateY(14px); }
+    .sw:nth-child(3) { background: #FF6160; transform: rotate(-8deg) translateY(6px); }
+    .sw:nth-child(4) { background: #EFEFEF; transform: rotate(24deg) translateY(30px); }
+    .sw:nth-child(5) { background: #4C4C4C; transform: rotate(-16deg) translateY(14px); }
+    .sw:hover { transform: rotate(0) scale(1.05); }
+
+    /* ---------- 14. UI gallery (collapsible) ---------- */
+    .gallery { margin-top: 56px; border: 1.5px solid #e6e6e6; border-radius: 28px; position: relative; }
+    .gallery:not(.open) { min-height: 40px; }
+    .gallery-head {
+      position: absolute; top: -22px; left: 26px; padding: 0 14px;
+      background: #fff; border: none; cursor: pointer;
+      font-size: 28px; font-weight: 500; color: #111;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .chev {
+      width: 13px; height: 13px; border-left: 3px solid #111; border-top: 3px solid #111;
+      transform: rotate(45deg) translate(3px, 3px); transition: transform .3s;
+    }
+    .gallery:not(.open) .chev { transform: rotate(225deg) translate(3px, 3px); }
+    .gallery-body { overflow: hidden; transition: max-height .45s ease; }
+    .gallery:not(.open) .gallery-body { max-height: 0 !important; }
+    .g-in { padding: 56px 40px 40px; }
+
+    /* ----- App screens ----- */
+    /* phone screen: whole screen shown, nothing cropped (tops lined up) */
+    .ry-ph { border-radius: 10px; overflow: hidden; background: #fff; border: 1.5px solid #D2E2DF; cursor: zoom-in; }
+    .ry-ph img { width: 100%; height: auto; }
+
+    .ry-row { display: grid; gap: 12px; align-items: start; }
+    .ry-row.c3 { grid-template-columns: repeat(3, 1fr); }
+    .ry-row.c5 { grid-template-columns: repeat(5, 1fr); }
+    /* 3 screens the same size as the 5-in-a-row screens above them, centred */
+    /* 3 screens at 4-in-a-row size (smaller, like your design), centred */
+    .ry-row.c3-of4 { grid-template-columns: repeat(3, calc((100% - 36px) / 4)); justify-content: center; }
+    .ry-row.c3-of5 { grid-template-columns: repeat(3, calc((100% - 48px) / 5)); justify-content: center; margin-top: 14px; }
+
+    /* beige box around a group of screens */
+    .ry-box { background: var(--soft); border-radius: 22px; padding: 22px; margin: 40px auto 0; max-width: 1050px; }
+    .ry-box:first-child { margin-top: 0; }
+    .ry-box > .ry-row.c3 { max-width: 760px; margin: 0 auto; }
+    .ry-cap { text-align: center; color: var(--brown); font-size: 20px; font-weight: 600; margin-top: 16px; }
+    .ry-cap.top { margin: 0 0 16px; }
+
+    /* screens + text side by side */
+    .ry-split { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: center; max-width: 1050px; margin: 40px auto 0; }
+    .ry-split.r { grid-template-columns: 1fr 2fr; }     /* text on the left */
+    .ry-split.mid { grid-template-columns: 0.6fr 1.2fr 0.6fr; max-width: 800px; }   /* screen | text | screen */
+    .ry-box .ry-split { margin: 0; }
+    .ry-note { background: var(--soft); border-radius: 22px; padding: 24px; text-align: center; font-size: 15px; line-height: 1.6; color: #3a1f0a; }
+    .ry-box .ry-note { background: transparent; }
+    .ry-note h4 { color: var(--brown-2); font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+
+    /* ----- Website screenshots: whole page shown, nothing cropped ----- */
+    .ry-web-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; max-width: 900px; margin: 0 auto; align-items: start; }
+    .ry-web { border-radius: 8px; overflow: hidden; background: #1C1C1C; cursor: zoom-in; }
+    .ry-web img { width: 100%; height: auto; }
+
+    /* ---------- 15. Usability testing ---------- */
+    .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 46px; }
+    .cards3 > div { background: var(--soft); border-radius: 22px; padding: 36px 34px; text-align: center; font-size: 17px; line-height: 1.65; color: #333; }
+    .cards3 h4 { color: var(--brown-2); font-size: 22px; font-weight: 600; line-height: 1.4; margin-bottom: 18px; }
+
+    /* ---------- 16. Lightbox ---------- */
+    .lightbox { position: fixed; inset: 0; z-index: 100; padding: 30px; background: rgba(0,0,0,.88); display: none; align-items: center; justify-content: center; }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 10px; }
+    .lightbox .close { position: absolute; top: 20px; right: 28px; background: none; border: none; color: #fff; font-size: 44px; line-height: 1; cursor: pointer; }
+
+    /* ---------- 17. Footer ---------- */
+    footer { background: #000; color: #fff; padding: 16px 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+    footer .copy { font-size: 18px; }
+    footer .f-logo img { height: 100px; }
+    footer .social { display: flex; align-items: center; justify-content: flex-end; gap: 23px; }
+    footer .social span { font-size: 18px; font-weight: 500; margin-right: -8px; }
+    footer .social img { width: 50px; height: 50px; border-radius: 6px; transition: transform .25s; }
+    footer .social a:hover img { transform: translateY(-4px); }
+
+    /* ---------- 18. Responsive: tablet ---------- */
+    @media (max-width: 1100px) {
+      .nav-links a { padding: 14px 24px; font-size: 18px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-img { max-width: 520px; width: 100%; margin: 0 auto; }
+      .ov-row { grid-template-columns: 1fr; }
+      .soft-box { padding: 56px 30px 60px; }
+      .process { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .step::after, .step::before { display: none; }
+      .charts { grid-template-columns: repeat(2, 1fr); }
+      .persona { grid-template-columns: 1fr; }
+      .empathy { grid-template-columns: 1fr; max-width: 560px; }
+      .emp-col.side, .emp-col.mid { padding-top: 0; }
+      .typo { grid-template-columns: 1fr; padding: 0; }
+      .sw { width: 130px; }
+      .g-in { padding: 50px 18px 24px; }
+      .ry-split, .ry-split.r, .ry-split.mid { grid-template-columns: 1fr; }
+      .ry-split .ry-note { order: -1; }   /* text above the screens */
+      .ry-row.c5 { grid-template-columns: repeat(3, 1fr); }
+      .ry-row.c3-of5, .ry-row.c3-of4 { grid-template-columns: repeat(3, 1fr); }
+      .ry-web-grid { grid-template-columns: 1fr; }
+      .cards3 { grid-template-columns: 1fr; }
+    }
+
+    /* ---------- 19. Responsive: mobile ---------- */
+    @media (max-width: 720px) {
+      .nav-wrap { padding: 20px 16px 0; }
+      .navbar { height: auto; padding: 14px 16px; flex-direction: column; gap: 12px; border-radius: 30px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .nav-links a { padding: 10px 18px; font-size: 16px; }
+
+      main { padding: 0 16px 60px; }
+      .page-title { margin-top: 44px; }
+      .page-title h1 { font-size: 34px; }
+      .overview { padding: 28px 22px; }
+      .sec-title { font-size: 30px; }
+      .sec-sub { font-size: 16px; }
+      section.block { margin-top: 80px; }
+
+      .process { grid-template-columns: 1fr 1fr; }
+      .charts { grid-template-columns: 1fr; }
+      .comp { grid-template-columns: repeat(4, minmax(150px, 1fr)); overflow-x: auto; padding-bottom: 8px; }
+      .comp .cell { font-size: 14px; }
+
+      .wires { grid-template-columns: 1fr; gap: 40px; max-width: 300px; }
+      .wire span { font-size: 18px; margin-top: 16px; }
+
+      .typo .fname { font-size: 64px; }
+      .typo .chars { font-size: 20px; }
+      .aa .A { font-size: 140px; }
+      .aa .a { font-size: 112px; }
+      .weights { gap: 16px; font-size: 15px; }
+      .swatches { flex-wrap: wrap; gap: 10px; margin-top: -80px; padding: 0; }
+      .sw { width: 30%; border-width: 6px; }
+      .ds-box { padding-bottom: 110px; }
+
+      .gallery-head { font-size: 22px; }
+      .ry-row.c3, .ry-row.c5, .ry-row.c3-of5, .ry-row.c3-of4 { grid-template-columns: repeat(2, 1fr); }
+
+      footer { grid-template-columns: 1fr; gap: 22px; text-align: center; padding: 20px 20px; }
+      footer .f-logo img { margin: 0 auto; }
+      footer .social { justify-content: center; flex-wrap: wrap; gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="ux-ui-design.html" class="active" aria-current="page">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== Hero & overview ===== -->
+    <div class="page-title"><h1>Rydio- e bike</h1></div>
+
+    <div class="hero">
+      <div class="hero-img zoom"><img src="Image/rydio-e-bike/1.png" alt="Rydio e bike"></div>
+      <div class="overview">
+        <h2>Product Overview</h2>
+        <p>Rydio is an e-bike rental app designed to make urban travel simple, convenient, and accessible through easy bike discovery, booking, and ride tracking.</p>
+        <div class="ov-row">
+          <fieldset class="fieldset">
+            <legend>Tools</legend>
+            <div class="tools"><img src="Image/Common/Photoshop.png" alt="Photoshop"><img src="Image/Common/Figma.png" alt="Figma"></div>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend>Role</legend>
+            <div class="val">UX/UI DESIGNER | GRAPHIC DESIGNER</div>
+          </fieldset>
+        </div>
+        <fieldset class="fieldset">
+          <legend>Focus</legend><div class="val">UX Architecture | User Flow | Journey Tracking | Payment UX | Interactive Design</div>
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- ===== Design Process ===== -->
+    <section class="block">
+      <h2 class="sec-title">Design <span>Process</span></h2>
+      <p class="sec-sub w-820">A user-focused design process that turns research and insights into a simple e-bike rental experience, from discovering bikes to booking and completing a ride.</p>
+      <div class="process">
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#EF4F8C"/><path d="M31 17l-4.5 9.5L17 31l4.5-9.5z" fill="#fff"/><circle cx="24" cy="24" r="2" fill="#EF4F8C"/></svg></div>
+          <h4>Discover</h4>
+          <p>User Research, Competitive Analysis</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#F06A1E" stroke-width="4" stroke-linecap="round"><path d="M15 15a14 14 0 1 0 18 0"/><path d="M19.5 20a7.5 7.5 0 1 0 9 0"/><path d="M24 6v14"/><circle cx="24" cy="27" r="2" fill="#F06A1E"/></svg></div>
+          <h4>Define</h4>
+          <p>User Persona, Empathy Map</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M24 5a14 14 0 0 0-8 25.5V35h16v-4.5A14 14 0 0 0 24 5z" fill="#F7B500"/><rect x="17" y="37" width="14" height="3" rx="1.5" fill="#F7B500"/><rect x="19" y="42" width="10" height="3" rx="1.5" fill="#F7B500"/><path d="M19 15l5 6 5-6M24 21v9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Ideate</h4>
+          <p>User Flow</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M30 10l8 8-16 16-9 2 2-9z" fill="#F2622B"/><path d="M14 30c-6 0-8 4-5 6s9-1 4 5" stroke="#F2622B" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Design</h4>
+          <p>Lo-fi Wireframe, Hi-fi Wireframe</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M10 5h18l10 10v26a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#EF4F6E"/><path d="M28 5v10h10" fill="#F9A3B3"/><rect x="13" y="22" width="9" height="3" rx="1.5" fill="#fff"/><rect x="13" y="29" width="7" height="3" rx="1.5" fill="#fff"/><circle cx="31" cy="32" r="6" fill="#fff" stroke="#EF4F6E" stroke-width="3"/><path d="M35.5 36.5l5 5" stroke="#EF4F6E" stroke-width="3.5" stroke-linecap="round"/></svg></div>
+          <h4>Test</h4>
+          <p>Usability Testing</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== Quantitative Research ===== -->
+    <section class="block">
+      <h2 class="sec-title">Quantitative <span>Research</span></h2>
+      <p class="sec-sub w-860">Understanding user preferences and riding habits helps shape a convenient e-bike rental experience that meets users’ needs for accessibility, affordability, and ease of use.</p>
+      <div class="charts">
+        <div class="chart" style="--c:#8E62E8"><h4>Age Group</h4><div class="body"><div class="donut" style="background:conic-gradient(#E3D2FA 0% 32%, #B48EF4 32% 78%, #9C6CF0 78% 94%, #5B2DB8 94% 100%)"><span></span></div><ul class="legend2"><li style="--d:#E3D2FA">18–24<b>32%</b></li><li style="--d:#B48EF4">25–34<b>46%</b></li><li style="--d:#9C6CF0">35–44<b>16%</b></li><li style="--d:#5B2DB8">45+<b>6%</b></li></ul></div></div>
+        <div class="chart" style="--c:#F08A3C"><h4>Gender</h4><div class="body"><div class="donut" style="background:conic-gradient(#FBD9B6 0% 42%, #F07A12 42% 97%, #F8C9A0 97% 100%)"><span></span></div><ul class="legend2"><li style="--d:#FBD9B6">Female<b>42%</b></li><li style="--d:#F07A12">Male<b>55%</b></li><li style="--d:#F8C9A0">Prefer not to say<b>3%</b></li></ul></div></div>
+        <div class="chart" style="--c:#5CC45A"><h4>Primary Device</h4><div class="body"><div class="donut" style="background:conic-gradient(#A8E59A 0% 68%, #5CC45A 68% 95%, #2E7D32 95% 100%)"><span></span></div><ul class="legend2"><li style="--d:#A8E59A">Android<b>68%</b></li><li style="--d:#5CC45A">iOS<b>27%</b></li><li style="--d:#2E7D32">Other<b>5%</b></li></ul></div></div>
+        <div class="chart" style="--c:#F2B632"><h4>Ride Frequency</h4><div class="body"><div class="donut" style="background:conic-gradient(#FFE07A 0% 24%, #F8C94A 24% 62%, #F2A91E 62% 87%, #EE7A1F 87% 100%)"><span></span></div><ul class="legend2"><li style="--d:#FFE07A">Daily<b>24%</b></li><li style="--d:#F8C94A">2–4 times/week<b>38%</b></li><li style="--d:#F2A91E">Weekly<b>25%</b></li><li style="--d:#EE7A1F">Occasionally<b>13%</b></li></ul></div></div>
+        <div class="chart" style="--c:#EE4F96"><h4>Typical Ride Duration</h4><div class="body"><div class="donut" style="background:conic-gradient(#F9C6DD 0% 22%, #EE5B9C 22% 70%, #F38AB9 70% 93%, #C51466 93% 100%)"><span></span></div><ul class="legend2"><li style="--d:#F9C6DD">Under 15 min<b>22%</b></li><li style="--d:#EE5B9C">15–30 min<b>48%</b></li><li style="--d:#F38AB9">31–60 min<b>23%</b></li><li style="--d:#C51466">Over 60 min<b>7%</b></li></ul></div></div>
+        <div class="chart" style="--c:#3B8CE8"><h4>Most Wanted App Features</h4><div class="body"><div class="donut" style="background:conic-gradient(#8CC8F7 0% 34%, #2E95F0 34% 62%, #1C6FD6 62% 84%, #174FA8 84% 100%)"><span></span></div><ul class="legend2"><li style="--d:#8CC8F7">Live bicycle map<b>34%</b></li><li style="--d:#2E95F0">Transparent pricing<b>28%</b></li><li style="--d:#1C6FD6">Easy QR unlock<b>22%</b></li><li style="--d:#174FA8">Ride history<b>16%</b></li></ul></div></div>
+      </div>
+    </section>
+
+    <!-- ===== Competitor Analysis ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Competitor <span class="alt">Analysis</span></h2>
+      <p class="sec-sub">Understanding the competitive landscape to identify opportunities for differentiation and improvement.</p>
+      <div class="comp">
+        <div></div>
+        <div class="brand"><img src="Image/rydio-e-bike/2.png" alt="ONN Bike Rentals"></div>
+        <div class="brand"><img src="Image/rydio-e-bike/3.png" alt="bud-e"></div>
+        <div class="brand"><img src="Image/rydio-e-bike/4.png" alt="RenTrip"></div>
+        <div class="cell head">Core business model</div><div class="cell">Two-wheeler rentals and related mobility services</div><div class="cell">Electric two-wheeler sharing/rentals</div><div class="cell">Multi-category self-drive rentals and travel services</div>
+        <div class="cell head">Primary UX</div><div class="cell">Making rental plans, availability and final cost easy to compare</div><div class="cell">Making vehicle discovery, scanning and ride-starting reliable</div><div class="cell">Helping users compare many listings without decision fatigue</div>
+        <div class="cell head">Experience complexity</div><div class="cell">Medium: multiple vehicle types and rental durations</div><div class="cell">Potentially low for a straightforward scan-and-ride trip</div><div class="cell">Medium–high: multiple vehicle categories and trip types</div>
+        <div class="cell head">Booking approach</div><div class="cell">Select vehicle/ station and rental duration</div><div class="cell">Scan, rent and ride</div><div class="cell">Search, select vehicle, book and collect</div>
+        <div class="cell head">Electric mobility</div><div class="cell">Available in select locations, according to published listing</div><div class="cell">Central to the product</div><div class="cell">Electric and conventional bicycle options are listed; motorcycle EV availability requires verification</div>
+        <div class="cell head">Target user</div><div class="cell">Students, commuters, tourists and longer-term renters</div><div class="cell">Urban commuters and short-trip users</div><div class="cell">Tourists, weekend riders, commuters and vehicle enthusiasts</div>
+        <div class="cell head">Key differentiator</div><div class="cell">Rental-duration flexibility</div><div class="cell">Electric-first, scan-to-ride experience</div><div class="cell">Broad vehicle selection and travel options</div>
+        <div class="cell head">Best design focus</div><div class="cell">Reduce booking uncertainty</div><div class="cell">Reduce the time and effort needed to start a ride</div><div class="cell">Simplify discovery and comparison</div>
+        <div class="cell head">Accessibility</div><div class="cell">Legible pricing, large booking controls and readable policies</div><div class="cell">High-contrast map markers, accessible scan alternatives and clear ride status</div><div class="cell">Accessible filters, readable specifications and consistent card layouts</div>
+        <div class="cell head">Business opportunity</div><div class="cell">Repeat rentals and longer-term plans</div><div class="cell">Frequent short rides and high vehicle utilisation</div><div class="cell">Cross-category bookings and longer travel rentals</div>
+      </div>
+    </section>
+
+
+    <!-- ===== User Persona ===== -->
+    <section class="block">
+      <h2 class="sec-title">User <span>Persona</span></h2>
+      <p class="sec-sub w-780">Understanding the needs, goals, and challenges of e-bike users helps create a convenient and user-friendly rental experience tailored to their daily travel needs.</p>
+      <div class="persona">
+        <div class="p-col">
+          <div class="p-card">
+            <div class="avatar zoom"><img src="Image/rydio-e-bike/5.png" alt="Aarav Mehta"></div>
+            <div class="p-name">Aarav Mehta</div>
+            <dl class="facts"><dt>Age</dt><dd>26</dd><dt>Location</dt><dd>Hyderabad</dd><dt>Travel Mode</dt><dd>Daily commute</dd><dt>Tech Literacy</dt><dd>High</dd></dl>
+          </div>
+          <div class="p-card"><p class="quote">I want an affordable, eco-friendly way to get around without worrying about battery life, availability or hidden charges</p></div>
+          <div class="p-card"><h5>Personality</h5><div class="chips"><span>Practical</span><span>Health-conscious</span><span>Environmentally aware</span><span>Time-conscious</span></div></div>
+        </div>
+        <div class="p-col">
+          <div class="p-card"><h5>Bio</h5><p>Aarav is a young professional who commutes to work and visits nearby places in his free time. He prefers affordable, eco-friendly transportation and uses mobile apps to find convenient e-bicycles for everyday travel.</p></div>
+          <div class="p-card"><h5>Core Needs</h5><ul><li>Find nearby available e-bicycles quickly.</li><li>Check battery level and estimated riding range.</li><li>View rental charges before starting a ride.</li><li>Locate bicycle stations and designated parking areas.</li><li>Unlock and return e-bicycles easily.</li></ul></div>
+          <div class="p-card"><h5>Frustrations</h5><ul><li>Nearby e-bicycles may be unavailable or have low battery.</li><li>Unclear rental pricing and unexpected charges.</li><li>Difficulty finding designated return and parking locations.</li><li>Uncertainty about battery range and ride completion.</li></ul></div>
+          <div class="p-card"><h5>Preferred Brands</h5><p>Google Maps | Rapido | PhonePe | Uber</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Storyboard ===== -->
+    <section class="block">
+      <h2 class="sec-title">Story<span>board</span></h2>
+      <p class="sec-sub w-560">Visualizing the rider’s journey from needing a quick way to travel to finding a nearby e-bike, unlocking it, riding, and returning it with ease.</p>
+      <div class="storyboard zoom"><img src="Image/rydio-e-bike/10.png" alt="Storyboard"></div>
+    </section>
+
+    <!-- ===== Empathy Map ===== -->
+    <section class="block">
+      <h2 class="sec-title">Empathy <span class="alt">Map</span></h2>
+      <p class="sec-sub">Understanding users’ needs, motivations, frustrations, and behaviors to create a more convenient and user-friendly e-bike rental experience.</p>
+      <div class="empathy">
+        <div class="emp-col side">
+          <div class="emp"><h4><span class="em">👣</span>DOES</h4><ul><li>Uses the app to find nearby e-bicycles.</li><li>Checks availability, battery level and riding range.</li><li>Rents e-bicycles for commuting and short trips.</li><li>Follows parking rules and returns bicycles to designated zones.</li><li>Uses the app to make payments and view ride history.</li></ul></div>
+          <div class="emp"><h4><span class="em">😣</span>PAINS</h4><ul><li>No available e-bicycles nearby.</li><li>Low battery or unclear riding range.</li><li>Hidden charges and confusing pricing.</li><li>Difficulty finding designated parking areas.</li><li>App errors or slow unlocking.</li><li>Poor bicycle maintenance or safety concerns.</li></ul></div>
+        </div>
+        <div class="emp-col mid">
+          <div class="emp"><h4><span class="em">🧠</span>THINKS</h4><ul><li>“Is there an available e-bicycle near me?”</li><li>“How much will this ride cost?”</li><li>“Will the battery last for my trip?”</li><li>“Where can I safely return the bicycle?”</li><li>“Can I reach my destination on time?”</li></ul></div>
+          <div class="emp"><h4><span class="em">❤️</span>FEELS</h4><ul><li>Happy and refreshed after a ride.</li><li>Confident when the app is easy to use.</li><li>Frustrated when bicycles are unavailable.</li><li>Worried about battery life and reaching the destination on time.</li><li>Motivated to choose sustainable transportation.</li></ul></div>
+        </div>
+        <div class="emp-col side">
+          <div class="emp"><h4><span class="em">💬</span>SAYS</h4><ul><li>“I hope there is a bicycle nearby.”</li><li>“The pricing should be clear.”</li><li>“I want to see the battery level before starting.”</li><li>“Unlocking and returning should be easy.”</li><li>“I want a smooth and safe ride.”</li></ul></div>
+          <div class="emp"><h4><span class="em">✨</span>GAINS</h4><ul><li>Convenient and affordable last-mile transport.</li><li>Saves time and reduces travel stress.</li><li>Supports an eco-friendly lifestyle.</li><li>Incorporates light physical activity into daily travel.</li><li>Transparent pricing and reliable battery information.</li><li>Easy access to nearby e-bicycles.</li><li>Improved urban mobility and connectivity.</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Mapping the Experience ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Mapping <span class="alt">the Experience</span></h2>
+      <p class="sec-sub">The experience map connects the key steps of the e-bike rental journey, from finding and booking a bike to completing the ride, creating a smooth and seamless experience.</p>
+      <div class="map-img zoom"><img src="Image/rydio-e-bike/11.png" alt="Experience map"></div>
+    </section>
+
+    <!-- ===== Building the app (wireframes) ===== -->
+    <section class="block">
+      <h2 class="sec-title">Building the <span>App</span></h2>
+      <p class="sec-sub w-640">Transforming initial wireframes into a clear and intuitive e-bike rental experience, focusing on easy bike discovery, route planning, and seamless navigation.</p>
+      <div class="wires">
+        <div class="wire"><div class="shot zoom"><img src="Image/rydio-e-bike/12.png" alt="Paper wireframe"></div><span>Paper wireframe</span></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/rydio-e-bike/13.png" alt="Lo-fi wireframe"></div><span>Lo-fi wireframe</span></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/rydio-e-bike/14.png" alt="Hi-fi wireframe"></div><span>Hi-fi wireframe</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Design System ===== -->
+    <section class="block">
+      <div class="soft-box ds-box">
+        <h2 class="sec-title">Design <span>System</span></h2>
+        <p class="sec-sub">Establishing a consistent visual language through typography, colors, and reusable components to create a clear, accessible, and cohesive experience.</p>
+        <div class="typo">
+          <div>
+            <h5>Typography</h5>
+            <div class="fname">Poppins</div>
+            <div class="chars">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890</div>
+          </div>
+          <div class="aa-wrap">
+            <div class="aa"><span class="A">A</span><span class="a">a</span></div>
+            <div class="weights"><span>Regular</span><span>Medium</span><span>Semibold</span><span>Bold</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="swatches"><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span></div>
+    </section>
+
+    <!-- ===== UI Design ===== -->
+    <section class="block">
+      <h2 class="sec-title">UI <span>Design</span></h2>
+      <p class="sec-sub">A clear and intuitive interface designed to make bike discovery, booking, journey tracking, and payment simple and seamless.</p>
+      <!-- App gallery -->
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">App Design <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+
+          <!-- ===================== 1. ONBOARDING ===================== -->
+          <div class="ry-box">
+            <div class="ry-row c3">
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/15.png" alt="Onboarding 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/16.png" alt="Onboarding 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/17.png" alt="Onboarding 3" loading="lazy"></div>
+            </div>
+            <div class="ry-cap">Onboarding screens</div>
+          </div>
+
+          <!-- ===================== 2. LOGIN / SIGN UP ===================== -->
+          <div class="ry-split">
+            <div class="ry-row c3">
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/18.png" alt="Login 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/19.png" alt="Login 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/20.png" alt="Login 3" loading="lazy"></div>
+            </div>
+            <div class="ry-note">
+              <h4>Login/sign up</h4>
+              A simple and secure authentication flow designed to help users quickly access Rydio and start their e-bike journey.
+            </div>
+          </div>
+
+          <!-- ===================== 3. HOME ===================== -->
+          <div class="ry-box">
+            <div class="ry-split r">
+              <div class="ry-note">
+                <h4>Home</h4>
+                The home screen gives users a quick overview of nearby e-bikes and makes it easy to plan their next journey. The map-based interface helps users locate available rides, while destination search, ride details, and ride history make the rental experience simple and convenient.
+              </div>
+              <div class="ry-row c3-of4">
+                <div class="ry-ph zoom"><img src="Image/rydio-e-bike/21.png" alt="Home 1" loading="lazy"></div>
+                <div class="ry-ph zoom"><img src="Image/rydio-e-bike/22.png" alt="Home 2" loading="lazy"></div>
+                <div class="ry-ph zoom"><img src="Image/rydio-e-bike/23.png" alt="Home 3" loading="lazy"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===================== 4. ABOUT BIKE ===================== -->
+          <div class="ry-split mid">
+            <div class="ry-ph zoom"><img src="Image/rydio-e-bike/24.png" alt="About bike 1" loading="lazy"></div>
+            <div class="ry-note">
+              <h4>About bike</h4>
+              Users get essential information about a selected e-bike, from pricing and battery availability to its recent journey history. Showing the bike’s previous trips gives users greater visibility into its usage while keeping booking information easily accessible.
+            </div>
+            <div class="ry-ph zoom"><img src="Image/rydio-e-bike/25.png" alt="About bike 2" loading="lazy"></div>
+          </div>
+
+          <!-- ===================== 5. PICK YOUR BIKE ===================== -->
+          <div class="ry-box">
+            <div class="ry-row c5">
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/26.png" alt="Pick your bike 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/27.png" alt="Pick your bike 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/28.png" alt="Pick your bike 3" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/29.png" alt="Pick your bike 4" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/30.png" alt="Pick your bike 5" loading="lazy"></div>
+            </div>
+            <div class="ry-cap">Pick your bike</div>
+          </div>
+
+          <!-- ===================== 6. JOURNEY ===================== -->
+          <div class="ry-split">
+            <div class="ry-row c3">
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/31.png" alt="Journey 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/32.png" alt="Journey 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/33.png" alt="Journey 3" loading="lazy"></div>
+            </div>
+            <div class="ry-note">
+              <h4>Journey</h4>
+              The journey flow makes starting and managing an e-bike ride simple. Users can scan the bike’s QR code, review the fare and battery status, confirm their booking, and monitor their active ride with real-time journey and package information.
+            </div>
+          </div>
+
+          <!-- ===================== 7. RECHARGE ===================== -->
+          <div class="ry-box">
+            <div class="ry-row c5">
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/34.png" alt="Recharge 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/35.png" alt="Recharge 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/36.png" alt="Recharge 3" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/37.png" alt="Recharge 4" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/38.png" alt="Recharge 5" loading="lazy"></div>
+            </div>
+            <div class="ry-cap">Recharge</div>
+          </div>
+
+          <!-- ===================== 8. PAYMENT ===================== -->
+          <div class="ry-split r">
+            <div class="ry-note">
+              <h4>Payment</h4>
+              The payment interface keeps pricing and payment details clear, with a strong focus on the total amount and Pay CTA for a simple experience.
+            </div>
+            <div class="ry-row c3-of4">
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/39.png" alt="Payment 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/40.png" alt="Payment 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/41.png" alt="Payment 3" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- ===================== 9. OTHER SCREENS ===================== -->
+          <div class="ry-box">
+            <div class="ry-cap top">Other Screens</div>
+            <div class="ry-row c5">
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/42.png" alt="Other screen 1" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/43.png" alt="Other screen 2" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/44.png" alt="Other screen 3" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/45.png" alt="Other screen 4" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/46.png" alt="Other screen 5" loading="lazy"></div>
+            </div>
+            <div class="ry-row c3-of5">
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/47.png" alt="Other screen 6" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/48.png" alt="Other screen 7" loading="lazy"></div>
+              <div class="ry-ph zoom"><img src="Image/rydio-e-bike/49.png" alt="Other screen 8" loading="lazy"></div>
+            </div>
+          </div>
+
+        </div></div>
+      </div>
+
+      <!-- Website gallery -->
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">Website <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+          <div class="ry-web-grid">
+            <div class="ry-web zoom"><img src="Image/rydio-e-bike/50.png" alt="Website homepage" loading="lazy"></div>
+            <div class="ry-web zoom"><img src="Image/rydio-e-bike/51.png" alt="About us" loading="lazy"></div>
+          </div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Usability Testing ===== -->
+    <section class="block">
+      <h2 class="sec-title">Usability <span>Testing</span></h2>
+      <p class="sec-sub w-720">Evaluated the app’s key interactions, including bike discovery, booking, journey tracking, and payment, to identify usability issues and improve the overall user experience.</p>
+      <div class="cards3">
+        <div><h4>Simplified Bicycle<br>Discovery</h4>Users need a clear map with real-time bicycle availability, battery levels, and estimated riding range to make confident choices.</div>
+        <div><h4>Clear Rental &amp;<br>Pricing</h4>Rental packages should clearly communicate duration, pricing, and additional charges to help users choose the right option without confusion.</div>
+        <div><h4>Seamless Ride<br>Completion</h4>Easy unlocking, visible ride status, clear parking instructions, and instant ride-end confirmation can create a smoother rental experience.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="copy">© 2026 By Mariyam Nesha</div>
+    <a href="index.html" class="f-logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+    <div class="social">
+      <span>Follow :</span>
+      <a href="https://www.behance.net/mariyamnesha3" target="_blank" rel="noopener" aria-label="Behance"><img src="Image/Common/Behance.png" alt="Behance"></a>
+      <a href="https://dribbble.com/mary333333333" target="_blank" rel="noopener" aria-label="Dribbble"><img src="Image/Common/Dribbble.png" alt="Dribbble"></a>
+      <a href="mailto:mariyamnesha3@gmail.com" aria-label="Gmail"><img src="Image/Common/Gmail.png" alt="Gmail"></a>
+      <a href="https://www.linkedin.com/in/mariyam-nesha-05b04a190/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="Image/Common/LinkedIn.png" alt="LinkedIn"></a>
+    </div>
+  </footer>
+
+  <!-- ===== Lightbox (click an image to enlarge) ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </div>
+
+  <script>
+    /* ----- Collapsible gallery ----- */
+    function fit() {
+      document.querySelectorAll('.gallery-body').forEach(function (b) {
+        b.style.maxHeight = b.scrollHeight + 'px';
+      });
+    }
+
+    document.querySelectorAll('.gallery').forEach(function (g) {
+      var head = g.querySelector('.gallery-head');
+      head.addEventListener('click', function () {
+        fit();
+        var open = g.classList.toggle('open');
+        head.setAttribute('aria-expanded', open);
+      });
+    });
+
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    /* lazy images can change the height after loading – re-measure each time one loads */
+    document.querySelectorAll('.gallery img').forEach(function (img) {
+      img.addEventListener('load', fit);
+    });
+
+    /* ----- Lightbox ----- */
+    var lb = document.getElementById('lightbox');
+    var lbImg = lb.querySelector('img');
+
+    document.querySelectorAll('.zoom').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var img = el.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('show');
+      });
+    });
+
+    function closeLb() { lb.classList.remove('show'); }
+    lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Adhyayanam case study by Mariyam Nesha – NIMCET learning and test preparation app UX/UI design.">
+  <title>Adhyayanam | Mariyam Nesha</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Mariyam Nesha – Adhyayanam case study
+       ========================================================= */
+
+    /* ---------- 1. Variables & reset ---------- */
+    :root {
+      --orange: #F47B20;
+      --brown: #7A3E10;
+      --brown-2: #8C4A10;
+      --text-brown: #5A2A0A;
+      --soft: #FCE8DC;
+      --soft-2: #FDF2EA;
+      --label: #F9CDAE;
+      --dash: #D9B49B;
+      --dark: #161616;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- 2. Navbar ---------- */
+    .nav-wrap { padding: 40px 70px 0; }
+    .navbar {
+      max-width: 1300px; margin: 0 auto; height: 86px; padding: 0 8px 0 34px;
+      background: var(--dark); border-radius: 50px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar .logo img { height: 100px; }
+    .nav-links { display: flex; list-style: none; gap: 10px; }
+    .nav-links a {
+      display: block; color: #fff; font-size: 20px; padding: 18px 40px; border-radius: 40px;
+      transition: background .25s, color .25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { background: var(--orange); color: #fff; }
+
+    /* ---------- 3. Layout & section titles ---------- */
+    main { max-width: 1300px; margin: 0 auto; padding: 0 70px 100px; box-sizing: content-box; }
+    section.block { margin-top: 110px; position: relative; }
+    .soft-box { background: var(--soft); border-radius: 36px; padding: 70px 70px 80px; position: relative; }
+
+    .sec-title { text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -0.5px; }
+    .sec-title span { color: var(--orange); }
+    .sec-title span.alt { color: #C0601A; }
+    .sec-sub { text-align: center; font-size: 18px; line-height: 1.6; color: #333; max-width: 760px; margin: 18px auto 0; }
+    .sec-sub.w-860 { max-width: 860px; }
+    .sec-sub.w-820 { max-width: 820px; }
+    .sec-sub.w-780 { max-width: 780px; }
+    .sec-sub.w-720 { max-width: 720px; }
+    .sec-sub.w-640 { max-width: 640px; }
+    .sec-sub.w-560 { max-width: 560px; }
+
+    /* ---------- 4. Hero & overview ---------- */
+    .page-title { display: flex; align-items: center; justify-content: center; margin: 70px 0 44px; }
+    .page-title h1 { font-size: 52px; font-weight: 600; letter-spacing: -0.5px; }
+
+    .hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.58fr); gap: 48px; align-items: stretch; }
+
+    /* Photo with see-through white frame */
+    .hero-img { position: relative; height: 100%; border-radius: 30px; overflow: hidden; background: #F1E6DD; box-shadow: 0 10px 30px rgba(0,0,0,.08); cursor: zoom-in; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-img::after { content: ""; position: absolute; inset: 0; border: 16px solid rgba(255,255,255,.35); border-radius: 30px; pointer-events: none; }
+
+    .overview { background: #F5E7DC; border-radius: 30px; padding: 44px 44px 40px; }
+    .overview h2 { color: var(--brown); font-size: 30px; font-weight: 600; margin-bottom: 14px; }
+    .overview > p { font-size: 18px; line-height: 1.6; color: #333; margin-bottom: 30px; }
+    .ov-row { display: grid; grid-template-columns: minmax(0,0.62fr) minmax(0,1fr); gap: 26px; margin-bottom: 26px; }
+
+    .fieldset { min-width: 0; border: 1.5px solid #E2C9B8; border-radius: 14px; padding: 0 22px 18px; position: relative; }
+    .fieldset legend { font-size: 22px; font-weight: 600; padding: 0 8px; margin-left: -8px; }
+    .fieldset .tools { display: flex; gap: 36px; padding: 8px 26px 0; }
+    .fieldset .tools img { width: 50px; height: 50px; border-radius: 10px; }
+    .fieldset .val { font-size: 17px; font-weight: 500; padding-top: 16px; line-height: 1.7; }
+    .overview > .fieldset .val { text-align: justify; }
+
+    /* ---------- 5. Design process ---------- */
+    .process { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; max-width: 1150px; margin: 50px auto 0; position: relative; }
+    .step {
+      --c: #EF6C98; --bg: #FDE3EE;
+      position: relative; padding: 26px 16px 28px; text-align: center;
+      border: 2px solid var(--c); border-radius: 30px;
+      background: linear-gradient(180deg, var(--bg), #fff 120%);
+      box-shadow: 0 8px 20px rgba(0,0,0,.04);
+    }
+    .step:nth-child(2), .step:nth-child(4) { --c: #F2853A; --bg: #FDE6D6; }
+    .step:nth-child(3) { --c: #F4C23A; --bg: #FFF4D4; }
+    .step .ic {
+      width: 92px; height: 92px; border-radius: 50%; margin: 0 auto 18px;
+      background: rgba(255,255,255,.75); box-shadow: 0 6px 16px rgba(0,0,0,.06);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step .ic svg { width: 46px; height: 46px; }
+    .step h4 { font-size: 20px; font-weight: 600; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 2px dotted var(--c); }
+    .step p { font-size: 15px; font-weight: 500; line-height: 1.45; color: #222; }
+    /* connector line + dots between steps */
+    .step:not(:last-child)::after { content: ""; position: absolute; top: 46%; right: -42px; width: 42px; height: 2px; background: var(--c); }
+    .step:not(:last-child)::before {
+      content: ""; position: absolute; top: calc(46% - 5px); right: -10px; z-index: 1;
+      width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: -20px 0 0 var(--c);
+    }
+
+    /* ---------- 6. Quantitative research (donut charts) ---------- */
+    .charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1000px; margin: 46px auto 0; }
+    .chart {
+      --c: #3B8CE8; padding: 18px 20px 22px; border-radius: 14px;
+      border: 2px dashed color-mix(in srgb, var(--c) 45%, white);
+      background: color-mix(in srgb, var(--c) 4%, white);
+    }
+    .chart h4 { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 600; margin-bottom: 14px; }
+    .chart h4 i {
+      font-style: normal; width: 30px; height: 30px; border-radius: 8px; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: color-mix(in srgb, var(--c) 15%, white);
+    }
+    .chart .body { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; }
+    .donut { width: 120px; aspect-ratio: 1; border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; }
+    .donut::before { content: ""; position: absolute; inset: 26px; background: #fff; border-radius: 50%; }
+    .donut span { position: relative; font-size: 28px; }
+    .legend2 { list-style: none; font-size: 13px; color: #333; display: flex; flex-direction: column; gap: 8px; }
+    .legend2 li { display: grid; grid-template-columns: 12px 1fr auto; gap: 8px; align-items: center; line-height: 1.3; }
+    .legend2 li::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--d); }
+    .legend2 b { font-weight: 600; }
+
+    /* ---------- 7. Competitor analysis ---------- */
+    .comp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 22px; max-width: 1100px; margin: 46px auto 0; }
+    .comp .brand { border-radius: 10px; overflow: hidden; aspect-ratio: 2.5 / 1; background: #fff; border: 3px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,.08); }
+    .comp .brand img { width: 100%; height: 100%; object-fit: cover; }
+    .comp .cell {
+      background: #fff; border-radius: 10px; min-height: 64px; padding: 10px 16px;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      font-size: 16px; font-weight: 500; line-height: 1.35; color: #222; box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    }
+    .comp .cell.head { background: var(--label); border: 3px solid #fff; }
+
+    /* ---------- 8. User persona ---------- */
+    .persona { display: grid; grid-template-columns: 0.75fr 1fr; gap: 22px; max-width: 1100px; margin: 46px auto 0; }
+    .p-col { display: flex; flex-direction: column; gap: 18px; }
+    .p-card { background: var(--soft); border-radius: 22px; padding: 28px 32px; }
+    .p-card h5 { color: #666; font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+    .p-card p, .p-card li { color: var(--text-brown); font-size: 17px; line-height: 1.6; font-weight: 500; }
+    .p-card ul { padding-left: 22px; }
+    .avatar { width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 16px; background: #eadbd0; cursor: zoom-in; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .p-name { text-align: center; color: #B5642A; font-size: 24px; font-weight: 600; margin-bottom: 18px; }
+    .facts { display: grid; grid-template-columns: auto 1fr; gap: 12px 40px; font-size: 18px; }
+    .facts dt { color: #777; font-weight: 500; }
+    .facts dd { color: var(--text-brown); font-weight: 600; }
+    .quote { position: relative; padding: 0 20px 22px; font-size: 17px; line-height: 1.6; text-align: center; color: var(--text-brown); font-weight: 500; }
+    .quote::before { content: "“"; position: absolute; left: -6px; top: -16px; font-size: 54px; font-weight: 700; color: #222; }
+    .quote::after  { content: "”"; position: absolute; right: 6px; bottom: -34px; font-size: 54px; font-weight: 700; color: #222; }
+    .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+    .chips span { background: #fff; border-radius: 30px; padding: 8px 22px; font-size: 16px; font-weight: 500; color: var(--text-brown); }
+
+    /* ---------- 9. Storyboard ---------- */
+    .storyboard { max-width: 900px; min-height: 300px; margin: 40px auto 0; border-radius: 6px; overflow: hidden; background: #F2F0EC; cursor: zoom-in; }
+    .storyboard img { width: 100%; height: auto; }
+
+    /* ---------- 10. Empathy map ---------- */
+    .empathy { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; max-width: 1150px; margin: 50px auto 0; }
+    .emp-col { display: flex; flex-direction: column; gap: 22px; }
+    .emp-col.side { padding-top: 54px; }
+    .emp-col.mid  { padding-top: 26px; }
+    .emp { border: 2px dashed var(--dash); border-radius: 22px; padding: 30px 34px 32px; }
+    .emp h4 { color: var(--brown); font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 16px; }
+    .emp h4 .em { font-size: 22px; margin-right: 6px; }
+    .emp ul { padding-left: 20px; }
+    .emp li { font-size: 16px; line-height: 1.75; color: #333; }
+
+    /* ---------- 11. Experience map ---------- */
+    .map-img { background: var(--soft-2); border-radius: 24px; margin-top: 44px; padding: 26px; cursor: zoom-in; }
+    .map-img img { width: 100%; height: auto; min-height: 200px; margin: 0 auto; object-fit: contain; }
+
+    /* ---------- 12. Wireframes ---------- */
+    .wires { display: grid; grid-template-columns: 1fr 70px 1fr 70px 1fr; align-items: center; max-width: 1050px; margin: 46px auto 0; }
+    .wire { text-align: center; }
+    /* whole wireframe shown as it is: no extra box, background or shadow
+       (your images already have their own rounded corners, frame and shadow) */
+    .wire .shot { cursor: zoom-in; }
+    .wire .shot img { width: 100%; height: auto; }
+    .wire span { display: block; font-size: 18px; margin-top: 18px; }
+    .arrow { height: 2px; background: #C0753E; position: relative; margin: 0 10px; top: -22px; }
+    .arrow::after {
+      content: ""; position: absolute; right: -2px; top: -5px; width: 10px; height: 10px;
+      border-right: 2px solid #C0753E; border-top: 2px solid #C0753E; transform: rotate(45deg);
+    }
+
+    /* ---------- 13. Design system ---------- */
+    .ds-box { padding-bottom: 150px; }
+    .typo { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; margin-top: 50px; padding: 0 60px; }
+    .typo h5 { font-size: 22px; font-weight: 500; }
+    .typo .fname { font-size: 96px; font-weight: 500; line-height: 1.15; margin: 6px 0 14px; }
+    .typo .chars { font-weight: 300; font-size: 30px; line-height: 1.2; color: #8a8a8a; word-break: break-all; }
+
+    .aa-wrap { text-align: center; }
+    .aa {
+      display: inline-flex; align-items: flex-end; gap: 2px; line-height: .8;
+      padding: 18px 14px 10px; position: relative;
+      background-image:   /* dashed frame around "Aa" */
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px);
+      background-size: 100% 1.5px, 100% 1.5px, 1.5px 100%, 1.5px 100%;
+      background-position: 0 6px, 0 calc(100% - 4px), 6px 0, calc(100% - 6px) 0;
+      background-repeat: no-repeat;
+    }
+    .aa .A { font-size: 220px; font-weight: 700; color: #7E4A1E; }
+    .aa .a { font-size: 175px; font-weight: 600; color: transparent; -webkit-text-stroke: 3px #7E4A1E; }
+    .weights { display: flex; justify-content: center; gap: 34px; margin-top: 18px; font-size: 18px; }
+    .weights span:nth-child(1) { font-weight: 400; }
+    .weights span:nth-child(2) { font-weight: 500; }
+    .weights span:nth-child(3) { font-weight: 600; }
+    .weights span:nth-child(4) { font-weight: 700; }
+
+    .swatches { display: flex; justify-content: center; gap: 18px; margin-top: -110px; position: relative; z-index: 2; padding: 0 40px; }
+    .sw {
+      width: 170px; aspect-ratio: 1; border: 10px solid #fff; border-radius: 6px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12); transition: transform .3s;
+    }
+    /* Adhyayanam colour palette */
+    .sw:nth-child(1) { background: #0070C0; transform: rotate(-14deg); }
+    .sw:nth-child(2) { background: #6CDE9E; transform: rotate(20deg) translateY(14px); }
+    .sw:nth-child(3) { background: #FF7474; transform: rotate(-8deg) translateY(6px); }
+    .sw:nth-child(4) { background: #FFD27F; transform: rotate(24deg) translateY(30px); }
+    .sw:nth-child(5) { background: #333333; transform: rotate(-16deg) translateY(14px); }
+    .sw:hover { transform: rotate(0) scale(1.05); }
+
+    /* ---------- 14. UI gallery (collapsible) ---------- */
+    .gallery { margin-top: 56px; border: 1.5px solid #e6e6e6; border-radius: 28px; position: relative; }
+    .gallery:not(.open) { min-height: 40px; }
+    .gallery-head {
+      position: absolute; top: -22px; left: 26px; padding: 0 14px;
+      background: #fff; border: none; cursor: pointer;
+      font-size: 28px; font-weight: 500; color: #111;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .chev {
+      width: 13px; height: 13px; border-left: 3px solid #111; border-top: 3px solid #111;
+      transform: rotate(45deg) translate(3px, 3px); transition: transform .3s;
+    }
+    .gallery:not(.open) .chev { transform: rotate(225deg) translate(3px, 3px); }
+    .gallery-body { overflow: hidden; transition: max-height .45s ease; }
+    .gallery:not(.open) .gallery-body { max-height: 0 !important; }
+    .g-in { padding: 56px 40px 40px; }
+
+    /* Phone screen */
+    /* whole screen shown, nothing cropped (tops lined up) */
+    .ad-ph { border-radius: 10px; overflow: hidden; background: #fff; border: 1.5px solid #D8DCE3; cursor: zoom-in; }
+    .ad-ph img { width: 100%; height: auto; }
+    .grid5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; align-items: start; }
+
+    /* Onboarding strip */
+    .onb { background: var(--soft); border-radius: 18px; padding: 14px 14px 18px; max-width: 900px; margin: 0 auto; }
+    .onb .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: start; }
+    .onb-cap { text-align: center; color: var(--brown); font-size: 20px; font-weight: 600; margin-top: 16px; }
+
+    /* Notes */
+    .n { position: relative; background: var(--soft); border-radius: 26px; padding: 20px 24px; text-align: center; font-size: 16px; line-height: 1.6; color: var(--text-brown); }
+    .n.o { background: #fff; border: 2px solid var(--text-brown); }
+    .n h4 { font-size: 20px; font-weight: 600; margin-bottom: 14px; }
+
+    /* Home screen with notes around it and curved arrows */
+    .annot { position: relative; max-width: 1000px; margin: 60px auto 0; }
+    .annot-img {
+      width: 26%; margin: 0 auto; border-radius: 10px; overflow: hidden;
+      border: 1.5px solid #D8DCE3; box-shadow: 0 8px 24px rgba(0,0,0,.08); cursor: zoom-in;
+    }
+    .annot-img img { width: 100%; height: auto; }   /* full screen shown, nothing cropped */
+    .annot .n { position: absolute; width: 28%; font-size: 15px; font-weight: 500; line-height: 1.55; padding: 18px 20px; }
+    .annot .n.l { left: 4%; }
+    .annot .n.r { right: 4%; }
+    .annot .n1 { top: 4%; }
+    .annot .n2 { top: 12%; }
+    .annot .n3 { top: 40%; }
+    .annot .n4 { top: 56%; }
+
+    /* Curved dashed arrow */
+    .curve { position: absolute; width: 64px; height: 56px; overflow: visible; }
+    .curve path { fill: none; stroke: #B4682E; stroke-width: 2; stroke-dasharray: 5 4; stroke-linecap: round; }
+    .n.l .curve { left: calc(100% - 6px); }
+    .n.r .curve { right: calc(100% - 6px); transform: scaleX(-1); }   /* mirror for right-side notes */
+    .curve.up   { top: -34px; }
+    .curve.down { bottom: -30px; }
+
+    /* Books: two full screens + note */
+    .books { display: grid; grid-template-columns: 0.55fr 0.55fr 1fr; gap: 16px; align-items: center; max-width: 900px; margin: 60px auto 0; }
+    .books .n { margin-left: 30px; }
+
+    /* Mock test & other screens boxes */
+    .mock  { border: 2.5px solid var(--text-brown); border-radius: 30px; padding: 32px; margin-top: 60px; }
+    .other { background: var(--soft); border-radius: 30px; padding: 32px; margin-top: 40px; }
+    .mock h3, .other h3 { text-align: center; color: var(--brown-2); font-size: 24px; font-weight: 600; margin-bottom: 14px; }
+    .mock p.d { text-align: center; font-size: 16px; color: #333; max-width: 820px; margin: 0 auto 26px; line-height: 1.6; }
+
+    /* ---------- 15. Usability testing ---------- */
+    .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 46px; }
+    .cards3 > div { background: var(--soft); border-radius: 22px; padding: 36px 34px; text-align: center; font-size: 17px; line-height: 1.65; color: #333; }
+    .cards3 h4 { color: var(--brown-2); font-size: 22px; font-weight: 600; line-height: 1.4; margin-bottom: 18px; }
+
+    /* ---------- 16. Lightbox ---------- */
+    .lightbox { position: fixed; inset: 0; z-index: 100; padding: 30px; background: rgba(0,0,0,.88); display: none; align-items: center; justify-content: center; }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 10px; }
+    .lightbox .close { position: absolute; top: 20px; right: 28px; background: none; border: none; color: #fff; font-size: 44px; line-height: 1; cursor: pointer; }
+
+    /* ---------- 17. Footer ---------- */
+    footer { background: #000; color: #fff; padding: 16px 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+    footer .copy { font-size: 18px; }
+    footer .f-logo img { height: 100px; }
+    footer .social { display: flex; align-items: center; justify-content: flex-end; gap: 23px; }
+    footer .social span { font-size: 18px; font-weight: 500; margin-right: -8px; }
+    footer .social img { width: 50px; height: 50px; border-radius: 6px; transition: transform .25s; }
+    footer .social a:hover img { transform: translateY(-4px); }
+
+    /* ---------- 18. Responsive: tablet ---------- */
+    @media (max-width: 1100px) {
+      .nav-links a { padding: 14px 24px; font-size: 18px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-img { max-width: 520px; width: 100%; margin: 0 auto; }
+      .ov-row { grid-template-columns: 1fr; }
+      .soft-box { padding: 56px 30px 60px; }
+      .process { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .step::after, .step::before { display: none; }
+      .charts { grid-template-columns: repeat(2, 1fr); }
+      .persona { grid-template-columns: 1fr; }
+      .empathy { grid-template-columns: 1fr; max-width: 560px; }
+      .emp-col.side, .emp-col.mid { padding-top: 0; }
+      .typo { grid-template-columns: 1fr; padding: 0; }
+      .sw { width: 130px; }
+      .g-in { padding: 50px 18px 24px; }
+      .grid5 { grid-template-columns: repeat(3, 1fr); }
+      /* notes go under the screen in two columns, arrows hidden */
+      .annot { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .annot-img { grid-column: 1 / -1; width: 100%; max-width: 280px; margin-bottom: 10px; }
+      .annot .n { position: static; width: auto; }
+      .curve { display: none; }
+      .books { grid-template-columns: 1fr 1fr; }
+      .books .n { grid-column: 1 / -1; margin: 0; order: -1; }
+      .mock, .other { padding: 22px 16px; }
+      .cards3 { grid-template-columns: 1fr; }
+    }
+
+    /* ---------- 19. Responsive: mobile ---------- */
+    @media (max-width: 720px) {
+      .nav-wrap { padding: 20px 16px 0; }
+      .navbar { height: auto; padding: 14px 16px; flex-direction: column; gap: 12px; border-radius: 30px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .nav-links a { padding: 10px 18px; font-size: 16px; }
+
+      main { padding: 0 16px 60px; }
+      .page-title { margin-top: 44px; }
+      .page-title h1 { font-size: 34px; }
+      .overview { padding: 28px 22px; }
+      .sec-title { font-size: 30px; }
+      .sec-sub { font-size: 16px; }
+      section.block { margin-top: 80px; }
+
+      .process { grid-template-columns: 1fr 1fr; }
+      .charts { grid-template-columns: 1fr; }
+      .comp { grid-template-columns: repeat(4, minmax(150px, 1fr)); overflow-x: auto; padding-bottom: 8px; }
+      .comp .cell { font-size: 14px; }
+
+      .wires { grid-template-columns: 1fr; gap: 30px; max-width: 280px; }
+      .arrow { display: none; }
+
+      .typo .fname { font-size: 64px; }
+      .typo .chars { font-size: 20px; }
+      .aa .A { font-size: 140px; }
+      .aa .a { font-size: 112px; }
+      .weights { gap: 16px; font-size: 15px; }
+      .swatches { flex-wrap: wrap; gap: 10px; margin-top: -80px; padding: 0; }
+      .sw { width: 30%; border-width: 6px; }
+      .ds-box { padding-bottom: 110px; }
+
+      .gallery-head { font-size: 22px; }
+      .onb .row, .grid5 { grid-template-columns: repeat(2, 1fr); }
+      .annot { grid-template-columns: 1fr; }
+
+      footer { grid-template-columns: 1fr; gap: 22px; text-align: center; padding: 20px 20px; }
+      footer .f-logo img { margin: 0 auto; }
+      footer .social { justify-content: center; flex-wrap: wrap; gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="ux-ui-design.html" class="active" aria-current="page">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero & overview ===== -->
+    <div class="page-title"><h1>Adhyayanam</h1></div>
+    <div class="hero">
+      <div class="hero-img zoom"><img src="Image/Adhayaynam/1.png" alt="Adhyayanam"></div>
+      <div class="overview">
+        <h2>Product Overview</h2>
+        <p>A learning and test preparation app designed to help students prepare for NIMCET with study materials, books, mock tests, previous year papers, and detailed performance analysis.</p>
+        <div class="ov-row">
+          <fieldset class="fieldset">
+            <legend>Tools</legend>
+            <div class="tools"><img src="Image/Common/Photoshop.png" alt="Photoshop"><img src="Image/Common/Figma.png" alt="Figma"></div>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend>Role</legend>
+            <div class="val">UX/UI DESIGNER | APP DESIGNER</div>
+          </fieldset>
+        </div>
+        <fieldset class="fieldset">
+          <legend>Focus</legend>
+          <div class="val">Mobile App Design | User Flow | Information Architecture | Wireframing | Test Experience</div>
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- ===== Design process ===== -->
+    <section class="block">
+      <h2 class="sec-title">Design <span>Process</span></h2>
+      <p class="sec-sub w-820">Understanding student needs and exam preparation behavior helps create a focused learning experience that makes studying, practicing, and tracking performance easier.</p>
+      <div class="process">
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#EF4F8C"/><path d="M31 17l-4.5 9.5L17 31l4.5-9.5z" fill="#fff"/><circle cx="24" cy="24" r="2" fill="#EF4F8C"/></svg></div>
+          <h4>Discover</h4>
+          <p>User Research, Competitive Analysis</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#F06A1E" stroke-width="4" stroke-linecap="round"><path d="M15 15a14 14 0 1 0 18 0"/><path d="M19.5 20a7.5 7.5 0 1 0 9 0"/><path d="M24 6v14"/><circle cx="24" cy="27" r="2" fill="#F06A1E"/></svg></div>
+          <h4>Define</h4>
+          <p>User Persona, Empathy Map</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M24 5a14 14 0 0 0-8 25.5V35h16v-4.5A14 14 0 0 0 24 5z" fill="#F7B500"/><rect x="17" y="37" width="14" height="3" rx="1.5" fill="#F7B500"/><rect x="19" y="42" width="10" height="3" rx="1.5" fill="#F7B500"/><path d="M19 15l5 6 5-6M24 21v9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Ideate</h4>
+          <p>User Flow</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M30 10l8 8-16 16-9 2 2-9z" fill="#F2622B"/><path d="M14 30c-6 0-8 4-5 6s9-1 4 5" stroke="#F2622B" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Design</h4>
+          <p>Lo-fi Wireframe, Hi-fi Wireframe</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M10 5h18l10 10v26a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#EF4F6E"/><path d="M28 5v10h10" fill="#F9A3B3"/><rect x="13" y="22" width="9" height="3" rx="1.5" fill="#fff"/><rect x="13" y="29" width="7" height="3" rx="1.5" fill="#fff"/><circle cx="31" cy="32" r="6" fill="#fff" stroke="#EF4F6E" stroke-width="3"/><path d="M35.5 36.5l5 5" stroke="#EF4F6E" stroke-width="3.5" stroke-linecap="round"/></svg></div>
+          <h4>Test</h4>
+          <p>Usability Testing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Quantitative research ===== -->
+    <section class="block">
+      <h2 class="sec-title">Quantitative <span>Research</span></h2>
+      <p class="sec-sub w-860">Understanding student study habits, preparation challenges, and test-taking behavior helps create a focused learning experience that supports consistent practice, effective preparation, and better exam performance.</p>
+      <div class="charts">
+        <div class="chart" style="--c:#3B8CE8">
+          <h4><i>👥</i>Age Group</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#BFDBFA 0% 12%, #3E95EE 12% 60%, #1F6FD1 60% 92%, #1A4F99 92% 100%)"><span>🎓</span></div>
+            <ul class="legend2"><li style="--d:#BFDBFA">16–18<b>12%</b></li><li style="--d:#3E95EE">18–20<b>48%</b></li><li style="--d:#1F6FD1">21–24<b>32%</b></li><li style="--d:#1A4F99">25+<b>8%</b></li></ul>
+          </div>
+        </div>
+        <div class="chart" style="--c:#F08A3C">
+          <h4><i>👤</i>Gender</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#F08A3C 0% 62%, #F6B27A 62% 97%, #FBDCC2 97% 100%)"><span>👫</span></div>
+            <ul class="legend2"><li style="--d:#F08A3C">Male<b>62%</b></li><li style="--d:#F6B27A">Female<b>35%</b></li><li style="--d:#FBDCC2">Prefer not to say<b>3%</b></li></ul>
+          </div>
+        </div>
+        <div class="chart" style="--c:#5CC45A">
+          <h4><i>📱</i>Primary Device</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#79D46F 0% 76%, #4DB04B 76% 97%, #2E7D32 97% 100%)"><span>📱</span></div>
+            <ul class="legend2"><li style="--d:#79D46F">Android<b>76%</b></li><li style="--d:#4DB04B">iOS<b>21%</b></li><li style="--d:#2E7D32">Other<b>3%</b></li></ul>
+          </div>
+        </div>
+        <div class="chart" style="--c:#F2B632">
+          <h4><i>📅</i>Study Frequency</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#FFD36B 0% 52%, #F5BE3E 52% 80%, #EFA21F 80% 94%, #E8781A 94% 100%)"><span>📖</span></div>
+            <ul class="legend2"><li style="--d:#FFD36B">Daily<b>52%</b></li><li style="--d:#F5BE3E">4–6 days/week<b>28%</b></li><li style="--d:#EFA21F">2–3 days/week<b>14%</b></li><li style="--d:#E8781A">Occasionally<b>6%</b></li></ul>
+          </div>
+        </div>
+        <div class="chart" style="--c:#EE4F96">
+          <h4><i>⏱️</i>Typical Study Session Duration</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#F9C6DD 0% 6%, #F38AB9 6% 30%, #EE5B9C 30% 76%, #E1307A 76% 100%)"><span>⏱️</span></div>
+            <ul class="legend2"><li style="--d:#F9C6DD">Under 15 min<b>6%</b></li><li style="--d:#F38AB9">15–30 min<b>24%</b></li><li style="--d:#EE5B9C">31–60 min<b>46%</b></li><li style="--d:#E1307A">Over 60 min<b>24%</b></li></ul>
+          </div>
+        </div>
+        <div class="chart" style="--c:#8E62E8">
+          <h4><i>⭐</i>Most Wanted App Features</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#9C6CF0 0% 38%, #B48EF4 38% 60%, #C9ADF7 60% 80%, #7E4FDB 80% 92%, #DCCBFA 92% 100%)"><span>▦</span></div>
+            <ul class="legend2"><li style="--d:#9C6CF0">Mock tests &amp; practice sets<b>38%</b></li><li style="--d:#B48EF4">Previous year papers<b>22%</b></li><li style="--d:#C9ADF7">Detailed result &amp; analysis<b>20%</b></li><li style="--d:#7E4FDB">Study materials (books, notes)<b>12%</b></li><li style="--d:#DCCBFA">Exam updates &amp; notifications<b>8%</b></li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Competitor analysis ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Competitor <span class="alt">Analysis</span></h2>
+      <p class="sec-sub">Analyzing existing NIMCET preparation platforms to identify gaps in learning, mock testing, performance tracking, and content accessibility, helping create a simpler and more effective preparation experience.</p>
+      <div class="comp">
+        <div></div>
+        <div class="brand"><img src="Image/Adhayaynam/2.png" alt="NIMCET Connect"></div>
+        <div class="brand"><img src="Image/Adhayaynam/3.png" alt="MCA Prep"></div>
+        <div class="brand"><img src="Image/Adhayaynam/4.png" alt="INPS Classes"></div>
+
+        <div class="cell head">Target Audience</div>
+        <div class="cell">NIMCET aspirants</div>
+        <div class="cell">MCA &amp; NIMCET aspirants</div>
+        <div class="cell">NIMCET aspirants &amp; beginners</div>
+
+        <div class="cell head">Content Focus</div>
+        <div class="cell">PYQs, mock tests &amp; exam preparation</div>
+        <div class="cell">MCA/NIMCET study resources</div>
+        <div class="cell">Foundation-level NIMCET preparation</div>
+
+        <div class="cell head">Study Material</div>
+        <div class="cell">Exam-focused resources</div>
+        <div class="cell">Broad learning material</div>
+        <div class="cell">Foundation concepts &amp; study content</div>
+
+        <div class="cell head">Practice Approach</div>
+        <div class="cell">Previous-year questions &amp; mocks</div>
+        <div class="cell">Practice-oriented preparation</div>
+        <div class="cell">Concept building &amp; practice</div>
+
+        <div class="cell head">Test Experience</div>
+        <div class="cell">Mock-test focused</div>
+        <div class="cell">Test &amp; practice focused</div>
+        <div class="cell">Exam preparation focused</div>
+
+        <div class="cell head">Performance Tracking</div>
+        <div class="cell">Basic performance feedback</div>
+        <div class="cell">Limited performance insights</div>
+        <div class="cell">Limited performance insights</div>
+
+        <div class="cell head">Question Solutions</div>
+        <div class="cell">Available with practice</div>
+        <div class="cell">Available</div>
+        <div class="cell">Available</div>
+
+        <div class="cell head">User Experience</div>
+        <div class="cell">Simple, exam-oriented</div>
+        <div class="cell">Resource-heavy learning experience</div>
+        <div class="cell">Basic educational experience</div>
+
+        <div class="cell head">Key Strength</div>
+        <div class="cell">Strong focus on PYQs and mocks</div>
+        <div class="cell">Wider MCA preparation coverage</div>
+        <div class="cell">Beginner-friendly foundation preparation</div>
+
+        <div class="cell head">Opportunity</div>
+        <div class="cell">Improve personalization and analytics</div>
+        <div class="cell">Simplify content discovery and navigation</div>
+        <div class="cell">Enhance testing and performance tracking</div>
+      </div>
+    </section>
+
+    <!-- ===== User persona ===== -->
+    <section class="block">
+      <h2 class="sec-title">User <span>Persona</span></h2>
+      <p class="sec-sub w-780">Understanding student goals, study habits, and exam-related challenges helps create a focused preparation experience that supports consistent learning and confident test-taking.</p>
+      <div class="persona">
+        <div class="p-col">
+          <div class="p-card">
+            <div class="avatar zoom"><img src="Image/Adhayaynam/5.png" alt="Rohan Sharma"></div>
+            <div class="p-name">Rohan Sharma</div>
+            <dl class="facts">
+              <dt>Age</dt><dd>21</dd>
+              <dt>Location</dt><dd>Jaipur</dd>
+              <dt>Education</dt><dd>Final-year BCA Student</dd>
+              <dt>Preparation</dt><dd>NIMCET Aspirant</dd>
+              <dt>Tech Literacy</dt><dd>High</dd>
+            </dl>
+          </div>
+          <div class="p-card"><p class="quote">I want one simple platform where I can study, practice, understand my mistakes, and clearly track my NIMCET preparation.</p></div>
+          <div class="p-card">
+            <h5>Personality</h5>
+            <div class="chips"><span>Goal-oriented</span><span>Organized</span><span>Self-motivated</span><span>Competitive</span></div>
+          </div>
+        </div>
+        <div class="p-col">
+          <div class="p-card">
+            <h5>Bio</h5>
+            <p>Rohan is a final-year BCA student preparing for NIMCET alongside his college studies. He uses mobile apps to access study materials, practice mock tests, and track his preparation. He prefers a simple and organized platform that helps him identify weak areas and improve his performance.</p>
+          </div>
+          <div class="p-card">
+            <h5>Core Needs</h5>
+            <ul>
+              <li>Access NIMCET study materials in one place.</li>
+              <li>Practice with mock tests and previous-year questions.</li>
+              <li>Track scores, accuracy, rank, and progress.</li>
+              <li>Understand mistakes through detailed solutions.</li>
+              <li>Identify weak subjects and topics.</li>
+              <li>Manage preparation efficiently alongside college.</li>
+            </ul>
+          </div>
+          <div class="p-card">
+            <h5>Frustrations</h5>
+            <ul>
+              <li>Study materials are scattered across different platforms.</li>
+              <li>Difficult to track overall preparation progress.</li>
+              <li>Limited performance insights after mock tests.</li>
+              <li>Repeatedly making mistakes without understanding them.</li>
+              <li>Difficulty finding reliable and relevant NIMCET resources.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Storyboard ===== -->
+    <section class="block">
+      <h2 class="sec-title">Story<span>board</span></h2>
+      <p class="sec-sub w-560">Visualizing the student journey from feeling uncertain about NIMCET preparation to studying, practicing mock tests, tracking progress, and feeling more confident for the exam.</p>
+      <div class="storyboard zoom"><img src="Image/Adhayaynam/6.png" alt="Storyboard"></div>
+    </section>
+
+    <!-- ===== Empathy map ===== -->
+    <section class="block">
+      <h2 class="sec-title">Empathy <span class="alt">Map</span></h2>
+      <p class="sec-sub">Understanding students’ thoughts, emotions, behaviors, and challenges to create a more focused and effective NIMCET preparation experience.</p>
+      <div class="empathy">
+        <div class="emp-col side">
+          <div class="emp">
+            <h4><span class="em">👣</span>DOES</h4>
+            <ul><li>Studies NIMCET-related subjects through mobile resources.</li><li>Practices mock tests and previous-year questions.</li><li>Reviews incorrect answers and solutions.</li><li>Checks scores, rank and percentile after tests.</li><li>Revisits difficult topics and study materials.</li></ul>
+          </div>
+          <div class="emp">
+            <h4><span class="em">😣</span>PAINS</h4>
+            <ul><li>Difficulty finding reliable study material.</li><li>Limited understanding of weak subjects and topics.</li><li>Lack of detailed performance insights.</li><li>Difficulty maintaining consistent preparation.</li><li>Repeated mistakes without clear explanations.</li><li>Uncertainty about exam readiness.</li></ul>
+          </div>
+        </div>
+        <div class="emp-col mid">
+          <div class="emp">
+            <h4><span class="em">🧠</span>THINKS</h4>
+            <ul><li>“Am I preparing enough for NIMCET?”</li><li>“Which subjects should I focus on more?”</li><li>“How am I performing compared to other students?”</li><li>“Can I improve my score before the exam?”</li><li>“Which topics do I need to practice again?”</li></ul>
+          </div>
+          <div class="emp">
+            <h4><span class="em">❤️</span>FEELS</h4>
+            <ul><li>Motivated when seeing improvement in scores.</li><li>Anxious about exam preparation and competition.</li><li>Frustrated when mistakes are repeated.</li><li>Confident when performance is clearly tracked.</li><li>Overwhelmed when study resources are scattered.</li></ul>
+          </div>
+        </div>
+        <div class="emp-col side">
+          <div class="emp">
+            <h4><span class="em">💬</span>SAYS</h4>
+            <ul><li>“I want all my study material in one place.”</li><li>“I need more NIMCET mock tests.”</li><li>“I want to understand where I’m making mistakes.”</li><li>“The test results should show my actual performance.”</li><li>“I need a simple way to track my preparation.”</li></ul>
+          </div>
+          <div class="emp">
+            <h4><span class="em">✨</span>GAINS</h4>
+            <ul><li>Centralized study materials and resources.</li><li>Regular mock-test practice.</li><li>Clear score, rank and percentile tracking.</li><li>Detailed solutions to understand mistakes.</li><li>Better understanding of strengths and weaknesses.</li><li>More confidence and structured NIMCET preparation.</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Mapping the experience ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Mapping <span class="alt">the Experience</span></h2>
+      <p class="sec-sub">The experience map connects the student’s NIMCET preparation journey with key touchpoints to create a structured, simple, and confidence-building learning experience.</p>
+      <div class="map-img zoom"><img src="Image/Adhayaynam/7.png" alt="Experience map"></div>
+    </section>
+
+    <!-- ===== Wireframes ===== -->
+    <section class="block">
+      <h2 class="sec-title">Building the <span>Digital Experience</span></h2>
+      <p class="sec-sub w-640">Designing a focused NIMCET preparation experience that makes studying, practicing, and tracking progress simple, organized, and effective.</p>
+      <div class="wires">
+        <div class="wire"><div class="shot zoom"><img src="Image/Adhayaynam/8.png" alt="Paper wireframe"></div><span>Paper wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/Adhayaynam/9.png" alt="Lo-fi wireframe"></div><span>Lo-fi wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/Adhayaynam/10.png" alt="Hi-fi wireframe"></div><span>Hi-fi wireframe</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Design system ===== -->
+    <section class="block">
+      <div class="soft-box ds-box">
+        <h2 class="sec-title">Design <span>System</span></h2>
+        <p class="sec-sub">Establishing a consistent visual language through typography, colors, and reusable components to create a clear, accessible, and cohesive NIMCET preparation experience.</p>
+        <div class="typo">
+          <div>
+            <h5>Typography</h5>
+            <div class="fname">Poppins</div>
+            <div class="chars">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890</div>
+          </div>
+          <div class="aa-wrap">
+            <div class="aa"><span class="A">A</span><span class="a">a</span></div>
+            <div class="weights"><span>Regular</span><span>Medium</span><span>Semibold</span><span>Bold</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="swatches"><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span></div>
+    </section>
+
+    <!-- ===== UI design ===== -->
+    <section class="block">
+      <h2 class="sec-title">UI <span>Design</span></h2>
+      <p class="sec-sub">A collection of the key app screens, showcasing onboarding, the home dashboard, books, mock tests, test-taking, results, solutions, and performance analysis.</p>
+
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">App Design <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+
+          <!-- Onboarding -->
+          <div class="onb">
+            <div class="row">
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/11.png" alt="Onboarding 1" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/12.png" alt="Onboarding 2" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/13.png" alt="Onboarding 3" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/14.png" alt="Onboarding 4" loading="lazy"></div>
+            </div>
+            <div class="onb-cap">Onboarding screens</div>
+          </div>
+
+          <!-- Home screen with notes (arrow shapes: "up" curves upward, "down" curves downward) -->
+          <div class="annot">
+            <div class="annot-img zoom"><img src="Image/Adhayaynam/15.png" alt="Home screen" loading="lazy"></div>
+
+            <div class="n l n1">The Books section gives students quick access to recommended NIMCET study materials and reference books.
+              <svg class="curve down" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 2 C 4 36, 30 50, 40 30 S 52 26, 60 48"/><path d="M53 47 L60 48 L58 41"/></svg>
+            </div>
+
+            <div class="n o r n2">A dedicated space encourages students to stay connected, share updates, and engage with the wider learning community.
+              <svg class="curve down" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 2 C 4 36, 30 50, 40 30 S 52 26, 60 48"/><path d="M53 47 L60 48 L58 41"/></svg>
+            </div>
+
+            <div class="n o l n3">Quick-access options and dedicated sections make it easy for students to find important exam resources, practice materials, and updates in one place.
+              <svg class="curve up" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 54 C 4 20, 30 6, 40 26 S 52 30, 60 8"/><path d="M53 9 L60 8 L58 15"/></svg>
+            </div>
+
+            <div class="n r n4">Subject-wise study materials help students quickly find the resources they need for preparation.
+              <svg class="curve down" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 2 C 4 36, 30 50, 40 30 S 52 26, 60 48"/><path d="M53 47 L60 48 L58 41"/></svg>
+            </div>
+          </div>
+
+          <!-- Books -->
+          <div class="books">
+            <div class="ad-ph zoom"><img src="Image/Adhayaynam/16.png" alt="Books" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/Adhayaynam/17.png" alt="Book detail" loading="lazy"></div>
+            <div class="n"><h4>Books</h4>A curated collection of NIMCET study books with detailed information and recommendations, helping students easily discover and access relevant resources for their preparation.</div>
+          </div>
+
+          <!-- Mock test -->
+          <div class="mock">
+            <h3>Mock Test</h3>
+            <p class="d">A complete mock-test experience designed to simulate the NIMCET exam, from selecting a test and reviewing instructions to answering questions, tracking progress, and analyzing results.</p>
+            <div class="grid5">
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/18.png" alt="Mock test 1" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/19.png" alt="Mock test 2" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/20.png" alt="Mock test 3" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/21.png" alt="Mock test 4" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/22.png" alt="Mock test 5" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/23.png" alt="Mock test 6" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/24.png" alt="Mock test 7" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/25.png" alt="Mock test 8" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/26.png" alt="Mock test 9" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/27.png" alt="Mock test 10" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/28.png" alt="Mock test 11" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/29.png" alt="Mock test 12" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/30.png" alt="Mock test 13" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- Other screens -->
+          <div class="other">
+            <h3>Other Screens</h3>
+            <div class="grid5">
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/31.png" alt="Other screen 1" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/32.png" alt="Other screen 2" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/33.png" alt="Other screen 3" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/34.png" alt="Other screen 4" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/35.png" alt="Other screen 5" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/36.png" alt="Other screen 6" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/37.png" alt="Other screen 7" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/38.png" alt="Other screen 8" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/39.png" alt="Other screen 9" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/Adhayaynam/40.png" alt="Other screen 10" loading="lazy"></div>
+            </div>
+          </div>
+
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Usability testing ===== -->
+    <section class="block">
+      <h2 class="sec-title">Usability <span>Testing</span></h2>
+      <p class="sec-sub w-720">Testing the key NIMCET preparation flows to identify usability issues and refine the experience for easier learning, practice, and performance tracking.</p>
+      <div class="cards3">
+        <div><h4>Simplified Test<br>Discovery</h4>Students need a clear way to find mock tests, previous-year papers, and relevant practice resources without unnecessary navigation.</div>
+        <div><h4>Clear Test &amp;<br>Instructions</h4>Test instructions should clearly communicate duration, marks, sections, and rules so students can begin with confidence.</div>
+        <div><h4>Seamless Test<br>Experience</h4>Easy question navigation, clear answer states, and accessible test controls help students focus on solving questions without confusion.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="copy">© 2026 By Mariyam Nesha</div>
+    <a href="index.html" class="f-logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+    <div class="social">
+      <span>Follow :</span>
+      <a href="https://www.behance.net/mariyamnesha3" target="_blank" rel="noopener" aria-label="Behance"><img src="Image/Common/Behance.png" alt="Behance"></a>
+      <a href="https://dribbble.com/mary333333333" target="_blank" rel="noopener" aria-label="Dribbble"><img src="Image/Common/Dribbble.png" alt="Dribbble"></a>
+      <a href="mailto:mariyamnesha3@gmail.com" aria-label="Gmail"><img src="Image/Common/Gmail.png" alt="Gmail"></a>
+      <a href="https://www.linkedin.com/in/mariyam-nesha-05b04a190/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="Image/Common/LinkedIn.png" alt="LinkedIn"></a>
+    </div>
+  </footer>
+
+  <!-- ===== Lightbox (click an image to enlarge) ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </div>
+
+  <script>
+    /* ----- Collapsible gallery ----- */
+    function fit() {
+      document.querySelectorAll('.gallery-body').forEach(function (b) {
+        b.style.maxHeight = b.scrollHeight + 'px';
+      });
+    }
+
+    document.querySelectorAll('.gallery').forEach(function (g) {
+      var head = g.querySelector('.gallery-head');
+      head.addEventListener('click', function () {
+        fit();
+        var open = g.classList.toggle('open');
+        head.setAttribute('aria-expanded', open);
+      });
+    });
+
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    /* lazy images can change the height after loading – re-measure each time one loads */
+    document.querySelectorAll('.gallery img').forEach(function (img) {
+      img.addEventListener('load', fit);
+    });
+
+    /* ----- Lightbox ----- */
+    var lb = document.getElementById('lightbox');
+    var lbImg = lb.querySelector('img');
+
+    document.querySelectorAll('.zoom').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var img = el.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('show');
+      });
+    });
+
+    function closeLb() { lb.classList.remove('show'); }
+    lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  </script>
+</body>
+</html>

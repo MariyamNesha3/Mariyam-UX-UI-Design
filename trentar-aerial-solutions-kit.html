@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Trentar Aerial Solutions Kit (TASK) case study by Mariyam Nesha – drone asset intelligence website UX/UI design.">
+  <title>Trentar Aerial Solutions Kit | Mariyam Nesha</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sen:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Mariyam Nesha – Trentar Aerial Solutions Kit case study
+       ========================================================= */
+
+    /* ---------- 1. Variables & reset ---------- */
+    :root {
+      --orange: #F47B20;
+      --brown: #7A3E10;
+      --brown-2: #8C4A10;
+      --text-brown: #5A2A0A;
+      --soft: #FCE8DC;
+      --soft-2: #FDF2EA;
+      --label: #F9CDAE;
+      --dash: #D9B49B;
+      --dark: #161616;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- 2. Navbar ---------- */
+    .nav-wrap { padding: 40px 70px 0; }
+    .navbar {
+      max-width: 1300px; margin: 0 auto; height: 86px; padding: 0 8px 0 34px;
+      background: var(--dark); border-radius: 50px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar .logo img { height: 100px; }
+    .nav-links { display: flex; list-style: none; gap: 10px; }
+    .nav-links a {
+      display: block; color: #fff; font-size: 20px; padding: 18px 40px; border-radius: 40px;
+      transition: background .25s, color .25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { background: var(--orange); color: #fff; }
+
+    /* ---------- 3. Layout & section titles ---------- */
+    main { max-width: 1300px; margin: 0 auto; padding: 0 70px 100px; box-sizing: content-box; }
+    section.block { margin-top: 110px; position: relative; }
+    .soft-box { background: var(--soft); border-radius: 36px; padding: 70px 70px 80px; position: relative; }
+
+    .sec-title { text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -0.5px; }
+    .sec-title span { color: var(--orange); }
+    .sec-title span.alt { color: #C0601A; }
+    .sec-sub { text-align: center; font-size: 18px; line-height: 1.6; color: #333; max-width: 760px; margin: 18px auto 0; }
+    .sec-sub.w-860 { max-width: 860px; }
+    .sec-sub.w-820 { max-width: 820px; }
+    .sec-sub.w-780 { max-width: 780px; }
+    .sec-sub.w-720 { max-width: 720px; }
+    .sec-sub.w-640 { max-width: 640px; }
+    .sec-sub.w-560 { max-width: 560px; }
+
+    /* ---------- 4. Hero & overview ---------- */
+    .page-title { display: flex; align-items: center; justify-content: center; margin: 70px 0 44px; }
+    .page-title h1 { font-size: 52px; font-weight: 600; letter-spacing: -0.5px; }
+
+    .hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.58fr); gap: 48px; align-items: stretch; }
+
+    /* Photo with see-through white frame */
+    .hero-img { position: relative; height: 100%; border-radius: 30px; overflow: hidden; background: #F1E6DD; box-shadow: 0 10px 30px rgba(0,0,0,.08); cursor: zoom-in; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-img::after { content: ""; position: absolute; inset: 0; border: 16px solid rgba(255,255,255,.35); border-radius: 30px; pointer-events: none; }
+
+    .overview { background: #F5E7DC; border-radius: 30px; padding: 44px 44px 40px; }
+    .overview h2 { color: var(--brown); font-size: 30px; font-weight: 600; margin-bottom: 14px; }
+    .overview > p { font-size: 18px; line-height: 1.6; color: #333; margin-bottom: 30px; }
+    .ov-row { display: grid; grid-template-columns: minmax(0,0.62fr) minmax(0,1fr); gap: 26px; margin-bottom: 26px; }
+
+    .fieldset { min-width: 0; border: 1.5px solid #E2C9B8; border-radius: 14px; padding: 0 22px 18px; position: relative; }
+    .fieldset legend { font-size: 22px; font-weight: 600; padding: 0 8px; margin-left: -8px; }
+    .fieldset .tools { display: flex; gap: 36px; padding: 8px 26px 0; }
+    .fieldset .tools img { width: 50px; height: 50px; border-radius: 10px; }
+    .fieldset .val { font-size: 17px; font-weight: 500; padding-top: 16px; line-height: 1.7; }
+    .overview > .fieldset .val { text-align: justify; }
+
+    /* ---------- 5. Design process ---------- */
+    .process { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; max-width: 1150px; margin: 50px auto 0; position: relative; }
+    .step {
+      --c: #EF6C98; --bg: #FDE3EE;
+      position: relative; padding: 26px 16px 28px; text-align: center;
+      border: 2px solid var(--c); border-radius: 30px;
+      background: linear-gradient(180deg, var(--bg), #fff 120%);
+      box-shadow: 0 8px 20px rgba(0,0,0,.04);
+    }
+    .step:nth-child(2), .step:nth-child(4) { --c: #F2853A; --bg: #FDE6D6; }
+    .step:nth-child(3) { --c: #F4C23A; --bg: #FFF4D4; }
+    .step .ic {
+      width: 92px; height: 92px; border-radius: 50%; margin: 0 auto 18px;
+      background: rgba(255,255,255,.75); box-shadow: 0 6px 16px rgba(0,0,0,.06);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step .ic svg { width: 46px; height: 46px; }
+    .step h4 { font-size: 20px; font-weight: 600; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 2px dotted var(--c); }
+    .step p { font-size: 15px; font-weight: 500; line-height: 1.45; color: #222; }
+    /* connector line + dots between steps */
+    .step:not(:last-child)::after { content: ""; position: absolute; top: 46%; right: -42px; width: 42px; height: 2px; background: var(--c); }
+    .step:not(:last-child)::before {
+      content: ""; position: absolute; top: calc(46% - 5px); right: -10px; z-index: 1;
+      width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: -20px 0 0 var(--c);
+    }
+
+    /* ---------- 6. Quantitative research (donut charts) ---------- */
+    .charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1000px; margin: 46px auto 0; }
+    .chart {
+      --c: #3B8CE8; padding: 18px 20px 22px; border-radius: 14px;
+      border: 2px dashed color-mix(in srgb, var(--c) 45%, white);
+      background: color-mix(in srgb, var(--c) 4%, white);
+    }
+    .chart h4 { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 600; margin-bottom: 14px; }
+    .chart h4 i {
+      font-style: normal; width: 30px; height: 30px; border-radius: 8px; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: color-mix(in srgb, var(--c) 15%, white);
+    }
+    .chart .body { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; }
+    .donut { width: 120px; aspect-ratio: 1; border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; }
+    .donut::before { content: ""; position: absolute; inset: 26px; background: #fff; border-radius: 50%; }
+    .donut span { position: relative; font-size: 28px; }
+    .legend2 { list-style: none; font-size: 13px; color: #333; display: flex; flex-direction: column; gap: 8px; }
+    .legend2 li { display: grid; grid-template-columns: 12px 1fr auto; gap: 8px; align-items: center; line-height: 1.3; }
+    .legend2 li::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--d); }
+    .legend2 b { font-weight: 600; }
+
+    /* ---------- 7. Competitor analysis ---------- */
+    .comp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 22px; max-width: 1100px; margin: 46px auto 0; }
+    .comp .brand { border-radius: 10px; overflow: hidden; aspect-ratio: 2.5 / 1; background: #fff; border: 3px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,.08); }
+    .comp .brand img { width: 100%; height: 100%; object-fit: cover; }
+    .comp .cell {
+      background: #fff; border-radius: 10px; min-height: 64px; padding: 10px 16px;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      font-size: 16px; font-weight: 500; line-height: 1.35; color: #222; box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    }
+    .comp .cell.head { background: var(--label); border: 3px solid #fff; }
+
+    /* ---------- 8. Challenges ---------- */
+    .challenges { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 26px; max-width: 1150px; margin: 46px auto 0; }
+    .ch { border: 2px dashed var(--dash); border-radius: 20px; padding: 32px; text-align: center; font-size: 16px; line-height: 1.7; color: #222; }
+    .ch h4 { color: var(--brown); font-size: 23px; font-weight: 600; line-height: 1.2; margin-bottom: 14px; }
+    .ch-side { align-self: center; }
+    .ch-mid { display: flex; flex-direction: column; gap: 22px; }
+
+    /* ---------- 11. Experience map ---------- */
+    .map-img { background: var(--soft-2); border-radius: 24px; margin-top: 44px; padding: 26px; cursor: zoom-in; }
+    .map-img img { width: 100%; height: auto; min-height: 200px; margin: 0 auto; object-fit: contain; }
+
+    /* ---------- 12. Wireframes ---------- */
+    .wires { display: grid; grid-template-columns: 1fr 70px 1fr 70px 1fr; align-items: center; max-width: 1050px; margin: 46px auto 0; }
+    .wire { text-align: center; }
+    /* whole wireframe shown as it is: no extra box, background or shadow
+       (your images already have their own rounded corners, frame and shadow) */
+    .wire .shot { cursor: zoom-in; }
+    .wire .shot img { width: 100%; height: auto; }
+    .wire span { display: block; font-size: 18px; margin-top: 18px; }
+    .arrow { height: 2px; background: #C0753E; position: relative; margin: 0 10px; top: -22px; }
+    .arrow::after {
+      content: ""; position: absolute; right: -2px; top: -5px; width: 10px; height: 10px;
+      border-right: 2px solid #C0753E; border-top: 2px solid #C0753E; transform: rotate(45deg);
+    }
+
+    /* ---------- 13. Design system ---------- */
+    .ds-box { padding-bottom: 150px; }
+    .typo { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; margin-top: 50px; padding: 0 60px; }
+    .typo h5 { font-size: 22px; font-weight: 500; }
+    .aa .A, .aa .a, .typo .fname, .typo .chars { font-family: 'Sen', sans-serif; }   /* project typography */
+    .typo .fname { font-size: 96px; font-weight: 500; line-height: 1.15; margin: 6px 0 14px; }
+    .typo .chars { font-weight: 300; font-size: 30px; line-height: 1.2; color: #8a8a8a; word-break: break-all; }
+
+    .aa-wrap { text-align: center; }
+    .aa {
+      display: inline-flex; align-items: flex-end; gap: 2px; line-height: .8;
+      padding: 18px 14px 10px; position: relative;
+      background-image:   /* dashed frame around "Aa" */
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px);
+      background-size: 100% 1.5px, 100% 1.5px, 1.5px 100%, 1.5px 100%;
+      background-position: 0 6px, 0 calc(100% - 4px), 6px 0, calc(100% - 6px) 0;
+      background-repeat: no-repeat;
+    }
+    .aa .A { font-size: 220px; font-weight: 700; color: #7E4A1E; }
+    .aa .a { font-size: 175px; font-weight: 600; color: transparent; -webkit-text-stroke: 3px #7E4A1E; }
+    .weights { display: flex; justify-content: center; gap: 34px; margin-top: 18px; font-size: 18px; }
+    .weights span:nth-child(1) { font-weight: 400; }
+    .weights span:nth-child(2) { font-weight: 500; }
+    .weights span:nth-child(3) { font-weight: 600; }
+    .weights span:nth-child(4) { font-weight: 700; }
+
+    .swatches { display: flex; justify-content: center; gap: 18px; margin-top: -110px; position: relative; z-index: 2; padding: 0 40px; }
+    .sw {
+      width: 170px; aspect-ratio: 1; border: 10px solid #fff; border-radius: 6px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12); transition: transform .3s;
+    }
+    /* TASK colour palette */
+    .sw:nth-child(1) { background: #42B649; transform: rotate(-14deg); }
+    .sw:nth-child(2) { background: #0F172A; transform: rotate(20deg) translateY(14px); }
+    .sw:nth-child(3) { background: #D2E2C8; transform: rotate(-8deg) translateY(6px); }
+    .sw:nth-child(4) { background: #F8D553; transform: rotate(24deg) translateY(30px); }
+    .sw:nth-child(5) { background: #F6F6F6; transform: rotate(-16deg) translateY(14px); }
+    .sw:hover { transform: rotate(0) scale(1.05); }
+
+    /* ---------- 14. UI gallery (collapsible) ---------- */
+    .gallery { margin-top: 56px; border: 1.5px solid #e6e6e6; border-radius: 28px; position: relative; }
+    .gallery:not(.open) { min-height: 40px; }
+    .gallery-head {
+      position: absolute; top: -22px; left: 26px; padding: 0 14px;
+      background: #fff; border: none; cursor: pointer;
+      font-size: 28px; font-weight: 500; color: #111;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .chev {
+      width: 13px; height: 13px; border-left: 3px solid #111; border-top: 3px solid #111;
+      transform: rotate(45deg) translate(3px, 3px); transition: transform .3s;
+    }
+    .gallery:not(.open) .chev { transform: rotate(225deg) translate(3px, 3px); }
+    .gallery-body { overflow: hidden; transition: max-height .45s ease; }
+    .gallery:not(.open) .gallery-body { max-height: 0 !important; }
+    .g-in { padding: 56px 40px 40px; }
+
+    /* Website page: whole page shown, nothing cropped (tops lined up) */
+    .tr-web { border-radius: 8px; overflow: hidden; background: #F1F4EE; border: 1.5px solid #DDE3D6; box-shadow: 0 4px 14px rgba(0,0,0,.06); cursor: zoom-in; }
+    .tr-web img { width: 100%; height: auto; }
+
+    /* Products / Solutions boxes */
+    .tr-blk { max-width: 1050px; margin: 70px auto 0; padding: 30px 26px; border-radius: 26px; }
+    .tr-blk.o { border: 2.5px solid var(--text-brown); }   /* outlined */
+    .tr-blk.f { background: var(--soft); }                 /* filled */
+    .tr-blk h3 { text-align: center; color: var(--brown-2); font-size: 22px; font-weight: 600; margin-bottom: 10px; }
+    .tr-blk p { text-align: center; font-size: 15px; color: #333; line-height: 1.6; }
+    .tr-blk.f p { max-width: 820px; margin: 0 auto 24px; }
+    .tr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+
+    /* Products: text + 2 pages on the left, third page on the right from the top */
+    .tr-products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+    .tr-products .intro { grid-column: 1 / 3; align-self: center; }
+    .tr-products .intro h3 { margin-bottom: 14px; }
+    .tr-products .intro .n { font-size: 15px; }
+    .tr-products .p3 { grid-column: 3; grid-row: 1 / 3; }
+
+    /* About | notes + enquiry | packages */
+    /* three fixed columns, so nothing can jump to another place */
+    .tr-trio { display: grid; grid-template-columns: 1fr 0.95fr 1fr; gap: 28px; align-items: start; max-width: 1050px; margin: 70px auto 0; }
+    .tr-trio .col-mid { display: flex; flex-direction: column; }
+    .tr-trio .stack { display: flex; flex-direction: column; gap: 34px; padding-top: 10px; }
+    .tr-trio .stack .n { font-size: 15px; font-weight: 500; padding: 16px 18px; }
+    .tr-trio .enq { margin-top: 50px; }   /* Enquiry page sits under the notes */
+
+    /* Notes */
+    .n { position: relative; background: var(--soft); border-radius: 26px; padding: 20px 24px; text-align: center; font-size: 16px; line-height: 1.6; color: var(--text-brown); }
+    .n.o { background: #fff; border: 2px solid var(--text-brown); }
+    .n h4 { font-size: 20px; font-weight: 600; margin-bottom: 14px; }
+
+    /* Homepage with notes around it and curved arrows */
+    .annot { position: relative; max-width: 1050px; margin: 0 auto; }
+    .annot-img {
+      width: 41%; margin: 0 auto; border-radius: 8px; overflow: hidden;
+      border: 1.5px solid #DDE3D6; box-shadow: 0 8px 24px rgba(0,0,0,.08); cursor: zoom-in;
+    }
+    .annot-img img { width: 100%; height: auto; }   /* full page shown, nothing cropped */
+    .annot .n { position: absolute; width: 24%; font-size: 15px; font-weight: 500; line-height: 1.55; padding: 18px 20px; }
+    .annot .n.l { left: 3%; }
+    .annot .n.r { right: 3%; }
+    /* note positions (top = how far down the screenshot) */
+    .annot .l1 { top: 13%; }  .annot .l2 { top: 46%; }  .annot .l3 { top: 76%; }
+    .annot .r1 { top: 11%; }  .annot .r2 { top: 44%; }  .annot .r3 { top: 81%; }
+
+    /* Curved dashed arrow */
+    .curve { position: absolute; width: 64px; height: 56px; overflow: visible; }
+    .curve path { fill: none; stroke: #B4682E; stroke-width: 2; stroke-dasharray: 5 4; stroke-linecap: round; }
+    .n.l .curve { left: calc(100% - 6px); }
+    .n.r .curve { right: calc(100% - 6px); transform: scaleX(-1); }   /* mirror for right-side notes */
+    .curve.up   { top: -34px; }
+    .curve.down { bottom: -30px; }
+    /* arrows on the About / Packages / Enquiry notes */
+    .stack .n.al .curve { right: calc(100% - 6px); transform: scaleX(-1); }   /* points left, to About Us */
+    .stack .n.ar .curve { left: calc(100% - 6px); }                          /* points right, to Packages */
+    .curve.v { left: 50%; bottom: -40px; width: 20px; height: 36px; margin-left: -10px; }   /* points down, to Enquiry */
+
+    /* ---------- 15. Usability testing ---------- */
+    .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 46px; }
+    .cards3 > div { background: var(--soft); border-radius: 22px; padding: 36px 34px; text-align: center; font-size: 17px; line-height: 1.65; color: #333; }
+    .cards3 h4 { color: var(--brown-2); font-size: 22px; font-weight: 600; line-height: 1.4; margin-bottom: 18px; }
+
+    /* ---------- 16. Lightbox ---------- */
+    .lightbox { position: fixed; inset: 0; z-index: 100; padding: 30px; background: rgba(0,0,0,.88); display: none; align-items: center; justify-content: center; }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 10px; }
+    .lightbox .close { position: absolute; top: 20px; right: 28px; background: none; border: none; color: #fff; font-size: 44px; line-height: 1; cursor: pointer; }
+
+    /* ---------- 17. Footer ---------- */
+    footer { background: #000; color: #fff; padding: 16px 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+    footer .copy { font-size: 18px; }
+    footer .f-logo img { height: 100px; }
+    footer .social { display: flex; align-items: center; justify-content: flex-end; gap: 23px; }
+    footer .social span { font-size: 18px; font-weight: 500; margin-right: -8px; }
+    footer .social img { width: 50px; height: 50px; border-radius: 6px; transition: transform .25s; }
+    footer .social a:hover img { transform: translateY(-4px); }
+
+    /* ---------- 18. Responsive: tablet ---------- */
+    @media (max-width: 1100px) {
+      .nav-links a { padding: 14px 24px; font-size: 18px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-img { max-width: 520px; width: 100%; margin: 0 auto; }
+      .ov-row { grid-template-columns: 1fr; }
+      .soft-box { padding: 56px 30px 60px; }
+      .process { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .step::after, .step::before { display: none; }
+      .charts { grid-template-columns: repeat(2, 1fr); }
+      .challenges { grid-template-columns: 1fr; max-width: 560px; }
+      .typo { grid-template-columns: 1fr; padding: 0; }
+      .sw { width: 130px; }
+      .g-in { padding: 50px 18px 24px; }
+      .tr-grid, .tr-products { grid-template-columns: 1fr 1fr; }
+      .tr-products .intro { grid-column: 1 / -1; }
+      .tr-products .p3 { grid-column: auto; grid-row: auto; }
+      .tr-trio { grid-template-columns: 1fr 1fr; }
+      .tr-trio .col-mid { grid-column: 1 / -1; order: -1; }   /* notes + enquiry first, full width */
+      .tr-trio .stack { padding: 0; gap: 16px; }
+      .tr-trio .enq { margin-top: 20px; max-width: 420px; width: 100%; align-self: center; }
+      /* notes go under the screen in two columns, arrows hidden */
+      .annot { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .annot-img { grid-column: 1 / -1; width: 100%; max-width: 380px; margin-bottom: 10px; }
+      .annot .n { position: static; width: auto; }
+      .curve { display: none; }
+      .tr-blk { padding: 22px 16px; }
+      .cards3 { grid-template-columns: 1fr; }
+    }
+
+    /* ---------- 19. Responsive: mobile ---------- */
+    @media (max-width: 720px) {
+      .nav-wrap { padding: 20px 16px 0; }
+      .navbar { height: auto; padding: 14px 16px; flex-direction: column; gap: 12px; border-radius: 30px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .nav-links a { padding: 10px 18px; font-size: 16px; }
+
+      main { padding: 0 16px 60px; }
+      .page-title { margin-top: 44px; }
+      .page-title h1 { font-size: 34px; }
+      .overview { padding: 28px 22px; }
+      .sec-title { font-size: 30px; }
+      .sec-sub { font-size: 16px; }
+      section.block { margin-top: 80px; }
+
+      .process { grid-template-columns: 1fr 1fr; }
+      .charts { grid-template-columns: 1fr; }
+      .comp { grid-template-columns: repeat(4, minmax(150px, 1fr)); overflow-x: auto; padding-bottom: 8px; }
+      .comp .cell { font-size: 14px; }
+
+      .wires { grid-template-columns: 1fr; gap: 30px; max-width: 280px; }
+      .arrow { display: none; }
+
+      .typo .fname { font-size: 64px; }
+      .typo .chars { font-size: 20px; }
+      .aa .A { font-size: 140px; }
+      .aa .a { font-size: 112px; }
+      .weights { gap: 16px; font-size: 15px; }
+      .swatches { flex-wrap: wrap; gap: 10px; margin-top: -80px; padding: 0; }
+      .sw { width: 30%; border-width: 6px; }
+      .ds-box { padding-bottom: 110px; }
+
+      .gallery-head { font-size: 22px; }
+      .annot { grid-template-columns: 1fr; }
+      .tr-grid, .tr-products, .tr-trio { grid-template-columns: 1fr; }
+
+      footer { grid-template-columns: 1fr; gap: 22px; text-align: center; padding: 20px 20px; }
+      footer .f-logo img { margin: 0 auto; }
+      footer .social { justify-content: center; flex-wrap: wrap; gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="ux-ui-design.html" class="active" aria-current="page">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== Hero & overview ===== -->
+    <div class="page-title"><h1>Trentar Aerial Solutions Kit</h1></div>
+
+    <div class="hero">
+      <div class="hero-img zoom"><img src="Image/Trentar Aerial Solution Kit/1.png" alt="Trentar Aerial Solutions Kit"></div>
+      <div class="overview">
+        <h2>Product Overview</h2>
+        <p>TASK is a drone-powered asset intelligence platform that helps businesses capture, process, analyze, and visualize aerial data for large-scale infrastructure.</p>
+        <div class="ov-row">
+          <fieldset class="fieldset">
+            <legend>Tools</legend>
+            <div class="tools"><img src="Image/Common/Photoshop.png" alt="Photoshop"><img src="Image/Common/Figma.png" alt="Figma"></div>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend>Role</legend>
+            <div class="val">UX/UI DESIGNER | GRAPHIC DESIGNER</div>
+          </fieldset>
+        </div>
+        <fieldset class="fieldset">
+          <legend>Focus</legend><div class="val">UX Architecture | User Flow | Website Design | User Experience | Interactive Design</div>
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- ===== Design Process ===== -->
+    <section class="block">
+      <h2 class="sec-title">Design <span>Process</span></h2>
+      <p class="sec-sub w-820">A user-focused design process that turns research and insights into a clear website experience, helping visitors understand TASK’s products and solutions and make an enquiry.</p>
+      <div class="process">
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#EF4F8C"/><path d="M31 17l-4.5 9.5L17 31l4.5-9.5z" fill="#fff"/><circle cx="24" cy="24" r="2" fill="#EF4F8C"/></svg></div>
+          <h4>Discover</h4>
+          <p>User Research, Competitive Analysis</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#F06A1E" stroke-width="4" stroke-linecap="round"><path d="M15 15a14 14 0 1 0 18 0"/><path d="M19.5 20a7.5 7.5 0 1 0 9 0"/><path d="M24 6v14"/><circle cx="24" cy="27" r="2" fill="#F06A1E"/></svg></div>
+          <h4>Define</h4>
+          <p>User Persona, Empathy Map</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M24 5a14 14 0 0 0-8 25.5V35h16v-4.5A14 14 0 0 0 24 5z" fill="#F7B500"/><rect x="17" y="37" width="14" height="3" rx="1.5" fill="#F7B500"/><rect x="19" y="42" width="10" height="3" rx="1.5" fill="#F7B500"/><path d="M19 15l5 6 5-6M24 21v9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Ideate</h4>
+          <p>User Flow</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M30 10l8 8-16 16-9 2 2-9z" fill="#F2622B"/><path d="M14 30c-6 0-8 4-5 6s9-1 4 5" stroke="#F2622B" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Design</h4>
+          <p>Lo-fi Wireframe, Hi-fi Wireframe</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M10 5h18l10 10v26a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#EF4F6E"/><path d="M28 5v10h10" fill="#F9A3B3"/><rect x="13" y="22" width="9" height="3" rx="1.5" fill="#fff"/><rect x="13" y="29" width="7" height="3" rx="1.5" fill="#fff"/><circle cx="31" cy="32" r="6" fill="#fff" stroke="#EF4F6E" stroke-width="3"/><path d="M35.5 36.5l5 5" stroke="#EF4F6E" stroke-width="3.5" stroke-linecap="round"/></svg></div>
+          <h4>Test</h4>
+          <p>Usability Testing</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== Quantitative Research ===== -->
+    <section class="block">
+      <h2 class="sec-title">Quantitative <span>Research</span></h2>
+      <p class="sec-sub w-860">Analyzing measurable data and user behavior to understand website usage patterns, identify key trends, and uncover areas for improvement.</p>
+      <div class="charts">
+        <div class="chart" style="--c:#8E62E8"><h4>Primary Interest</h4><div class="body"><div class="donut" style="background:conic-gradient(#C79BF5 0% 34%, #9C55EC 34% 62%, #B48EF4 62% 84%, #5B1FB8 84% 100%)"><span></span></div><ul class="legend2"><li style="--d:#C79BF5">Asset Management<b>34%</b></li><li style="--d:#9C55EC">Drone Data<b>28%</b></li><li style="--d:#B48EF4">Analytics<b>22%</b></li><li style="--d:#5B1FB8">Surveying<b>16%</b></li></ul></div></div>
+        <div class="chart" style="--c:#F08A3C"><h4>Information Needed</h4><div class="body"><div class="donut" style="background:conic-gradient(#F9B472 0% 32%, #F07A12 32% 60%, #F59A3C 60% 82%, #FBC890 82% 100%)"><span></span></div><ul class="legend2"><li style="--d:#F9B472">Services<b>32%</b></li><li style="--d:#F07A12">How It Works<b>28%</b></li><li style="--d:#F59A3C">Case Studies<b>22%</b></li><li style="--d:#FBC890">Technology<b>18%</b></li></ul></div></div>
+        <div class="chart" style="--c:#5CC45A"><h4>Website Expectations</h4><div class="body"><div class="donut" style="background:conic-gradient(#9BEC7E 0% 30%, #5CCB38 30% 58%, #46B82E 58% 82%, #1F8A1A 82% 100%)"><span></span></div><ul class="legend2"><li style="--d:#9BEC7E">Easy Navigation<b>30%</b></li><li style="--d:#5CCB38">Clear Solutions<b>28%</b></li><li style="--d:#46B82E">Visual Explanation<b>24%</b></li><li style="--d:#1F8A1A">Fast Access<b>18%</b></li></ul></div></div>
+        <div class="chart" style="--c:#F2B632"><h4>Business Challenges</h4><div class="body"><div class="donut" style="background:conic-gradient(#FFD978 0% 34%, #F8B627 34% 61%, #F59A12 61% 83%, #EE7A1A 83% 100%)"><span></span></div><ul class="legend2"><li style="--d:#FFD978">Manual Inspection<b>34%</b></li><li style="--d:#F8B627">Data Management<b>27%</b></li><li style="--d:#F59A12">High Operational Cost<b>22%</b></li><li style="--d:#EE7A1A">Slow Reporting<b>17%</b></li></ul></div></div>
+        <div class="chart" style="--c:#EE4F96"><h4>Decision Factors</h4><div class="body"><div class="donut" style="background:conic-gradient(#F9A3CC 0% 32%, #F04A9A 32% 59%, #F57BB5 59% 82%, #E1307A 82% 100%)"><span></span></div><ul class="legend2"><li style="--d:#F9A3CC">Service Quality<b>32%</b></li><li style="--d:#F04A9A">Technical Expertise<b>27%</b></li><li style="--d:#F57BB5">Industry Experience<b>23%</b></li><li style="--d:#E1307A">Pricing<b>18%</b></li></ul></div></div>
+        <div class="chart" style="--c:#3B8CE8"><h4>Conversion Intent</h4><div class="body"><div class="donut" style="background:conic-gradient(#8CC8F7 0% 35%, #2E95F0 35% 64%, #1C6FD6 64% 85%, #174FA8 85% 100%)"><span></span></div><ul class="legend2"><li style="--d:#8CC8F7">Request a Demo<b>35%</b></li><li style="--d:#2E95F0">Explore Solutions<b>29%</b></li><li style="--d:#1C6FD6">View Case Studies<b>21%</b></li><li style="--d:#174FA8">Contact Sales<b>15%</b></li></ul></div></div>
+      </div>
+    </section>
+
+    <!-- ===== Competitor Analysis ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Competitor <span class="alt">Analysis</span></h2>
+      <p class="sec-sub">Understanding the competitive landscape to identify opportunities for differentiation and improvement.</p>
+      <div class="comp">
+        <div></div>
+        <div class="brand"><img src="Image/Trentar Aerial Solution Kit/2.png" alt="Skylark Drones"></div>
+        <div class="brand"><img src="Image/Trentar Aerial Solution Kit/3.png" alt="inDrones"></div>
+        <div class="brand"><img src="Image/Trentar Aerial Solution Kit/4.png" alt="Survey Copter"></div>
+        <div class="cell head">Brand Positioning</div><div class="cell">Drone intelligence &amp; enterprise solutions</div><div class="cell">Geospatial intelligence &amp; drone technology</div><div class="cell">Drone surveying &amp; infrastructure intelligence</div>
+        <div class="cell head">Primary Users</div><div class="cell">Large enterprises, infrastructure &amp; operations teams</div><div class="cell">Infrastructure, energy &amp; industrial companies</div><div class="cell">Surveyors, construction &amp; infrastructure teams</div>
+        <div class="cell head">Key Services</div><div class="cell">Drone operations, data capture, analytics, inspection &amp; monitoring</div><div class="cell">Mapping, surveying, inspection, LiDAR, computer vision &amp; analytics</div><div class="cell">Surveying, mapping, inspection, LiDAR &amp; AI monitoring</div>
+        <div class="cell head">Industry Coverage</div><div class="cell">Solar, utilities, mining, infrastructure, agriculture</div><div class="cell">Power, mining, oil &amp; gas, infrastructure</div><div class="cell">Construction, infrastructure, surveying</div>
+        <div class="cell head">Technology Focus</div><div class="cell">Drone data + AI + enterprise platform</div><div class="cell">UAV + GIS + computer vision</div><div class="cell">UAV + LiDAR + photogrammetry + AI</div>
+        <div class="cell head">Website Strength</div><div class="cell">Strong product and technology communication</div><div class="cell">Strong technical credibility and service depth</div><div class="cell">Strong workflow and visual storytelling</div>
+        <div class="cell head">Website Weakness</div><div class="cell">Can feel technology-heavy</div><div class="cell">Content can feel dense</div><div class="cell">Technical information can require more explanation</div>
+        <div class="cell head">Visual Approach</div><div class="cell">Modern, technology-driven</div><div class="cell">Technical &amp; corporate</div><div class="cell">Visual, project-focused &amp; technical</div>
+      </div>
+    </section>
+
+
+    <!-- ===== Challenges ===== -->
+    <section class="block">
+      <h2 class="sec-title">The <span>Challenges</span></h2>
+      <p class="sec-sub w-820">The main challenge was to create a clearer experience that could communicate TASK’s complex drone and asset-management solutions without overwhelming visitors.</p>
+      <div class="challenges">
+        <div class="ch ch-side"><h4>Creating Clear<br>Visual Hierarchy</h4>Organizing large amounts of information while keeping the important content easy to scan.</div>
+        <div class="ch-mid">
+          <div class="ch"><h4>Simplifying Complex<br>Information</h4>Presenting technical drone and asset-management services in a way that was easy for users to understand.</div>
+          <div class="ch"><h4>Maintaining Consistency<br>Across Pages</h4>Creating a consistent visual system across different solutions, industries, and service pages.</div>
+        </div>
+        <div class="ch ch-side"><h4>Balancing Visuals<br>&amp; Content</h4>Using aerial imagery, dashboards, diagrams, and UI visuals without making the pages feel cluttered.</div>
+      </div>
+    </section>
+
+    <!-- ===== Mapping the Experience ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Mapping <span class="alt">the Experience</span></h2>
+      <p class="sec-sub">The experience map connects the key steps of the TASK website journey, from discovering the platform and exploring products and solutions to comparing packages and making an enquiry.</p>
+      <div class="map-img zoom"><img src="Image/Trentar Aerial Solution Kit/5.png" alt="Experience map"></div>
+    </section>
+
+    <!-- ===== Building the digital experience (wireframes) ===== -->
+    <section class="block">
+      <h2 class="sec-title">Building the <span>Digital Experience</span></h2>
+      <p class="sec-sub w-640">Creating a clear and engaging digital experience that makes TASK’s products, solutions, and packages easy to explore while guiding users toward making an enquiry.</p>
+      <div class="wires">
+        <div class="wire"><div class="shot zoom"><img src="Image/Trentar Aerial Solution Kit/6.png" alt="Paper wireframe"></div><span>Paper wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/Trentar Aerial Solution Kit/7.png" alt="Lo-fi wireframe"></div><span>Lo-fi wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/Trentar Aerial Solution Kit/8.png" alt="Hi-fi wireframe"></div><span>Hi-fi wireframe</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Design System ===== -->
+    <section class="block">
+      <div class="soft-box ds-box">
+        <h2 class="sec-title">Design <span>System</span></h2>
+        <p class="sec-sub">Establishing a consistent visual language through typography, colors, and reusable components to ensure clarity, accessibility, and a cohesive experience.</p>
+        <div class="typo">
+          <div>
+            <h5>Typography</h5>
+            <div class="fname">Sen</div>
+            <div class="chars">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890</div>
+          </div>
+          <div class="aa-wrap">
+            <div class="aa"><span class="A">A</span><span class="a">a</span></div>
+            <div class="weights"><span>Regular</span><span>Medium</span><span>Semibold</span><span>Bold</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="swatches"><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span></div>
+    </section>
+
+    <!-- ===== UI Design ===== -->
+    <section class="block">
+      <h2 class="sec-title">UI <span>Design</span></h2>
+      <p class="sec-sub">A collection of the main website interfaces, showcasing the homepage, product and solution pages, packages, about us, and enquiry experience.</p>
+      <!-- Website gallery -->
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">Website <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+
+          <!-- Homepage with notes ("up" arrows curve upward, "down" arrows curve downward) -->
+          <div class="annot">
+            <div class="annot-img zoom"><img src="Image/Trentar Aerial Solution Kit/9.png" alt="Homepage" loading="lazy"></div>
+
+            <!-- left side -->
+            <div class="n l l1">The aerial hero imagery immediately communicates TASK’s industry and establishes a strong visual introduction to the platform.
+              <svg class="curve up" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 54 C 4 20, 30 6, 40 26 S 52 30, 60 8"/><path d="M53 9 L60 8 L58 15"/></svg>
+            </div>
+            <div class="n o l l2">Products and solutions are presented with clear categories and supporting visuals, making complex technical services easier to understand.
+              <svg class="curve down" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 2 C 4 36, 30 50, 40 30 S 52 26, 60 48"/><path d="M53 47 L60 48 L58 41"/></svg>
+            </div>
+            <div class="n l l3">The footer brings together important navigation links, product and solution categories, company information, and contact details for easy access.
+              <svg class="curve down" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 2 C 4 36, 30 50, 40 30 S 52 26, 60 48"/><path d="M53 47 L60 48 L58 41"/></svg>
+            </div>
+
+            <!-- right side -->
+            <div class="n o r r1">The navigation keeps Products, Solutions, Packages, and About Us easily accessible, helping users explore the website without confusion.
+              <svg class="curve up" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 54 C 4 20, 30 6, 40 26 S 52 30, 60 8"/><path d="M53 9 L60 8 L58 15"/></svg>
+            </div>
+            <div class="n r r2">The “Why TASK?” section highlights the platform’s key capabilities and builds trust by clearly communicating its value.
+              <svg class="curve up" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 54 C 4 20, 30 6, 40 26 S 52 30, 60 8"/><path d="M53 9 L60 8 L58 15"/></svg>
+            </div>
+            <div class="n o r r3">Prominent “Make an Enquiry” and “Try Now” CTAs guide users toward taking the next step after exploring TASK’s offerings.
+              <svg class="curve up" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 54 C 4 20, 30 6, 40 26 S 52 30, 60 8"/><path d="M53 9 L60 8 L58 15"/></svg>
+            </div>
+          </div>
+
+          <!-- Products: text and 2 pages on the left, third page on the right -->
+          <div class="tr-blk o">
+            <div class="tr-products">
+              <div class="intro">
+                <h3>Products</h3>
+                <div class="n">The product pages present TASK’s three core capabilities—Acquisition, Processing, and Analytics—with dedicated layouts that explain each offering, highlight key features, showcase supporting visuals, and guide users toward taking the next step.</div>
+              </div>
+              <div class="tr-web zoom p3"><img src="Image/Trentar Aerial Solution Kit/12.png" alt="Product page 3" loading="lazy"></div>
+              <div class="tr-web zoom"><img src="Image/Trentar Aerial Solution Kit/10.png" alt="Product page 1" loading="lazy"></div>
+              <div class="tr-web zoom"><img src="Image/Trentar Aerial Solution Kit/11.png" alt="Product page 2" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- Solutions -->
+          <div class="tr-blk f">
+            <h3>Solutions</h3>
+            <p>The solution pages showcase TASK’s industry-focused offerings across Power Distribution, Solar Asset Management, and Highway Management, explaining the challenges, proposed solutions, key benefits, and results through structured content and visuals.</p>
+            <div class="tr-grid">
+              <div class="tr-web zoom"><img src="Image/Trentar Aerial Solution Kit/13.png" alt="Solution page 1" loading="lazy"></div>
+              <div class="tr-web zoom"><img src="Image/Trentar Aerial Solution Kit/14.png" alt="Solution page 2" loading="lazy"></div>
+              <div class="tr-web zoom"><img src="Image/Trentar Aerial Solution Kit/15.png" alt="Solution page 3" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- About us | notes + enquiry | packages -->
+          <div class="tr-trio">
+            <!-- left column -->
+            <div class="tr-web zoom"><img src="Image/Trentar Aerial Solution Kit/16.png" alt="About us" loading="lazy"></div>
+
+            <!-- middle column: notes, then the Enquiry page -->
+            <div class="col-mid">
+              <div class="stack">
+                <div class="n o al">The About Us page introduces Trentar, its group companies, services, expertise, and key strengths to build trust and credibility.
+                  <svg class="curve down" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 2 C 4 36, 30 50, 40 30 S 52 26, 60 48"/><path d="M53 47 L60 48 L58 41"/></svg>
+                </div>
+                <div class="n o ar">The Packages page presents different plans with feature comparisons, helping users understand the available options and choose the right package.
+                  <svg class="curve down" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 2 C 4 36, 30 50, 40 30 S 52 26, 60 48"/><path d="M53 47 L60 48 L58 41"/></svg>
+                </div>
+                <div class="n o">The Enquiry page provides a simple contact form where users can share their requirements and connect with the TASK team.
+                  <svg class="curve v" viewBox="0 0 20 36" aria-hidden="true"><path d="M10 2 C 4 12, 16 20, 10 33"/><path d="M5 28 L10 34 L14 28"/></svg>
+                </div>
+              </div>
+              <div class="tr-web zoom enq"><img src="Image/Trentar Aerial Solution Kit/17.png" alt="Enquiry" loading="lazy"></div>
+            </div>
+
+            <!-- right column -->
+            <div class="tr-web zoom"><img src="Image/Trentar Aerial Solution Kit/18.png" alt="Packages" loading="lazy"></div>
+          </div>
+
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Usability Testing ===== -->
+    <section class="block">
+      <h2 class="sec-title">Usability <span>Testing</span></h2>
+      <p class="sec-sub w-720">Evaluated the website’s key interactions, including exploring products and solutions, understanding packages, navigating information, and making an enquiry, to identify usability improvements and create a smoother user experience.</p>
+      <div class="cards3">
+        <div><h4>Easy Product &amp; Solution<br>Discovery</h4>Users should be able to quickly explore Acquisition, Processing, Analytics, and industry-specific solutions without feeling overwhelmed.</div>
+        <div><h4>Smooth Enquiry<br>Experience</h4>Clear CTAs and an accessible enquiry form make it easier for interested users to understand the next step and connect with TASK.</div>
+        <div><h4>Clear Information &amp;<br>Navigation</h4>Simple navigation and well-structured content help users understand TASK’s products and solutions and find relevant information easily.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="copy">© 2026 By Mariyam Nesha</div>
+    <a href="index.html" class="f-logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+    <div class="social">
+      <span>Follow :</span>
+      <a href="https://www.behance.net/mariyamnesha3" target="_blank" rel="noopener" aria-label="Behance"><img src="Image/Common/Behance.png" alt="Behance"></a>
+      <a href="https://dribbble.com/mary333333333" target="_blank" rel="noopener" aria-label="Dribbble"><img src="Image/Common/Dribbble.png" alt="Dribbble"></a>
+      <a href="mailto:mariyamnesha3@gmail.com" aria-label="Gmail"><img src="Image/Common/Gmail.png" alt="Gmail"></a>
+      <a href="https://www.linkedin.com/in/mariyam-nesha-05b04a190/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="Image/Common/LinkedIn.png" alt="LinkedIn"></a>
+    </div>
+  </footer>
+
+  <!-- ===== Lightbox (click an image to enlarge) ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </div>
+
+  <script>
+    /* ----- Collapsible gallery ----- */
+    function fit() {
+      document.querySelectorAll('.gallery-body').forEach(function (b) {
+        b.style.maxHeight = b.scrollHeight + 'px';
+      });
+    }
+
+    document.querySelectorAll('.gallery').forEach(function (g) {
+      var head = g.querySelector('.gallery-head');
+      head.addEventListener('click', function () {
+        fit();
+        var open = g.classList.toggle('open');
+        head.setAttribute('aria-expanded', open);
+      });
+    });
+
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    /* lazy images can change the height after loading – re-measure each time one loads */
+    document.querySelectorAll('.gallery img').forEach(function (img) {
+      img.addEventListener('load', fit);
+    });
+
+    /* ----- Lightbox ----- */
+    var lb = document.getElementById('lightbox');
+    var lbImg = lb.querySelector('img');
+
+    document.querySelectorAll('.zoom').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var img = el.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('show');
+      });
+    });
+
+    function closeLb() { lb.classList.remove('show'); }
+    lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  </script>
+</body>
+</html>

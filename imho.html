@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="IMHO case study by Mariyam Nesha – anonymous social Q&amp;A app UX/UI design.">
+  <title>IMHO | Mariyam Nesha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================
+       Mariyam Nesha – IMHO case study
+       ========================================================= */
+
+    /* ---------- 1. Variables & reset ---------- */
+    :root {
+      --orange: #F47B20;
+      --brown: #7A3E10;
+      --brown-2: #8C4A10;
+      --text-brown: #5A2A0A;
+      --soft: #FCE8DC;
+      --soft-2: #FDF2EA;
+      --label: #F9CDAE;
+      --dash: #D9B49B;
+      --dark: #161616;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- 2. Navbar ---------- */
+    .nav-wrap { padding: 40px 70px 0; }
+    .navbar {
+      max-width: 1300px; margin: 0 auto; height: 86px; padding: 0 8px 0 34px;
+      background: var(--dark); border-radius: 50px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar .logo img { height: 100px; }   /* same as the other pages (was 30px) */
+    .nav-links { display: flex; list-style: none; gap: 10px; }
+    .nav-links a {
+      display: block; color: #fff; font-size: 20px; padding: 18px 40px; border-radius: 40px;
+      transition: background .25s, color .25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { background: var(--orange); color: #fff; }
+
+    /* ---------- 3. Layout & section titles ---------- */
+    main { max-width: 1300px; margin: 0 auto; padding: 0 70px 100px; box-sizing: content-box; }
+    section.block { margin-top: 110px; position: relative; }
+    .soft-box { background: var(--soft); border-radius: 36px; padding: 70px 70px 80px; position: relative; }
+
+    .sec-title { text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -0.5px; }
+    .sec-title span { color: var(--orange); }
+    .sec-title span.alt { color: #C0601A; }
+    .sec-sub { text-align: center; font-size: 18px; line-height: 1.6; color: #333; max-width: 760px; margin: 18px auto 0; }
+    .sec-sub.w-860 { max-width: 860px; }
+    .sec-sub.w-820 { max-width: 820px; }
+    .sec-sub.w-780 { max-width: 780px; }
+    .sec-sub.w-720 { max-width: 720px; }
+    .sec-sub.w-640 { max-width: 640px; }
+    .sec-sub.w-560 { max-width: 560px; }
+
+    /* ---------- 4. Hero & overview ---------- */
+    .page-title { display: flex; align-items: center; justify-content: center; margin: 70px 0 44px; }
+    .page-title h1 { font-size: 52px; font-weight: 600; letter-spacing: -0.5px; }
+
+    .hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.58fr); gap: 48px; align-items: stretch; }
+    /* Photo with see-through white frame (same as Adhyayanam) */
+    .hero-img { position: relative; height: 100%; border-radius: 30px; overflow: hidden; background: #F1E6DD; box-shadow: 0 10px 30px rgba(0,0,0,.08); cursor: zoom-in; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-img::after { content: ""; position: absolute; inset: 0; border: 16px solid rgba(255,255,255,.35); border-radius: 30px; pointer-events: none; }
+
+    .overview { background: #F5E7DC; border-radius: 30px; padding: 44px 44px 40px; }
+    .overview h2 { color: var(--brown); font-size: 30px; font-weight: 600; margin-bottom: 14px; }
+    .overview > p { font-size: 18px; line-height: 1.6; color: #333; margin-bottom: 30px; }
+    .ov-row { display: grid; grid-template-columns: minmax(0,0.62fr) minmax(0,1fr); gap: 26px; margin-bottom: 26px; }
+
+    .fieldset { min-width: 0; border: 1.5px solid #E2C9B8; border-radius: 14px; padding: 0 22px 18px; position: relative; }
+    .fieldset legend { font-size: 22px; font-weight: 600; padding: 0 8px; margin-left: -8px; }
+    .fieldset .tools { display: flex; gap: 36px; padding: 8px 26px 0; }
+    .fieldset .tools img { width: 50px; height: 50px; border-radius: 10px; }
+    .fieldset .val { font-size: 17px; font-weight: 500; padding-top: 16px; line-height: 1.7; }
+
+    /* ---------- 5. Design process ---------- */
+    .process { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; max-width: 1150px; margin: 50px auto 0; position: relative; }
+    .step {
+      --c: #EF6C98; --bg: #FDE3EE;
+      position: relative; padding: 26px 16px 28px; text-align: center;
+      border: 2px solid var(--c); border-radius: 30px;
+      background: linear-gradient(180deg, var(--bg), #fff 120%);
+      box-shadow: 0 8px 20px rgba(0,0,0,.04);
+    }
+    .step:nth-child(2), .step:nth-child(4) { --c: #F2853A; --bg: #FDE6D6; }
+    .step:nth-child(3) { --c: #F4C23A; --bg: #FFF4D4; }
+    .step .ic {
+      width: 92px; height: 92px; border-radius: 50%; margin: 0 auto 18px;
+      background: rgba(255,255,255,.75); box-shadow: 0 6px 16px rgba(0,0,0,.06);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step .ic svg { width: 46px; height: 46px; }
+    .step h4 { font-size: 20px; font-weight: 600; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 2px dotted var(--c); }
+    .step p { font-size: 15px; font-weight: 500; line-height: 1.45; color: #222; }
+    /* connector line + dots between steps */
+    .step:not(:last-child)::after { content: ""; position: absolute; top: 46%; right: -42px; width: 42px; height: 2px; background: var(--c); }
+    .step:not(:last-child)::before {
+      content: ""; position: absolute; top: calc(46% - 5px); right: -10px; z-index: 1;
+      width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: -20px 0 0 var(--c);
+    }
+
+    /* ---------- 6. Quantitative research (donut charts) ---------- */
+    .charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1000px; margin: 46px auto 0; }
+    .chart {
+      --c: #3B8CE8; padding: 18px 20px 22px; border-radius: 14px;
+      border: 2px dashed color-mix(in srgb, var(--c) 45%, white);
+      background: color-mix(in srgb, var(--c) 4%, white);
+    }
+    .chart h4 { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 600; margin-bottom: 14px; }
+    .chart h4 i {
+      font-style: normal; width: 30px; height: 30px; border-radius: 8px; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: color-mix(in srgb, var(--c) 15%, white);
+    }
+    .chart .body { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; }
+    .donut { width: 120px; aspect-ratio: 1; border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; }
+    .donut::before { content: ""; position: absolute; inset: 26px; background: #fff; border-radius: 50%; }
+    .donut span { position: relative; font-size: 28px; }
+    .legend2 { list-style: none; font-size: 13px; color: #333; display: flex; flex-direction: column; gap: 8px; }
+    .legend2 li { display: grid; grid-template-columns: 12px 1fr auto; gap: 8px; align-items: center; line-height: 1.3; }
+    .legend2 li::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--d); }
+    .legend2 b { font-weight: 600; }
+
+    /* ---------- 7. Competitor analysis ---------- */
+    .comp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 22px; max-width: 1100px; margin: 46px auto 0; }
+    .comp .brand { border-radius: 10px; overflow: hidden; aspect-ratio: 2.5 / 1; background: #fff; border: 3px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,.08); }
+    .comp .brand img { width: 100%; height: 100%; object-fit: cover; }
+    .comp .cell {
+      background: #fff; border-radius: 10px; min-height: 64px; padding: 10px 16px;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      font-size: 16px; font-weight: 500; line-height: 1.35; color: #222; box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    }
+    .comp .cell.head { background: var(--label); border: 3px solid #fff; }
+
+    /* ---------- 8. User persona ---------- */
+    .persona { display: grid; grid-template-columns: 0.75fr 1fr; gap: 22px; max-width: 1100px; margin: 46px auto 0; }
+    .p-col { display: flex; flex-direction: column; gap: 18px; }
+    .p-card { background: var(--soft); border-radius: 22px; padding: 28px 32px; }
+    .p-card h5 { color: #666; font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+    .p-card p, .p-card li { color: var(--text-brown); font-size: 17px; line-height: 1.6; font-weight: 500; }
+    .p-card ul { padding-left: 22px; }
+    .avatar { width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 16px; background: #eadbd0; cursor: zoom-in; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .p-name { text-align: center; color: #B5642A; font-size: 24px; font-weight: 600; margin-bottom: 18px; }
+    .facts { display: grid; grid-template-columns: auto 1fr; gap: 12px 40px; font-size: 18px; }
+    .facts dt { color: #777; font-weight: 500; }
+    .facts dd { color: var(--text-brown); font-weight: 600; }
+    .quote { position: relative; padding: 0 20px 22px; font-size: 17px; line-height: 1.6; text-align: center; color: var(--text-brown); font-weight: 500; }
+    .quote::before { content: "“"; position: absolute; left: -6px; top: -16px; font-size: 54px; font-weight: 700; color: #222; }
+    .quote::after  { content: "”"; position: absolute; right: 6px; bottom: -34px; font-size: 54px; font-weight: 700; color: #222; }
+    .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+    .chips span { background: #fff; border-radius: 30px; padding: 8px 22px; font-size: 16px; font-weight: 500; color: var(--text-brown); }
+
+    /* ---------- 9. Storyboard ---------- */
+    .storyboard { max-width: 900px; min-height: 300px; margin: 40px auto 0; border-radius: 6px; overflow: hidden; background: #F2F0EC; cursor: zoom-in; }
+    .storyboard img { width: 100%; height: auto; }
+
+    /* ---------- 10. Empathy map ---------- */
+    .empathy { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; max-width: 1150px; margin: 50px auto 0; }
+    .emp-col { display: flex; flex-direction: column; gap: 22px; }
+    .emp-col.side { padding-top: 54px; }
+    .emp-col.mid  { padding-top: 26px; }
+    .emp { border: 2px dashed var(--dash); border-radius: 22px; padding: 30px 34px 32px; }
+    .emp h4 { color: var(--brown); font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 16px; }
+    .emp h4 .em { font-size: 22px; margin-right: 6px; }
+    .emp ul { padding-left: 20px; }
+    .emp li { font-size: 16px; line-height: 1.75; color: #333; }
+
+    /* ---------- 11. Experience mapping ---------- */
+    .map-list { display: flex; flex-direction: column; gap: 26px; margin-top: 40px; }
+    .map-img { background: var(--soft-2); border-radius: 24px; padding: 26px; cursor: zoom-in; }
+    .map-img img { width: 100%; height: auto; min-height: 200px; margin: 0 auto; object-fit: contain; }
+    .map-cap { text-align: center; font-weight: 500; margin-top: 10px; }
+
+    /* ---------- 12. Wireframes ---------- */
+    .wires { display: grid; grid-template-columns: 1fr 70px 1fr 70px 1fr; align-items: center; max-width: 1050px; margin: 46px auto 0; }
+    .wire { text-align: center; }
+    /* whole wireframe shown as it is: no extra box, background or shadow
+       (your images already have their own rounded corners, frame and shadow) */
+    .wire .shot { cursor: zoom-in; }
+    .wire .shot img { width: 100%; height: auto; }
+    .wire span { display: block; font-size: 18px; margin-top: 18px; }
+    .arrow { height: 2px; background: #C0753E; position: relative; margin: 0 10px; top: -22px; }
+    .arrow::after {
+      content: ""; position: absolute; right: -2px; top: -5px; width: 10px; height: 10px;
+      border-right: 2px solid #C0753E; border-top: 2px solid #C0753E; transform: rotate(45deg);
+    }
+
+    /* ---------- 13. Design system ---------- */
+    .ds-box { padding-bottom: 150px; }
+    .typo { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; margin-top: 50px; padding: 0 60px; }
+    .typo h5 { font-size: 22px; font-weight: 500; }
+    .typo .fname { font-family: 'Roboto', sans-serif; font-size: 96px; font-weight: 500; line-height: 1.15; margin: 6px 0 14px; }
+    .typo .chars { font-family: 'Roboto', sans-serif; font-weight: 300; font-size: 30px; line-height: 1.2; color: #8a8a8a; word-break: break-all; }
+
+    .aa-wrap { text-align: center; }
+    .aa {
+      display: inline-flex; align-items: flex-end; gap: 2px; line-height: .8;
+      font-family: 'Roboto', sans-serif;
+      padding: 18px 14px 10px; position: relative;
+      background-image:   /* dashed frame around "Aa" */
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px);
+      background-size: 100% 1.5px, 100% 1.5px, 1.5px 100%, 1.5px 100%;
+      background-position: 0 6px, 0 calc(100% - 4px), 6px 0, calc(100% - 6px) 0;
+      background-repeat: no-repeat;
+    }
+    .aa .A { font-size: 220px; font-weight: 700; color: #7E4A1E; }
+    .aa .a { font-size: 175px; font-weight: 600; color: transparent; -webkit-text-stroke: 3px #7E4A1E; }
+    .weights { display: flex; justify-content: center; gap: 34px; margin-top: 18px; font-size: 18px; }
+    .weights span:nth-child(1) { font-weight: 400; }
+    .weights span:nth-child(2) { font-weight: 500; }
+    .weights span:nth-child(3) { font-weight: 600; }
+    .weights span:nth-child(4) { font-weight: 700; }
+
+    .swatches { display: flex; justify-content: center; gap: 18px; margin-top: -110px; position: relative; z-index: 2; padding: 0 40px; }
+    .sw {
+      width: 170px; aspect-ratio: 1; border: 10px solid #fff; border-radius: 6px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12); transition: transform .3s;
+    }
+    /* IMHO colour palette */
+    .sw:nth-child(1) { background: linear-gradient(160deg, #F28A3C, #E8458A); transform: rotate(-14deg); }
+    .sw:nth-child(2) { background: #0793F5; transform: rotate(20deg) translateY(14px); }
+    .sw:nth-child(3) { background: #141414; transform: rotate(-8deg) translateY(6px); }
+    .sw:nth-child(4) { background: #DFF2FF; transform: rotate(24deg) translateY(30px); }
+    .sw:nth-child(5) { background: #E2E2E2; transform: rotate(-16deg) translateY(14px); }
+    .sw:hover { transform: rotate(0) scale(1.05); }
+
+    /* ---------- 14. UI galleries (collapsible) ---------- */
+    .gallery { margin-top: 56px; border: 1.5px solid #e6e6e6; border-radius: 28px; position: relative; }
+    .gallery:not(.open) { min-height: 40px; }
+    .gallery-head {
+      position: absolute; top: -22px; left: 26px; padding: 0 14px;
+      background: #fff; border: none; cursor: pointer;
+      font-size: 28px; font-weight: 500; color: #111;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .chev {
+      width: 13px; height: 13px; border-left: 3px solid #111; border-top: 3px solid #111;
+      transform: rotate(45deg) translate(3px, 3px); transition: transform .3s;
+    }
+    .gallery:not(.open) .chev { transform: rotate(225deg) translate(3px, 3px); }
+    .gallery-body { overflow: hidden; transition: max-height .45s ease; }
+    .gallery:not(.open) .gallery-body { max-height: 0 !important; }
+    .g-in { padding: 56px 40px 40px; }
+
+    /* Phone screen – always shown in full, nothing cropped */
+    .ad-ph { border-radius: 10px; overflow: hidden; background: #fff; border: 1.5px solid #D8DCE3; cursor: zoom-in; }
+    .ad-ph img { width: 100%; height: auto; }
+
+    /* Onboarding box */
+    .onb { background: var(--soft); border-radius: 18px; padding: 14px 14px 18px; max-width: 900px; margin: 0 auto; }
+    .onb-cap { text-align: center; color: var(--brown); font-size: 20px; font-weight: 600; margin: 4px 0 14px; }
+
+    .dsub { text-align: center; font-size: 22px; font-weight: 600; margin: 50px 0 18px; }
+    .row4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 900px; margin: 0 auto; align-items: start; }
+    .row4.mt { margin-top: 40px; }
+    .row2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; max-width: 440px; margin: 0 auto; align-items: start; }
+
+    /* Screen – note – screen */
+    .n { position: relative; background: var(--soft); border-radius: 26px; padding: 20px 24px; text-align: center; font-size: 16px; line-height: 1.6; color: var(--text-brown); }
+    .im-trio { display: grid; grid-template-columns: 0.55fr 1.1fr 0.55fr; gap: 40px; align-items: center; max-width: 900px; margin: 50px auto 0; }
+
+    /* ---------- 15. Usability testing ---------- */
+    .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 46px; }
+    .cards3 > div { background: var(--soft); border-radius: 22px; padding: 36px 34px; text-align: center; font-size: 17px; line-height: 1.65; color: #333; }
+    .cards3 h4 { color: var(--brown-2); font-size: 22px; font-weight: 600; line-height: 1.4; margin-bottom: 18px; }
+
+    /* ---------- 16. Lightbox ---------- */
+    .lightbox { position: fixed; inset: 0; z-index: 100; padding: 30px; background: rgba(0,0,0,.88); display: none; align-items: center; justify-content: center; }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 10px; }
+    .lightbox .close { position: absolute; top: 20px; right: 28px; background: none; border: none; color: #fff; font-size: 44px; line-height: 1; cursor: pointer; }
+
+    /* ---------- 17. Footer ---------- */
+    footer { background: #000; color: #fff; padding: 16px 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+    footer .copy { font-size: 18px; }
+    footer .f-logo img { height: 100px; }
+    footer .social { display: flex; align-items: center; justify-content: flex-end; gap: 23px; }
+    footer .social span { font-size: 18px; font-weight: 500; margin-right: -8px; }
+    footer .social img { width: 50px; height: 50px; border-radius: 6px; transition: transform .25s; }
+    footer .social a:hover img { transform: translateY(-4px); }
+
+    /* ---------- 18. Responsive: tablet ---------- */
+    @media (max-width: 1100px) {
+      .nav-links a { padding: 14px 24px; font-size: 18px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-img { max-width: 520px; width: 100%; margin: 0 auto; }
+      .ov-row { grid-template-columns: 1fr; }
+      .soft-box { padding: 56px 30px 60px; }
+      .process { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .step::after, .step::before { display: none; }
+      .charts { grid-template-columns: repeat(2, 1fr); }
+      .persona { grid-template-columns: 1fr; }
+      .empathy { grid-template-columns: 1fr; max-width: 560px; }
+      .emp-col.side, .emp-col.mid { padding-top: 0; }
+      .typo { grid-template-columns: 1fr; padding: 0; }
+      .sw { width: 130px; }
+      .g-in { padding: 50px 18px 24px; }
+      .im-trio { grid-template-columns: 1fr 1fr; }
+      .im-trio .n { grid-column: 1 / -1; order: -1; }
+      .cards3 { grid-template-columns: 1fr; }
+    }
+
+    /* ---------- 19. Responsive: mobile ---------- */
+    @media (max-width: 720px) {
+      .nav-wrap { padding: 20px 16px 0; }
+      .navbar { height: auto; padding: 14px 16px; flex-direction: column; gap: 12px; border-radius: 30px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .nav-links a { padding: 10px 18px; font-size: 16px; }
+
+      main { padding: 0 16px 60px; }
+      .page-title { margin-top: 44px; }
+      .page-title h1 { font-size: 34px; }
+      .overview { padding: 28px 22px; }
+      .sec-title { font-size: 30px; }
+      .sec-sub { font-size: 16px; }
+      section.block { margin-top: 80px; }
+
+      .process { grid-template-columns: 1fr 1fr; }
+      .charts { grid-template-columns: 1fr; }
+      .comp { grid-template-columns: repeat(4, minmax(150px, 1fr)); overflow-x: auto; padding-bottom: 8px; }
+      .comp .cell { font-size: 14px; }
+
+      .wires { grid-template-columns: 1fr; gap: 30px; max-width: 280px; }
+      .arrow { display: none; }
+
+      .typo .fname { font-size: 64px; }
+      .typo .chars { font-size: 20px; }
+      .aa .A { font-size: 140px; }
+      .aa .a { font-size: 112px; }
+      .weights { gap: 16px; font-size: 15px; }
+      .swatches { flex-wrap: wrap; gap: 10px; margin-top: -80px; padding: 0; }
+      .sw { width: 30%; border-width: 6px; }
+      .ds-box { padding-bottom: 110px; }
+
+      .gallery-head { font-size: 22px; }
+      .row4 { grid-template-columns: repeat(2, 1fr); }
+
+      footer { grid-template-columns: 1fr; gap: 22px; text-align: center; padding: 20px 20px; }
+      footer .f-logo img { margin: 0 auto; }
+      footer .social { justify-content: center; flex-wrap: wrap; gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="ux-ui-design.html" class="active" aria-current="page">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <div class="page-title"><h1>IMHO</h1></div>
+
+    <div class="hero">
+      <div class="hero-img zoom"><img src="Image/IMHO/1.png" alt="IMHO"></div>
+      <div class="overview">
+        <h2>Product Overview</h2>
+        <p>IMHO is a social Q&amp;A app that helps people connect through anonymous questions, honest opinions, and fun interactions.</p>
+        <div class="ov-row">
+          <fieldset class="fieldset">
+            <legend>Tools</legend>
+            <div class="tools"><img src="Image/Common/Photoshop.png" alt="Photoshop"><img src="Image/Common/Figma.png" alt="Figma"></div>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend>Role</legend>
+            <div class="val">UX/UI DESIGNER | GRAPHIC DESIGNER</div>
+          </fieldset>
+        </div>
+        <fieldset class="fieldset">
+          <legend>Focus</legend>
+          <div class="val">UX Architecture | User Flow | Social Interaction | Feature Design | Interactive Design</div>
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- ===== Design Process ===== -->
+    <section class="block">
+      <h2 class="sec-title">Design <span>Process</span></h2>
+      <p class="sec-sub w-820">A user-focused design process that transforms research and insights into a simple, engaging social experience, from understanding user needs to designing and refining interactions.</p>
+      <div class="process">
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#EF4F8C"/><path d="M31 17l-4.5 9.5L17 31l4.5-9.5z" fill="#fff"/><circle cx="24" cy="24" r="2" fill="#EF4F8C"/></svg></div>
+          <h4>Discover</h4>
+          <p>User Research, Competitive Analysis</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#F06A1E" stroke-width="4" stroke-linecap="round"><path d="M15 15a14 14 0 1 0 18 0"/><path d="M19.5 20a7.5 7.5 0 1 0 9 0"/><path d="M24 6v14"/><circle cx="24" cy="27" r="2" fill="#F06A1E"/></svg></div>
+          <h4>Define</h4>
+          <p>User Persona, Empathy Map</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M24 5a14 14 0 0 0-8 25.5V35h16v-4.5A14 14 0 0 0 24 5z" fill="#F7B500"/><rect x="17" y="37" width="14" height="3" rx="1.5" fill="#F7B500"/><rect x="19" y="42" width="10" height="3" rx="1.5" fill="#F7B500"/><path d="M19 15l5 6 5-6M24 21v9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Ideate</h4>
+          <p>User Flow</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M30 10l8 8-16 16-9 2 2-9z" fill="#F2622B"/><path d="M14 30c-6 0-8 4-5 6s9-1 4 5" stroke="#F2622B" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Design</h4>
+          <p>Lo-fi Wireframe, Hi-fi Wireframe</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M10 5h18l10 10v26a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#EF4F6E"/><path d="M28 5v10h10" fill="#F9A3B3"/><rect x="13" y="22" width="9" height="3" rx="1.5" fill="#fff"/><rect x="13" y="29" width="7" height="3" rx="1.5" fill="#fff"/><circle cx="31" cy="32" r="6" fill="#fff" stroke="#EF4F6E" stroke-width="3"/><path d="M35.5 36.5l5 5" stroke="#EF4F6E" stroke-width="3.5" stroke-linecap="round"/></svg></div>
+          <h4>Test</h4>
+          <p>Usability Testing</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== Quantitative Research ===== -->
+    <section class="block">
+      <h2 class="sec-title">Quantitative <span>Research</span></h2>
+      <p class="sec-sub w-860">Understanding user preferences and social interaction habits helps shape an engaging anonymous Q&amp;A experience that feels fun, simple, and comfortable to use.</p>
+      <div class="charts">
+        <div class="chart" style="--c:#8E62E8"><h4>Age Group</h4><div class="body"><div class="donut" style="background:conic-gradient(#D9B8F7 0% 18%, #A65CF0 18% 74%, #8A3FE0 74% 94%, #4B1A9E 94% 100%)"><span></span></div><ul class="legend2"><li style="--d:#D9B8F7">13–17<b>18%</b></li><li style="--d:#A65CF0">18–24<b>56%</b></li><li style="--d:#8A3FE0">25–34<b>20%</b></li><li style="--d:#4B1A9E">35+<b>6%</b></li></ul></div></div>
+        <div class="chart" style="--c:#F08A3C"><h4>Gender</h4><div class="body"><div class="donut" style="background:conic-gradient(#FBC79B 0% 52%, #F06A0E 52% 96%, #F5B07A 96% 100%)"><span></span></div><ul class="legend2"><li style="--d:#FBC79B">Female<b>52%</b></li><li style="--d:#F06A0E">Male<b>44%</b></li><li style="--d:#F5B07A">Prefer not to say<b>4%</b></li></ul></div></div>
+        <div class="chart" style="--c:#5CC45A"><h4>Primary Device</h4><div class="body"><div class="donut" style="background:conic-gradient(#8EE37E 0% 72%, #45B82E 72% 98%, #1F7A1A 98% 100%)"><span></span></div><ul class="legend2"><li style="--d:#8EE37E">Android<b>72%</b></li><li style="--d:#45B82E">iOS<b>26%</b></li><li style="--d:#1F7A1A">Other<b>2%</b></li></ul></div></div>
+        <div class="chart" style="--c:#F2B632"><h4>App Usage Frequency</h4><div class="body"><div class="donut" style="background:conic-gradient(#FFD978 0% 48%, #F8B627 48% 80%, #F09A1A 80% 94%, #E8641A 94% 100%)"><span></span></div><ul class="legend2"><li style="--d:#FFD978">Daily<b>48%</b></li><li style="--d:#F8B627">Several times/week<b>32%</b></li><li style="--d:#F09A1A">Weekly<b>14%</b></li><li style="--d:#E8641A">Occasionally<b>6%</b></li></ul></div></div>
+        <div class="chart" style="--c:#EE4F96"><h4>Comfort with Anonymous Interactions</h4><div class="body"><div class="donut" style="background:conic-gradient(#F9A3CC 0% 50%, #F04A9A 50% 84%, #E8357F 84% 95%, #C51466 95% 100%)"><span></span></div><ul class="legend2"><li style="--d:#F9A3CC">Very comfortable<b>50%</b></li><li style="--d:#F04A9A">Comfortable<b>34%</b></li><li style="--d:#E8357F">Neutral<b>11%</b></li><li style="--d:#C51466">Uncomfortable<b>5%</b></li></ul></div></div>
+        <div class="chart" style="--c:#3B8CE8"><h4>Most Wanted App Features</h4><div class="body"><div class="donut" style="background:conic-gradient(#8CC8F7 0% 36%, #2E95F0 36% 64%, #1C6FD6 64% 84%, #174FA8 84% 100%)"><span></span></div><ul class="legend2"><li style="--d:#8CC8F7">Anonymous Q&amp;A<b>36%</b></li><li style="--d:#2E95F0">Fun quizzes (e.g. Rizzler, CUPID)<b>28%</b></li><li style="--d:#1C6FD6">Honest opinions (e.g. Unpopular Opinion)<b>20%</b></li><li style="--d:#174FA8">Profile sharing &amp; reactions<b>16%</b></li></ul></div></div>
+      </div>
+    </section>
+
+    <!-- ===== Competitor Analysis ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Competitor <span class="alt">Analysis</span></h2>
+      <p class="sec-sub">Understanding the competitive landscape to identify opportunities for differentiation and improvement.</p>
+      <div class="comp">
+        <div></div>
+        <div class="brand"><img src="Image/IMHO/2.png" alt="Sendit"></div>
+        <div class="brand"><img src="Image/IMHO/3.png" alt="Tellonym"></div>
+        <div class="brand"><img src="Image/IMHO/4.png" alt="NGL - Not Gonna Lie"></div>
+        <div class="cell head">Core business model</div><div class="cell">Anonymous Q&amp;A and social sharing</div><div class="cell">Anonymous messaging and Q&amp;A</div><div class="cell">Anonymous Q&amp;A and social interaction</div>
+        <div class="cell head">Primary UX</div><div class="cell">Share prompts, receive anonymous replies in inbox</div><div class="cell">Receive anonymous messages, answer and share</div><div class="cell">Share link, receive questions, answer and post</div>
+        <div class="cell head">Experience complexity</div><div class="cell">Low–medium, prompt and inbox focused</div><div class="cell">Medium, Q&amp;A, feed and profile features</div><div class="cell">Medium, Q&amp;A, profile and social features</div>
+        <div class="cell head">Question / message flow</div><div class="cell">Post prompt → friends respond → answer in inbox</div><div class="cell">Share profile → receive messages → answer</div><div class="cell">Share link → receive questions → answer and post</div>
+        <div class="cell head">Anonymity</div><div class="cell">Anonymous responses with optional hints</div><div class="cell">Anonymous messages with safety controls</div><div class="cell">Anonymous questions with paid reveal features</div>
+        <div class="cell head">Target user</div><div class="cell">Social users, especially younger audiences</div><div class="cell">Users seeking anonymous conversations</div><div class="cell">Users seeking anonymous Q&amp;A and feedback</div>
+        <div class="cell head">Key differentiator</div><div class="cell">Strong social sharing and interactive prompts</div><div class="cell">Established anonymous messaging experience</div><div class="cell">Simple anonymous Q&amp;A and social sharing</div>
+        <div class="cell head">Best design focus</div><div class="cell">Make prompt sharing and responses effortless</div><div class="cell">Balance anonymity with discovery and interaction</div><div class="cell">Make anonymous interaction engaging and trustworthy</div>
+        <div class="cell head">Accessibility &amp; safety</div><div class="cell">Blocking, reporting and safety controls</div><div class="cell">Word filters, blocking and reporting</div><div class="cell">Moderation, blocking and reporting</div>
+        <div class="cell head">Business opportunity</div><div class="cell">Premium hints, games and profile features</div><div class="cell">Premium subscriptions and social features</div><div class="cell">Premium hints and subscription features</div>
+      </div>
+    </section>
+
+
+    <!-- ===== User Persona ===== -->
+    <section class="block">
+      <h2 class="sec-title">User <span>Persona</span></h2>
+      <p class="sec-sub w-780">Understanding the needs, goals, and challenges of social users helps create a simple and engaging anonymous Q&amp;A experience that encourages honest interaction.</p>
+      <div class="persona">
+        <div class="p-col">
+          <div class="p-card">
+            <div class="avatar zoom"><img src="Image/IMHO/5.png" alt="Riya Sharma"></div>
+            <div class="p-name">Riya Sharma</div>
+            <dl class="facts"><dt>Age</dt><dd>22</dd><dt>Location</dt><dd>Noida</dd><dt>Occupation</dt><dd>College Student</dd><dt>Tech Literacy</dt><dd>High</dd></dl>
+          </div>
+          <div class="p-card"><p class="quote">I want a fun way to know what my friends really think without making things awkward.</p></div>
+          <div class="p-card"><h5>Personality</h5><div class="chips"><span>Social</span><span>Curious</span><span>Playful</span><span>Expressive</span><span>Privacy-conscious</span></div></div>
+        </div>
+        <div class="p-col">
+          <div class="p-card"><h5>Bio</h5><p>Riya is a college student who enjoys connecting with friends, sharing opinions, and trying fun social apps. She likes anonymous Q&amp;A because it lets her express herself and discover what her friends really think.</p></div>
+          <div class="p-card"><h5>Core Needs</h5><ul><li>Ask and receive questions anonymously.</li><li>Share her IMHO profile easily with friends.</li><li>Discover honest opinions and fun responses.</li><li>Reply to questions without a complicated flow.</li><li>Feel safe while interacting anonymously.</li></ul></div>
+          <div class="p-card"><h5>Frustrations</h5><ul><li>Repetitive or boring questions.</li><li>Confusing navigation between questions and responses.</li><li>Unclear anonymity and privacy controls.</li><li>Spam or unwanted messages.</li><li>Too many steps to share or respond.</li></ul></div>
+          <div class="p-card"><h5>Preferred Brands</h5><p>Instagram | Snapchat | WhatsApp | Spotify</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Storyboard ===== -->
+    <section class="block">
+      <h2 class="sec-title">Story<span>board</span></h2>
+      <p class="sec-sub w-560">Visualizing the user journey from receiving an anonymous message to wondering who sent it, reading the response, and engaging with the conversation.</p>
+      <div class="storyboard zoom"><img src="Image/IMHO/6.png" alt="Storyboard"></div>
+    </section>
+
+    <!-- ===== Empathy Map ===== -->
+    <section class="block">
+      <h2 class="sec-title">Empathy <span class="alt">Map</span></h2>
+      <p class="sec-sub">Understanding users’ needs, motivations, frustrations, and behaviors helps create a more engaging and comfortable anonymous Q&amp;A experience.</p>
+      <div class="empathy">
+        <div class="emp-col side">
+          <div class="emp"><h4><span class="em">👣</span>DOES</h4><ul><li>Shares IMHO profile or question links with friends.</li><li>Sends and answers anonymous questions.</li><li>Checks responses and reacts to interesting answers.</li><li>Tries fun features like Rizzler and CUPID.</li><li>Shares interesting responses on social media.</li></ul></div>
+          <div class="emp"><h4><span class="em">😣</span>PAINS</h4><ul><li>Repetitive or boring questions.</li><li>Unwanted or inappropriate messages.</li><li>Uncertainty about who sent a message.</li><li>Confusing navigation between questions and responses.</li><li>Concerns about privacy and anonymous interactions.</li></ul></div>
+        </div>
+        <div class="emp-col mid">
+          <div class="emp"><h4><span class="em">🧠</span>THINKS</h4><ul><li>“What do my friends really think about me?”</li><li>“Will people answer honestly if they are anonymous?”</li><li>“Who sent me this question?”</li><li>“I want to ask something without making it awkward.”</li><li>“Is my identity protected?”</li></ul></div>
+          <div class="emp"><h4><span class="em">❤️</span>FEELS</h4><ul><li>Curious when receiving anonymous questions.</li><li>Excited when friends respond.</li><li>Comfortable expressing thoughts anonymously.</li><li>Frustrated by spam or unwanted messages.</li><li>Concerned about privacy and safety.</li></ul></div>
+        </div>
+        <div class="emp-col side">
+          <div class="emp"><h4><span class="em">💬</span>SAYS</h4><ul><li>“I want honest answers from my friends.”</li><li>“Anonymous questions are more fun.”</li><li>“I wish I knew who sent this.”</li><li>“Sharing my profile should be easy.”</li><li>“I want to control who can interact with me.”</li></ul></div>
+          <div class="emp"><h4><span class="em">✨</span>GAINS</h4><ul><li>Honest and fun conversations with friends.</li><li>Easy way to ask and answer anonymously.</li><li>More engaging social interactions.</li><li>Quick sharing across social platforms.</li><li>Feeling safe and in control of anonymous interactions.</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Mapping the Experience ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Mapping <span class="alt">the Experience</span></h2>
+      <p class="sec-sub">The experience map connects the key steps of the IMHO journey, from discovering the app and creating a profile to sharing questions, receiving responses, and interacting with friends.</p>
+      <div class="map-list">
+        <div>
+          <div class="map-img zoom"><img src="Image/IMHO/7.png" alt="User side map"></div>
+          <div class="map-cap">User Side</div>
+        </div>
+        <div>
+          <div class="map-img zoom"><img src="Image/IMHO/8.png" alt="User-friend side map"></div>
+          <div class="map-cap">User-Friend Side</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Wireframes ===== -->
+    <section class="block">
+      <h2 class="sec-title">Building the <span>Digital Experience</span></h2>
+      <p class="sec-sub w-640">Creating an engaging anonymous Q&amp;A experience that keeps interactions simple, social, and fun while encouraging users to share, ask, and respond.</p>
+      <div class="wires">
+        <div class="wire"><div class="shot zoom"><img src="Image/IMHO/9.png" alt="Paper wireframe"></div><span>Paper wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/IMHO/10.png" alt="Lo-fi wireframe"></div><span>Lo-fi wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/IMHO/11.png" alt="Hi-fi wireframe"></div><span>Hi-fi wireframe</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Design System ===== -->
+    <section class="block">
+      <div class="soft-box ds-box">
+        <h2 class="sec-title">Design <span>System</span></h2>
+        <p class="sec-sub">Establishing a consistent visual language through typography, colors, and reusable components to ensure clarity, accessibility, and a cohesive experience.</p>
+        <div class="typo">
+          <div>
+            <h5>Typography</h5>
+            <div class="fname">Roboto</div>
+            <div class="chars">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890</div>
+          </div>
+          <div class="aa-wrap">
+            <div class="aa"><span class="A">A</span><span class="a">a</span></div>
+            <div class="weights"><span>Regular</span><span>Medium</span><span>Semibold</span><span>Bold</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="swatches"><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span></div>
+    </section>
+
+    <!-- ===== UI Design ===== -->
+    <section class="block">
+      <h2 class="sec-title">UI <span>Design</span></h2>
+      <p class="sec-sub">A collection of the main IMHO interfaces, showcasing onboarding, the home screen, anonymous questions, responses, social sharing, and interactive features.</p>
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">App Design <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+          <div class="onb">
+            <div class="onb-cap">Onboarding screens</div>
+            <div class="row4">
+              <div class="ad-ph zoom"><img src="Image/IMHO/12.png" alt="Onboarding 1" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/IMHO/13.png" alt="Onboarding 2" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/IMHO/14.png" alt="Onboarding 3" loading="lazy"></div>
+              <div class="ad-ph zoom"><img src="Image/IMHO/15.png" alt="Onboarding 4" loading="lazy"></div>
+            </div>
+          </div>
+          <div class="im-trio">
+            <div class="ad-ph zoom"><img src="Image/IMHO/16.png" alt="Home" loading="lazy"></div>
+            <div class="n">Explore different ways to interact with friends through fun categories like Ask Me Anything, Rizzler, CUPID, Unpopular Opinion, and Date, Marry, Kill. Share your IMHO link directly on Instagram, Snapchat, and WhatsApp to invite friends to participate and send anonymous responses.</div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/17.png" alt="How to add link to your story" loading="lazy"></div>
+          </div>
+          <div class="row4 mt">
+            <div class="ad-ph zoom"><img src="Image/IMHO/18.png" alt="Category 1" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/19.png" alt="Category 2" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/20.png" alt="Category 3" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/21.png" alt="Category 4" loading="lazy"></div>
+          </div>
+          <h3 class="dsub">Inbox / View</h3>
+          <div class="row4">
+            <div class="ad-ph zoom"><img src="Image/IMHO/22.png" alt="Inbox 1" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/23.png" alt="Inbox 2" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/24.png" alt="Inbox 3" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/25.png" alt="Inbox 4" loading="lazy"></div>
+          </div>
+          <h3 class="dsub">Message</h3>
+          <div class="row4">
+            <div class="ad-ph zoom"><img src="Image/IMHO/26.png" alt="Message 1" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/27.png" alt="Message 2" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/28.png" alt="Message 3" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/29.png" alt="Message 4" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/30.png" alt="Message 5" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/31.png" alt="Message 6" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/32.png" alt="Message 7" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/33.png" alt="Message 8" loading="lazy"></div>
+          </div>
+          <h3 class="dsub">Settings</h3>
+          <div class="row4">
+            <div class="ad-ph zoom"><img src="Image/IMHO/34.png" alt="Settings 1" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/35.png" alt="Settings 2" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/36.png" alt="Settings 3" loading="lazy"></div><div class="ad-ph zoom"><img src="Image/IMHO/37.png" alt="Settings 4" loading="lazy"></div>
+          </div>
+          <h3 class="dsub">Pro Version</h3>
+          <div class="row4">
+            <div class="ad-ph zoom"><img src="Image/IMHO/38.png" alt="Pro version 1" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/39.png" alt="Pro version 2" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/40.png" alt="Pro version 3" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/41.png" alt="Pro version 4" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">Response <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+          <div class="row2">
+            <div class="ad-ph zoom"><img src="Image/IMHO/42.png" alt="Response 1" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/IMHO/43.png" alt="Response 2" loading="lazy"></div>
+          </div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Usability Testing ===== -->
+    <section class="block">
+      <h2 class="sec-title">Usability <span>Testing</span></h2>
+      <p class="sec-sub w-720">Evaluated the app’s key interactions, including asking questions, receiving anonymous responses, sharing links, and exploring interactive categories, to identify usability issues and improve the overall user experience.</p>
+      <div class="cards3">
+        <div><h4>Easy Category<br>Discovery</h4>Users should be able to quickly explore categories like Ask Me Anything, Rizzler, CUPID, and Unpopular Opinion without feeling overwhelmed.</div>
+        <div><h4>Simple Sharing &amp;<br>Interaction</h4>Clear sharing options make it easy to post the IMHO link on Instagram, Snapchat, and WhatsApp and invite friends to participate.</div>
+        <div><h4>Smooth Anonymous<br>Experience</h4>Simple question flows, easy responses, and clear privacy controls help create a more engaging and comfortable anonymous Q&amp;A experience.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="copy">© 2026 By Mariyam Nesha</div>
+    <a href="index.html" class="f-logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+    <div class="social">
+      <span>Follow :</span>
+      <a href="https://www.behance.net/mariyamnesha3" target="_blank" rel="noopener" aria-label="Behance"><img src="Image/Common/Behance.png" alt="Behance"></a>
+      <a href="https://dribbble.com/mary333333333" target="_blank" rel="noopener" aria-label="Dribbble"><img src="Image/Common/Dribbble.png" alt="Dribbble"></a>
+      <a href="mailto:mariyamnesha3@gmail.com" aria-label="Gmail"><img src="Image/Common/Gmail.png" alt="Gmail"></a>
+      <a href="https://www.linkedin.com/in/mariyam-nesha-05b04a190/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="Image/Common/LinkedIn.png" alt="LinkedIn"></a>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </div>
+
+  <script>
+    /* ----- Collapsible galleries ----- */
+    function fit() {
+      document.querySelectorAll('.gallery-body').forEach(function (b) {
+        b.style.maxHeight = b.scrollHeight + 'px';
+      });
+    }
+
+    document.querySelectorAll('.gallery').forEach(function (g) {
+      var head = g.querySelector('.gallery-head');
+      head.addEventListener('click', function () {
+        fit();
+        var open = g.classList.toggle('open');
+        head.setAttribute('aria-expanded', open);
+      });
+    });
+
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    /* lazy images can change the height after loading – re-measure each time one loads */
+    document.querySelectorAll('.gallery img').forEach(function (img) {
+      img.addEventListener('load', fit);
+    });
+
+    /* ----- Lightbox ----- */
+    var lb = document.getElementById('lightbox');
+    var lbImg = lb.querySelector('img');
+
+    document.querySelectorAll('.zoom').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var img = el.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('show');
+      });
+    });
+
+    function closeLb() { lb.classList.remove('show'); }
+    lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  </script>
+</body>
+</html>

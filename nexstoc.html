@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NEXSTOC case study by Mariyam Nesha – business management dashboard UX/UI design.">
+  <title>NEXSTOC | Mariyam Nesha</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Mariyam Nesha – NEXSTOC case study
+       ========================================================= */
+
+    /* ---------- 1. Variables & reset ---------- */
+    :root {
+      --orange: #F47B20;
+      --brown: #7A3E10;
+      --brown-2: #8C4A10;
+      --text-brown: #5A2A0A;
+      --soft: #FCE8DC;
+      --soft-2: #FDF2EA;
+      --dash: #D9B49B;
+      --dark: #161616;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- 2. Navbar ---------- */
+    .nav-wrap { padding: 40px 70px 0; }
+    .navbar {
+      max-width: 1300px; margin: 0 auto; height: 86px; padding: 0 8px 0 34px;
+      background: var(--dark); border-radius: 50px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar .logo img { height: 100px; }   /* same as the other pages (was 30px) */
+    .nav-links { display: flex; list-style: none; gap: 10px; }
+    .nav-links a {
+      display: block; color: #fff; font-size: 20px; padding: 18px 40px; border-radius: 40px;
+      transition: background .25s, color .25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { background: var(--orange); color: #fff; }
+
+    /* ---------- 3. Layout & section titles ---------- */
+    main { max-width: 1300px; margin: 0 auto; padding: 0 70px 100px; box-sizing: content-box; }
+    section.block { margin-top: 110px; position: relative; }
+    .soft-box { background: var(--soft); border-radius: 36px; padding: 70px 70px 80px; position: relative; }
+
+    .sec-title { text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -0.5px; }
+    .sec-title span { color: var(--orange); }
+    .sec-title span.alt { color: #C0601A; }
+    .sec-sub { text-align: center; font-size: 18px; line-height: 1.6; color: #333; max-width: 760px; margin: 18px auto 0; }
+    .sec-sub.w-820 { max-width: 820px; }
+    .sec-sub.w-720 { max-width: 720px; }
+    .sec-sub.w-640 { max-width: 640px; }
+
+    /* ---------- 4. Hero & overview ---------- */
+    .page-title { display: flex; align-items: center; justify-content: center; margin: 70px 0 44px; }
+    .page-title h1 { font-size: 52px; font-weight: 600; letter-spacing: -0.5px; }
+
+    .hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.58fr); gap: 48px; align-items: stretch; }
+    /* Photo with see-through white frame (same as Adhyayanam) */
+    .hero-img { position: relative; height: 100%; border-radius: 30px; overflow: hidden; background: #F1E6DD; box-shadow: 0 10px 30px rgba(0,0,0,.08); cursor: zoom-in; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-img::after { content: ""; position: absolute; inset: 0; border: 16px solid rgba(255,255,255,.35); border-radius: 30px; pointer-events: none; }
+
+    .overview { background: #F5E7DC; border-radius: 30px; padding: 44px 44px 40px; }
+    .overview h2 { color: var(--brown); font-size: 30px; font-weight: 600; margin-bottom: 14px; }
+    .overview > p { font-size: 18px; line-height: 1.6; color: #333; margin-bottom: 30px; }
+    .ov-row { display: grid; grid-template-columns: minmax(0,0.62fr) minmax(0,1fr); gap: 26px; margin-bottom: 26px; }
+
+    .fieldset { min-width: 0; border: 1.5px solid #E2C9B8; border-radius: 14px; padding: 0 22px 18px; position: relative; }
+    .fieldset legend { font-size: 22px; font-weight: 600; padding: 0 8px; margin-left: -8px; }
+    .fieldset .tools { display: flex; gap: 36px; padding: 8px 26px 0; }
+    .fieldset .tools img { width: 50px; height: 50px; border-radius: 10px; }
+    .fieldset .val { font-size: 17px; font-weight: 500; padding-top: 16px; line-height: 1.7; }
+
+    /* ---------- 5. Info cards (Challenges & Usability testing) ---------- */
+    .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 46px; }
+    .cards3 > div { background: var(--soft); border-radius: 22px; padding: 36px 34px; text-align: center; font-size: 17px; line-height: 1.65; color: #333; }
+    .cards3 h4 { color: var(--brown-2); font-size: 22px; font-weight: 600; line-height: 1.4; margin-bottom: 18px; }
+    .cards3.outline > div { background: #fff; border: 2px dashed var(--dash); }   /* Challenges version */
+
+    /* ---------- 6. Experience mapping ---------- */
+    .map-two { display: flex; flex-direction: column; gap: 30px; margin-top: 40px; }
+    .map-img { background: var(--soft-2); border-radius: 24px; padding: 26px; cursor: zoom-in; }
+    .map-img img { width: 100%; height: auto; min-height: 200px; margin: 0 auto; object-fit: contain; }
+    .map-cap { text-align: center; font-size: 18px; font-weight: 500; margin-top: 10px; }
+
+    /* ---------- 7. Wireframes ---------- */
+    .wires { display: grid; grid-template-columns: 1fr 70px 1fr 70px 1fr; align-items: center; max-width: 1050px; margin: 46px auto 0; }
+    .wire { text-align: center; }
+    /* whole wireframe shown as it is: no extra box, background or shadow
+       (your images already have their own rounded corners, frame and shadow) */
+    .wire .shot { cursor: zoom-in; }
+    .wire .shot img { width: 100%; height: auto; }
+    .wire span { display: block; font-size: 18px; margin-top: 18px; }
+    .arrow { height: 2px; background: #C0753E; position: relative; margin: 0 10px; top: -22px; }
+    .arrow::after {
+      content: ""; position: absolute; right: -2px; top: -5px; width: 10px; height: 10px;
+      border-right: 2px solid #C0753E; border-top: 2px solid #C0753E; transform: rotate(45deg);
+    }
+
+    /* ---------- Design process ---------- */
+    .process { display: grid; grid-template-columns: repeat(5, 1fr); gap: 34px; max-width: 1100px; margin: 46px auto 0; }
+    .step {
+      --c: #EF6C98; --bg: #FDE3EE;
+      position: relative; padding: 24px 14px; text-align: center;
+      border: 2px solid var(--c); border-radius: 26px;
+      background: linear-gradient(180deg, var(--bg), #fff 130%);
+    }
+    .step:nth-child(2), .step:nth-child(4) { --c: #F2853A; --bg: #FDE6D6; }
+    .step:nth-child(3) { --c: #F4C23A; --bg: #FFF4D4; }
+    .step .ic { width: 84px; height: 84px; border-radius: 50%; margin: 0 auto 16px; background: rgba(255,255,255,.8); display: flex; align-items: center; justify-content: center; font-size: 38px; }
+    .step h4 { font-size: 19px; font-weight: 600; color: var(--c); line-height: 1.3; }
+    .step:not(:last-child)::after { content: ""; position: absolute; top: 50%; right: -36px; width: 36px; height: 2px; background: var(--c); }
+
+    /* ---------- Target audience ---------- */
+    .audience { display: grid; grid-template-columns: 0.8fr 1fr 1fr 1fr; gap: 20px; align-items: center; margin-top: 40px; }
+    .aud-donut {
+      width: 220px; aspect-ratio: 1; border-radius: 50%; margin: 0 auto; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      background: conic-gradient(#F2780C 0 40%, #5CC41E 40% 70%, #1E7CF2 70% 100%);
+    }
+    .aud-donut::before { content: ""; position: absolute; inset: 44px; border-radius: 50%; background: var(--soft); }
+    .aud-donut span { position: relative; font-weight: 600; font-size: 16px; }
+    .aud { border-radius: 18px; padding: 26px 22px; color: #fff; text-align: center; font-size: 16px; line-height: 1.55; }
+    .aud.blue   { background: #1E7CF2; }
+    .aud.orange { background: #F2780C; }
+    .aud.green  { background: #5CC41E; }
+    .aud h4 { font-size: 19px; font-weight: 600; line-height: 1.4; margin-bottom: 10px; }
+    .aud b { display: block; font-size: 19px; font-weight: 600; margin-bottom: 10px; }
+
+    /* ---------- Challenges ---------- */
+    .challenges { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 26px; max-width: 1150px; margin: 46px auto 0; }
+    .ch { border: 2px dashed var(--dash); border-radius: 20px; padding: 32px; text-align: center; font-size: 16px; line-height: 1.7; color: #222; }
+    .ch h4 { color: var(--brown); font-size: 23px; font-weight: 600; line-height: 1.2; margin-bottom: 14px; }
+    .ch-side { align-self: center; }
+    .ch-mid { display: flex; flex-direction: column; gap: 22px; }
+
+    /* ---------- 8. Design system ---------- */
+    .ds-box { padding-bottom: 150px; }
+    .typo { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; margin-top: 50px; padding: 0 60px; }
+    .typo h5 { font-size: 22px; font-weight: 500; }
+    .typo .fname { font-family: 'Outfit', sans-serif; font-size: 96px; font-weight: 500; line-height: 1.15; margin: 6px 0 14px; }
+    .typo .chars { font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 30px; line-height: 1.2; color: #8a8a8a; word-break: break-all; }
+
+    .aa-wrap { text-align: center; }
+    .aa {
+      display: inline-flex; align-items: flex-end; gap: 2px; line-height: .8;
+      font-family: 'Outfit', sans-serif;
+      padding: 18px 14px 10px; position: relative;
+      background-image:   /* dashed frame around "Aa" */
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px);
+      background-size: 100% 1.5px, 100% 1.5px, 1.5px 100%, 1.5px 100%;
+      background-position: 0 6px, 0 calc(100% - 4px), 6px 0, calc(100% - 6px) 0;
+      background-repeat: no-repeat;
+    }
+    .aa .A { font-size: 220px; font-weight: 700; color: #7E4A1E; }
+    .aa .a { font-size: 175px; font-weight: 600; color: transparent; -webkit-text-stroke: 3px #7E4A1E; }
+    .weights { display: flex; justify-content: center; gap: 34px; margin-top: 18px; font-size: 18px; }
+    .weights span:nth-child(1) { font-weight: 400; }
+    .weights span:nth-child(2) { font-weight: 500; }
+    .weights span:nth-child(3) { font-weight: 600; }
+    .weights span:nth-child(4) { font-weight: 700; }
+
+    .swatches { display: flex; justify-content: center; gap: 18px; margin-top: -110px; position: relative; z-index: 2; padding: 0 40px; }
+    .sw {
+      width: 170px; aspect-ratio: 1; border: 10px solid #fff; border-radius: 6px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12); transition: transform .3s;
+    }
+    /* NEXSTOC colour palette */
+    .sw:nth-child(1) { background: #FFBB00; transform: rotate(-14deg); }
+    .sw:nth-child(2) { background: #1E1E1E; transform: rotate(20deg) translateY(14px); }
+    .sw:nth-child(3) { background: #6866F8; transform: rotate(-8deg) translateY(6px); }
+    .sw:nth-child(4) { background: #D2D2D2; transform: rotate(24deg) translateY(30px); }
+    .sw:nth-child(5) { background: #41A3FC; transform: rotate(-16deg) translateY(14px); }
+    .sw:hover { transform: rotate(0) scale(1.05); }
+
+    /* ---------- 9. UI galleries (collapsible) ---------- */
+    .gallery { margin-top: 56px; border: 1.5px solid #e6e6e6; border-radius: 28px; position: relative; }
+    .gallery:not(.open) { min-height: 40px; }
+    .gallery-head {
+      position: absolute; top: -22px; left: 26px; padding: 0 14px;
+      background: #fff; border: none; cursor: pointer;
+      font-size: 28px; font-weight: 500; color: #111;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .chev {
+      width: 13px; height: 13px; border-left: 3px solid #111; border-top: 3px solid #111;
+      transform: rotate(45deg) translate(3px, 3px); transition: transform .3s;
+    }
+    .gallery:not(.open) .chev { transform: rotate(225deg) translate(3px, 3px); }
+    .gallery-body { overflow: hidden; transition: max-height .45s ease; }
+    .gallery:not(.open) .gallery-body { max-height: 0 !important; }
+    .g-in { padding: 56px 40px 40px; }
+
+    .sub-h { text-align: center; font-size: 26px; font-weight: 600; margin: 56px 0 24px; }
+
+    /* Screenshot box – always shows the whole image, nothing cropped */
+    .web { border-radius: 8px; overflow: hidden; background: #fff; border: 1.5px solid #D8DCE3; box-shadow: 0 4px 14px rgba(0,0,0,.06); cursor: zoom-in; }
+    .web img { width: 100%; height: auto; }
+
+    .gw { display: grid; gap: 16px; max-width: 1000px; margin: 0 auto; }
+    .gw.c5 { grid-template-columns: repeat(5, 1fr); }
+    .gw.c5 .web { aspect-ratio: 9 / 22; }
+    .gw.c4 { grid-template-columns: repeat(4, 1fr); }
+    .gw.c4 .web { aspect-ratio: 9 / 18; }
+    .gw.c2 { grid-template-columns: 1fr 1fr; max-width: 820px; }
+
+    /* "full" = show the whole page screenshot, no cropping, tops aligned */
+    .gw.full { align-items: start; gap: 20px; }
+    .gw.full .web { aspect-ratio: auto; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+    .gw.full .web img { height: auto; }
+
+    /* ---------- NEXSTOC dashboard layouts (all screens shown in full) ---------- */
+
+    /* Screenshot + note side by side (Login, Dashboard) */
+    .nx-pair { display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 40px; align-items: center; max-width: 1000px; margin: 0 auto 50px; }
+    .nx-pair.r { grid-template-columns: 0.8fr 1.4fr; }
+    /* Dashboard: phone + desktop screens side by side */
+    .nx-dash { display: flex; gap: 16px; align-items: flex-start; }
+    .nx-dash .phone { flex: 0 0 27%; }
+    .nx-dash .desk  { flex: 1; }
+    .nx-note { background: var(--soft); border-radius: 26px; padding: 26px; text-align: center; font-size: 16px; line-height: 1.6; color: #3a1f0a; }
+
+    /* Boxed groups (Employee/profile, Leads, Franchise & E-store) */
+    .nx-blk { max-width: 1050px; margin: 50px auto 0; padding: 30px 26px; border-radius: 26px; }
+    .nx-blk.o { border: 2.5px solid var(--text-brown); }
+    .nx-blk.f { background: var(--soft); }
+    .nx-blk h3 { text-align: center; color: var(--brown-2); font-size: 22px; font-weight: 600; margin-bottom: 10px; }
+    .nx-blk p.d { text-align: center; font-size: 15px; color: #333; max-width: 820px; margin: 0 auto 24px; line-height: 1.6; }
+
+    /* Big screen + smaller screen beside it, with a caption (Employees / Profile) */
+    .nx-big { display: grid; grid-template-columns: 1.75fr 1fr; gap: 18px; align-items: start; }
+    .nx-cap { text-align: center; color: var(--brown-2); font-size: 18px; font-weight: 600; margin: 12px 0 24px; }
+    .nx-stack { display: flex; flex-direction: column; gap: 16px; }
+
+    /* Marketing: big screen | note + pop-ups */
+    .nx-mkt { display: grid; grid-template-columns: 1.75fr 1fr; gap: 26px; align-items: start; max-width: 1050px; margin: 50px auto 0; }
+    .nx-mkt .nx-note { margin-top: 0; }
+
+    /* Leads: one wide screen, then 2 per row */
+    .nx-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; margin-top: 18px; }
+    .nx-grid2 > :last-child:nth-child(odd) { grid-column: 1 / -1; max-width: calc(50% - 9px); margin: 0 auto; }  /* odd one out = centred */
+
+    /* Franchise / E-store / Products */
+    .nx-two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+    .nx-two + .nx-two { margin-top: 30px; }
+    .nx-two .nx-side h3 { margin-top: 10px; }
+
+    /* ---------- 10. Lightbox ---------- */
+    .lightbox { position: fixed; inset: 0; z-index: 100; padding: 30px; background: rgba(0,0,0,.88); display: none; align-items: center; justify-content: center; }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 10px; }
+    .lightbox .close { position: absolute; top: 20px; right: 28px; background: none; border: none; color: #fff; font-size: 44px; line-height: 1; cursor: pointer; }
+
+    /* ---------- 11. Footer ---------- */
+    footer { background: #000; color: #fff; padding: 16px 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+    footer .copy { font-size: 18px; }
+    footer .f-logo img { height: 100px; }
+    footer .social { display: flex; align-items: center; justify-content: flex-end; gap: 23px; }
+    footer .social span { font-size: 18px; font-weight: 500; margin-right: -8px; }
+    footer .social img { width: 50px; height: 50px; border-radius: 6px; transition: transform .25s; }
+    footer .social a:hover img { transform: translateY(-4px); }
+
+    /* ---------- 12. Responsive: tablet ---------- */
+    @media (max-width: 1100px) {
+      .nav-links a { padding: 14px 24px; font-size: 18px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-img { max-width: 520px; width: 100%; margin: 0 auto; }
+      .ov-row { grid-template-columns: 1fr; }
+      .soft-box { padding: 56px 30px 60px; }
+      .cards3 { grid-template-columns: 1fr; }
+      .process { grid-template-columns: repeat(3, 1fr); }
+      .step::after { display: none; }
+      .audience, .challenges { grid-template-columns: 1fr; }
+      .nx-pair, .nx-pair.r, .nx-big, .nx-mkt, .nx-two { grid-template-columns: 1fr; }
+      .nx-pair .nx-note { order: -1; }
+      .typo { grid-template-columns: 1fr; padding: 0; }
+      .sw { width: 130px; }
+      .g-in { padding: 50px 18px 24px; }
+      .gw.c5, .gw.c4 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ---------- 13. Responsive: mobile ---------- */
+    @media (max-width: 720px) {
+      .nav-wrap { padding: 20px 16px 0; }
+      .navbar { height: auto; padding: 14px 16px; flex-direction: column; gap: 12px; border-radius: 30px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .nav-links a { padding: 10px 18px; font-size: 16px; }
+
+      main { padding: 0 16px 60px; }
+      .page-title { margin-top: 44px; }
+      .page-title h1 { font-size: 34px; }
+      .overview { padding: 28px 22px; }
+      .sec-title { font-size: 30px; }
+      .sec-sub { font-size: 16px; }
+      section.block { margin-top: 80px; }
+
+      .wires { grid-template-columns: 1fr; gap: 30px; max-width: 280px; }
+      .arrow { display: none; }
+
+      .typo .fname { font-size: 64px; }
+      .typo .chars { font-size: 20px; }
+      .aa .A { font-size: 140px; }
+      .aa .a { font-size: 112px; }
+      .weights { gap: 16px; font-size: 15px; }
+      .swatches { flex-wrap: wrap; gap: 10px; margin-top: -80px; padding: 0; }
+      .sw { width: 30%; border-width: 6px; }
+      .ds-box { padding-bottom: 110px; }
+
+      .gallery-head { font-size: 22px; }
+      .gw.c5, .gw.c4, .gw.c2 { grid-template-columns: 1fr 1fr; }
+      .nx-grid2 > :last-child:nth-child(odd) { max-width: none; }
+
+      footer { grid-template-columns: 1fr; gap: 22px; text-align: center; padding: 20px 20px; }
+      footer .f-logo img { margin: 0 auto; }
+      footer .social { justify-content: center; flex-wrap: wrap; gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="ux-ui-design.html" class="active" aria-current="page">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero & overview ===== -->
+    <div class="page-title"><h1>NEXSTOC</h1></div>
+    <div class="hero">
+      <div class="hero-img zoom"><img src="Image/Nextoc/1.png" alt="NEXSTOC"></div>
+      <div class="overview">
+        <h2>Product Overview</h2>
+        <p>A centralized business management dashboard designed to help admins manage employees, leads, franchises, e-stores, products, marketing, meetings, and business operations from one platform.</p>
+        <div class="ov-row">
+          <fieldset class="fieldset">
+            <legend>Tools</legend>
+            <div class="tools"><img src="Image/Common/Photoshop.png" alt="Photoshop"><img src="Image/Common/Figma.png" alt="Figma"></div>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend>Role</legend>
+            <div class="val">UX/UI DESIGNER | DASHBOARD DESIGNER</div>
+          </fieldset>
+        </div>
+        <fieldset class="fieldset">
+          <legend>Focus</legend>
+          <div class="val">Dashboard Design | Data Management | User Flow | UX Architecture | Information Architecture | Admin Panel Design</div>
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- ===== Design process ===== -->
+    <section class="block">
+      <h2 class="sec-title">Design <span>Process</span></h2>
+      <p class="sec-sub w-820">Understanding the business operations and admin requirements helped shape a centralized dashboard that simplifies employee management, lead tracking, meetings, franchise operations, e-store management, product handling, and marketing activities.</p>
+      <div class="process">
+        <div class="step"><div class="ic">🔍</div><h4>Research &amp;<br>Discovery</h4></div>
+        <div class="step"><div class="ic">♞</div><h4>Product<br>Strategy</h4></div>
+        <div class="step"><div class="ic">👥</div><h4>User<br>Mapping</h4></div>
+        <div class="step"><div class="ic">🗂️</div><h4>UX<br>Architecture</h4></div>
+        <div class="step"><div class="ic">🖥️</div><h4>Design &amp;<br>Testing</h4></div>
+      </div>
+    </section>
+
+    <!-- ===== Target audience ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Target <span>Audience</span></h2>
+      <p class="sec-sub">The dashboard is designed for business teams and administrators managing employees, leads, meetings, franchises, e-stores, products, and marketing operations from one centralized platform.</p>
+      <div class="audience">
+        <div class="aud-donut"><span>Out of 100</span></div>
+        <div class="aud blue"><h4>Business Owners &amp; Managers</h4>Monitor business operations, manage teams, track leads, and oversee franchises, e-stores, and overall performance.</div>
+        <div class="aud orange"><h4>Operations &amp; Admin Teams</h4>Manage employee profiles, permissions, leads, meetings, product information, and day-to-day administrative activities.</div>
+        <div class="aud green"><h4>Sales &amp; Relationship Teams</h4>Handle leads, prospects, client communication, meetings, follow-ups, assignments, and lead conversion.</div>
+      </div>
+    </section>
+
+    <!-- ===== Challenges ===== -->
+    <section class="block">
+      <h2 class="sec-title">The <span>Challenges</span></h2>
+      <p class="sec-sub w-820">Identifying key workflow and usability challenges to create a centralized, efficient, and easy-to-manage financial dashboard for teams handling clients, banking information, tasks, documents, and communication.</p>
+      <div class="challenges">
+        <div class="ch ch-side"><h4>Keeping Financial<br>Tasks Organized</h4>Managing daily tasks, follow-ups, and deadlines can become difficult when information is spread across multiple tools. The dashboard needed to make priorities and pending work easy to track.</div>
+        <div class="ch-mid">
+          <div class="ch"><h4>Managing Multiple<br>Client Details</h4>Financial teams often handle client information across different records and activities. The challenge was bringing client details, banking information, and important updates into one organized workspace.</div>
+          <div class="ch"><h4>Handling Documents<br>Efficiently</h4>Financial operations involve multiple documents and records that need to be accessed and managed regularly. The challenge was creating a clear structure for finding, reviewing, and organizing important files.</div>
+        </div>
+        <div class="ch ch-side"><h4>Clear Communication<br>&amp; Team Coordination</h4>Teams need to stay aligned on client updates, tasks, and financial activities. The challenge was supporting smooth communication and coordination without making the dashboard feel overwhelming.</div>
+      </div>
+    </section>
+
+    <!-- ===== Mapping the experience ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Mapping <span class="alt">the Experience</span></h2>
+      <p class="sec-sub">The experience map connects client management, banking operations, task tracking, document handling, and team communication to create a seamless and efficient financial workflow.</p>
+      <div class="map-img zoom"><img src="Image/Nextoc/2.png" alt="Experience map"></div>
+    </section>
+
+    <!-- ===== Wireframes ===== -->
+    <section class="block">
+      <h2 class="sec-title">Building the <span>Digital Experience</span></h2>
+      <p class="sec-sub w-640">A centralized dashboard that gives users a quick overview of tasks, activity, upcoming work, team members, and important updates in one place.</p>
+      <div class="wires">
+        <div class="wire"><div class="shot zoom"><img src="Image/Nextoc/3.png" alt="Paper wireframe"></div><span>Paper wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/Nextoc/4.png" alt="Lo-fi wireframe"></div><span>Lo-fi wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/Nextoc/5.png" alt="Hi-fi wireframe"></div><span>Hi-fi wireframe</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Design system ===== -->
+    <section class="block">
+      <div class="soft-box ds-box">
+        <h2 class="sec-title">Design <span>System</span></h2>
+        <p class="sec-sub">Creating a consistent visual language across the dashboard through typography, colors, spacing, and reusable UI components to ensure clarity, consistency, and ease of use.</p>
+        <div class="typo">
+          <div>
+            <h5>Typography</h5>
+            <div class="fname">Outfit</div>
+            <div class="chars">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890</div>
+          </div>
+          <div class="aa-wrap">
+            <div class="aa"><span class="A">A</span><span class="a">a</span></div>
+            <div class="weights"><span>Regular</span><span>Medium</span><span>Semibold</span><span>Bold</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="swatches"><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span></div>
+    </section>
+
+    <!-- ===== UI design ===== -->
+    <section class="block">
+      <h2 class="sec-title">UI <span>Design</span></h2>
+      <p class="sec-sub w-820">A collection of the key financial management interfaces, showcasing the dashboard, client overview, banking information, task management, documents, communication, and record updates.</p>
+
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">Web Dashboard <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+
+          <!-- Login -->
+          <div class="nx-pair">
+            <div class="web zoom"><img src="Image/Nextoc/6.png" alt="Login" loading="lazy"></div>
+            <div class="nx-note">Simple and intuitive login interface designed for quick and secure access to the platform.</div>
+          </div>
+
+          <!-- Dashboard -->
+          <div class="nx-pair r">
+            <div class="nx-note">A centralized overview that gives users quick access to key metrics, client information, tasks, and daily financial activities.</div>
+            <!-- Phone + desktop dashboard side by side, like the design.
+                 To add the desktop version, remove the comment marks around the second line and put its file name in. -->
+            <div class="nx-dash">
+              <div class="web zoom phone"><img src="Image/Nextoc/7.png" alt="Dashboard – mobile" loading="lazy"></div>
+              <div class="web zoom desk"><img src="Image/Nextoc/8.png" alt="Dashboard – desktop" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- Employee / profile -->
+          <div class="nx-blk o">
+            <h3>Employee/Profile</h3>
+            <p class="d">A centralized interface for managing employee records, profiles, roles, and access privileges, making it easy to organize workforce information and control permissions from one place.</p>
+            <div class="nx-big">
+              <div class="web zoom"><img src="Image/Nextoc/9.png" alt="Employees list" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/Nextoc/10.png" alt="Employee pop-ups" loading="lazy"></div>
+            </div>
+            <div class="nx-cap">Employees</div>
+            <div class="nx-big">
+              <div class="web zoom"><img src="Image/Nextoc/11.png" alt="Profile list" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/Nextoc/11.png" alt="Profile pop-ups" loading="lazy"></div>
+            </div>
+            <div class="nx-cap">Profile</div>
+          </div>
+
+          <!-- Marketing -->
+          <div class="nx-mkt">
+            <div class="web zoom"><img src="Image/Nextoc/12.png" alt="Marketing" loading="lazy"></div>
+            <div class="nx-stack">
+              <div class="nx-note">A centralized marketing management interface designed to organize campaigns, content, testimonials, and marketing links while making it easy to create and manage promotional content from one place.</div>
+              <div class="web zoom"><img src="Image/Nextoc/13.png" alt="Marketing pop-up" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/Nextoc/14.png" alt="Add blog" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/Nextoc/20.png" alt="Marketing page" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- Leads -->
+          <div class="nx-blk f">
+            <h3>Leads Management</h3>
+            <p class="d">A centralized lead management interface designed to help teams organize leads, track prospects, manage meetings, assign leads, and monitor their status throughout the sales process.</p>
+            <div class="web zoom"><img src="Image/Nextoc/15.png" alt="Leads management" loading="lazy"></div>
+            <div class="nx-grid2">
+              <div class="web zoom"><img src="Image/Nextoc/16.png" alt="Leads management 2" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/Nextoc/17.png" alt="Leads management 3" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/Nextoc/18.png" alt="Leads management 4" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/Nextoc/19.png" alt="Leads management 5" loading="lazy"></div>
+            </div>
+          </div>
+
+          <!-- Franchise, E-store & Products -->
+          <div class="nx-blk">
+            <h3>Franchise Management</h3>
+            <p class="d">A centralized franchise management interface designed to help teams manage franchise records, review requests, create new franchises, and maintain essential business and registration details.</p>
+            <div class="nx-two">
+              <div class="web zoom"><img src="Image/Nextoc/21.png" alt="Franchise list" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/Nextoc/22.png" alt="Create franchise" loading="lazy"></div>
+            </div>
+            <div class="nx-two">
+              <div class="nx-stack">
+                <div class="web zoom"><img src="Image/Nextoc/23.png" alt="E-store list" loading="lazy"></div>
+                <div class="web zoom"><img src="Image/Nextoc/25.png" alt="Products management" loading="lazy"></div>
+              </div>
+              <div class="nx-stack nx-side">
+                <h3>E-Store Management</h3>
+                <p class="d">A centralized e-store management interface designed to help teams manage store records, review store requests, and create new e-stores while organizing essential business and registration details.</p>
+                <div class="web zoom"><img src="Image/Nextoc/24.png" alt="Create e-store" loading="lazy"></div>
+                <div class="web zoom"><img src="Image/Nextoc/26.png" alt="Products management 2" loading="lazy"></div>
+              </div>
+            </div>
+          </div>
+
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Usability testing ===== -->
+    <section class="block">
+      <h2 class="sec-title">Usability <span>Testing</span></h2>
+      <p class="sec-sub w-720">Evaluated key dashboard interactions to understand how easily users could manage employees, leads, franchises, e-stores, and marketing activities, helping identify usability improvements for a smoother experience.</p>
+      <div class="cards3">
+        <div><h4>Managing<br>Information</h4>Users could quickly access and organize employee, lead, franchise, and store records through clear navigation and structured data tables.</div>
+        <div><h4>Understanding<br>Operations</h4>The dashboard helped users monitor business information, manage records, and understand ongoing activities through organized views and relevant details.</div>
+        <div><h4>Taking Action</h4>Clear actions, filters, search, and management options gave users an efficient way to update records and complete daily administrative tasks.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="copy">© 2026 By Mariyam Nesha</div>
+    <a href="index.html" class="f-logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+    <div class="social">
+      <span>Follow :</span>
+      <a href="https://www.behance.net/mariyamnesha3" target="_blank" rel="noopener" aria-label="Behance"><img src="Image/Common/Behance.png" alt="Behance"></a>
+      <a href="https://dribbble.com/mary333333333" target="_blank" rel="noopener" aria-label="Dribbble"><img src="Image/Common/Dribbble.png" alt="Dribbble"></a>
+      <a href="mailto:mariyamnesha3@gmail.com" aria-label="Gmail"><img src="Image/Common/Gmail.png" alt="Gmail"></a>
+      <a href="https://www.linkedin.com/in/mariyam-nesha-05b04a190/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="Image/Common/LinkedIn.png" alt="LinkedIn"></a>
+    </div>
+  </footer>
+
+  <!-- ===== Lightbox (click an image to enlarge) ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </div>
+
+  <script>
+    /* ----- Collapsible galleries ----- */
+    function fit() {
+      document.querySelectorAll('.gallery-body').forEach(function (b) {
+        b.style.maxHeight = b.scrollHeight + 'px';
+      });
+    }
+
+    document.querySelectorAll('.gallery').forEach(function (g) {
+      var head = g.querySelector('.gallery-head');
+      head.addEventListener('click', function () {
+        fit();
+        var open = g.classList.toggle('open');
+        head.setAttribute('aria-expanded', open);
+      });
+    });
+
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    /* lazy images can change the height after loading – re-measure each time one loads */
+    document.querySelectorAll('.gallery img').forEach(function (img) {
+      img.addEventListener('load', fit);
+    });
+
+    /* ----- Lightbox ----- */
+    var lb = document.getElementById('lightbox');
+    var lbImg = lb.querySelector('img');
+
+    document.querySelectorAll('.zoom').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var img = el.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('show');
+      });
+    });
+
+    function closeLb() { lb.classList.remove('show'); }
+    lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  </script>
+</body>
+</html>

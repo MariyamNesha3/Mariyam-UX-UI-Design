@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DeepThought case study by Mariyam Nesha – EdTech website UX/UI design.">
+  <title>DeepThought | Mariyam Nesha</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Mariyam Nesha – DeepThought case study
+       ========================================================= */
+
+    /* ---------- 1. Variables & reset ---------- */
+    :root {
+      --orange: #F47B20;
+      --brown: #7A3E10;
+      --brown-2: #8C4A10;
+      --text-brown: #5A2A0A;
+      --soft: #FCE8DC;
+      --soft-2: #FDF2EA;
+      --dash: #D9B49B;
+      --dark: #161616;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- 2. Navbar ---------- */
+    .nav-wrap { padding: 40px 70px 0; }
+    .navbar {
+      max-width: 1300px; margin: 0 auto; height: 86px; padding: 0 8px 0 34px;
+      background: var(--dark); border-radius: 50px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar .logo img { height: 100px; }   /* same as the other pages (was 30px) */
+    .nav-links { display: flex; list-style: none; gap: 10px; }
+    .nav-links a {
+      display: block; color: #fff; font-size: 20px; padding: 18px 40px; border-radius: 40px;
+      transition: background .25s, color .25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { background: var(--orange); color: #fff; }
+
+    /* ---------- 3. Layout & section titles ---------- */
+    main { max-width: 1300px; margin: 0 auto; padding: 0 70px 100px; box-sizing: content-box; }
+    section.block { margin-top: 110px; position: relative; }
+    .soft-box { background: var(--soft); border-radius: 36px; padding: 70px 70px 80px; position: relative; }
+
+    .sec-title { text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -0.5px; }
+    .sec-title span { color: var(--orange); }
+    .sec-title span.alt { color: #C0601A; }
+    .sec-sub { text-align: center; font-size: 18px; line-height: 1.6; color: #333; max-width: 760px; margin: 18px auto 0; }
+    .sec-sub.w-820 { max-width: 820px; }
+    .sec-sub.w-720 { max-width: 720px; }
+    .sec-sub.w-640 { max-width: 640px; }
+
+    /* ---------- 4. Hero & overview ---------- */
+    .page-title { display: flex; align-items: center; justify-content: center; margin: 70px 0 44px; }
+    .page-title h1 { font-size: 52px; font-weight: 600; letter-spacing: -0.5px; }
+
+    .hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.58fr); gap: 48px; align-items: stretch; }
+
+    /* Photo with see-through white frame (same as Adhyayanam) */
+    .hero-img { position: relative; height: 100%; border-radius: 30px; overflow: hidden; background: #F1E6DD; box-shadow: 0 10px 30px rgba(0,0,0,.08); cursor: zoom-in; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-img::after { content: ""; position: absolute; inset: 0; border: 16px solid rgba(255,255,255,.35); border-radius: 30px; pointer-events: none; }
+
+    .overview { background: #F5E7DC; border-radius: 30px; padding: 44px 44px 40px; }
+    .overview h2 { color: var(--brown); font-size: 30px; font-weight: 600; margin-bottom: 14px; }
+    .overview > p { font-size: 18px; line-height: 1.6; color: #333; margin-bottom: 30px; }
+    .ov-row { display: grid; grid-template-columns: minmax(0,0.62fr) minmax(0,1fr); gap: 26px; margin-bottom: 26px; }
+
+    .fieldset { min-width: 0; border: 1.5px solid #E2C9B8; border-radius: 14px; padding: 0 22px 18px; position: relative; }
+    .fieldset legend { font-size: 22px; font-weight: 600; padding: 0 8px; margin-left: -8px; }
+    .fieldset .tools { display: flex; gap: 36px; padding: 8px 26px 0; }
+    .fieldset .tools img { width: 50px; height: 50px; border-radius: 10px; }
+    .fieldset .val { font-size: 17px; font-weight: 500; padding-top: 16px; line-height: 1.7; }
+
+    /* ---------- 5. Info cards (Challenges & Usability testing) ---------- */
+    .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 46px; }
+    .cards3 > div { background: var(--soft); border-radius: 22px; padding: 36px 34px; text-align: center; font-size: 17px; line-height: 1.65; color: #333; }
+    .cards3 h4 { color: var(--brown-2); font-size: 22px; font-weight: 600; line-height: 1.4; margin-bottom: 18px; }
+    .cards3.outline > div { background: #fff; border: 2px dashed var(--dash); }   /* Challenges version */
+
+    /* ---------- 6. Experience map ---------- */
+    .map-img { background: var(--soft-2); border-radius: 24px; margin-top: 44px; padding: 26px; cursor: zoom-in; }
+    .map-img img { width: 100%; height: auto; min-height: 200px; margin: 0 auto; object-fit: contain; }
+
+    /* ---------- 7. Wireframes ---------- */
+    .wires { display: grid; grid-template-columns: 1fr 70px 1fr 70px 1fr; align-items: center; max-width: 1050px; margin: 46px auto 0; }
+    .wire { text-align: center; }
+    /* whole wireframe shown as it is: no extra box, background or shadow */
+    .wire .shot { cursor: zoom-in; }
+    .wire .shot img { width: 100%; height: auto; }
+    .wire span { display: block; font-size: 18px; margin-top: 18px; }
+    .arrow { height: 2px; background: #C0753E; position: relative; margin: 0 10px; top: -22px; }
+    .arrow::after {
+      content: ""; position: absolute; right: -2px; top: -5px; width: 10px; height: 10px;
+      border-right: 2px solid #C0753E; border-top: 2px solid #C0753E; transform: rotate(45deg);
+    }
+
+    /* ---------- 8. Design system ---------- */
+    .ds-box { padding-bottom: 150px; }
+    .typo { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; margin-top: 50px; padding: 0 60px; }
+    .typo h5 { font-size: 22px; font-weight: 500; }
+    .typo .fname { font-size: 96px; font-weight: 500; line-height: 1.15; margin: 6px 0 14px; }
+    .typo .chars { font-weight: 300; font-size: 30px; line-height: 1.2; color: #8a8a8a; word-break: break-all; }
+
+    .aa-wrap { text-align: center; }
+    .aa {
+      display: inline-flex; align-items: flex-end; gap: 2px; line-height: .8;
+      padding: 18px 14px 10px; position: relative;
+      background-image:   /* dashed frame around "Aa" */
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px);
+      background-size: 100% 1.5px, 100% 1.5px, 1.5px 100%, 1.5px 100%;
+      background-position: 0 6px, 0 calc(100% - 4px), 6px 0, calc(100% - 6px) 0;
+      background-repeat: no-repeat;
+    }
+    .aa .A { font-size: 220px; font-weight: 700; color: #7E4A1E; }
+    .aa .a { font-size: 175px; font-weight: 600; color: transparent; -webkit-text-stroke: 3px #7E4A1E; }
+    .weights { display: flex; justify-content: center; gap: 34px; margin-top: 18px; font-size: 18px; }
+    .weights span:nth-child(1) { font-weight: 400; }
+    .weights span:nth-child(2) { font-weight: 500; }
+    .weights span:nth-child(3) { font-weight: 600; }
+    .weights span:nth-child(4) { font-weight: 700; }
+
+    .swatches { display: flex; justify-content: center; gap: 18px; margin-top: -110px; position: relative; z-index: 2; padding: 0 40px; }
+    .sw {
+      width: 170px; aspect-ratio: 1; border: 10px solid #fff; border-radius: 6px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12); transition: transform .3s;
+    }
+    /* DeepThought colour palette */
+    .sw:nth-child(1) { background: #0C52FF; transform: rotate(-14deg); }
+    .sw:nth-child(2) { background: #121212; transform: rotate(20deg) translateY(14px); }
+    .sw:nth-child(3) { background: #DCE6FF; transform: rotate(-8deg) translateY(6px); }
+    .sw:nth-child(4) { background: #E4E4E4; transform: rotate(24deg) translateY(30px); }
+    .sw:nth-child(5) { background: #525252; transform: rotate(-16deg) translateY(14px); }
+    .sw:hover { transform: rotate(0) scale(1.05); }
+
+    /* ---------- 9. UI gallery (collapsible) ---------- */
+    .gallery { margin-top: 56px; border: 1.5px solid #e6e6e6; border-radius: 28px; position: relative; }
+    .gallery:not(.open) { min-height: 40px; }
+    .gallery-head {
+      position: absolute; top: -22px; left: 26px; padding: 0 14px;
+      background: #fff; border: none; cursor: pointer;
+      font-size: 28px; font-weight: 500; color: #111;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .chev {
+      width: 13px; height: 13px; border-left: 3px solid #111; border-top: 3px solid #111;
+      transform: rotate(45deg) translate(3px, 3px); transition: transform .3s;
+    }
+    .gallery:not(.open) .chev { transform: rotate(225deg) translate(3px, 3px); }
+    .gallery-body { overflow: hidden; transition: max-height .45s ease; }
+    .gallery:not(.open) .gallery-body { max-height: 0 !important; }
+    .g-in { padding: 56px 40px 40px; }
+
+    /* Website screenshot – always shown in full, nothing cropped */
+    .web { border-radius: 8px; overflow: hidden; background: #fff; border: 1.5px solid #D8DCE3; box-shadow: 0 4px 14px rgba(0,0,0,.06); cursor: zoom-in; }
+    .web img { width: 100%; height: auto; }
+
+    /* Notes */
+    .n { position: relative; background: var(--soft); border-radius: 24px; padding: 18px 20px; text-align: center; font-size: 15px; font-weight: 500; line-height: 1.55; color: var(--text-brown); }
+    .n.o { background: #fff; border: 2px solid var(--text-brown); }
+    .n h4 { color: var(--brown-2); font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+    .n ul { text-align: left; padding-left: 18px; }
+    .n li + li { margin-top: 8px; }
+
+    /* Homepage with notes around it and curved arrows */
+    .annot { position: relative; max-width: 1000px; margin: 20px auto 0; }
+    .annot .web { width: 34%; margin: 0 auto; }
+    .annot .n { position: absolute; width: 27%; }
+    .annot .n.l { left: 2%; }
+    .annot .n.r { right: 2%; }
+    .annot .n1 { top: 8%; }
+    .annot .n2 { top: 8%; }
+    .annot .n3 { top: 70%; }
+    .annot .n4 { top: 70%; }
+
+    /* Curved dashed arrow */
+    .curve { position: absolute; width: 64px; height: 56px; overflow: visible; }
+    .curve path { fill: none; stroke: #B4682E; stroke-width: 2; stroke-dasharray: 5 4; stroke-linecap: round; }
+    .n.l .curve { left: calc(100% - 6px); }
+    .n.r .curve { right: calc(100% - 6px); transform: scaleX(-1); }   /* mirror for right-side notes */
+    .curve.up   { top: -34px; }
+    .curve.down { bottom: -30px; }
+
+    /* Blog: two pages + note */
+    .dt-blog { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 26px; align-items: center; margin-top: 70px; }
+
+    /* Careers / About / other pages (layout from your design) */
+    .dt-grid { display: grid; grid-template-columns: 1fr 0.9fr 1fr; gap: 20px; align-items: start; margin-top: 70px; }
+    .dt-grid .careers { grid-column: 1; grid-row: 1; position: relative; z-index: 1; }   /* screenshots sit on top of the notes */
+    .dt-grid .about   { grid-column: 3; grid-row: 1 / span 2; position: relative; z-index: 1; }
+    /* Notes: wider than their column and tucked under the screenshots, like the design */
+    .dt-grid .stack   { grid-column: 2; grid-row: 1; align-self: start; margin-top: 6%; display: flex; flex-direction: column; gap: 34px; position: relative; z-index: 0; }
+    .dt-grid .stack .n { font-size: 16px; padding: 24px 26px; }
+    .dt-grid .stack .n:first-child { margin-left: -60px; margin-right: -10px; padding-left: 70px; }   /* slides under Careers */
+    .dt-grid .stack .n:last-child  { margin-left: 10px;  margin-right: -40px; padding-right: 50px; } /* slides under About */
+    .dt-grid .menus   { grid-column: 1 / span 2; grid-row: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+    .dt-grid .pages   { grid-column: 1 / -1; grid-row: 3; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
+
+    /* ---------- 10. Lightbox ---------- */
+    .lightbox { position: fixed; inset: 0; z-index: 100; padding: 30px; background: rgba(0,0,0,.88); display: none; align-items: center; justify-content: center; }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 10px; }
+    .lightbox .close { position: absolute; top: 20px; right: 28px; background: none; border: none; color: #fff; font-size: 44px; line-height: 1; cursor: pointer; }
+
+    /* ---------- 11. Footer ---------- */
+    footer { background: #000; color: #fff; padding: 16px 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+    footer .copy { font-size: 18px; }
+    footer .f-logo img { height: 100px; }
+    footer .social { display: flex; align-items: center; justify-content: flex-end; gap: 23px; }
+    footer .social span { font-size: 18px; font-weight: 500; margin-right: -8px; }
+    footer .social img { width: 50px; height: 50px; border-radius: 6px; transition: transform .25s; }
+    footer .social a:hover img { transform: translateY(-4px); }
+
+    /* ---------- 12. Responsive: tablet ---------- */
+    @media (max-width: 1100px) {
+      .nav-links a { padding: 14px 24px; font-size: 18px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-img { max-width: 520px; width: 100%; margin: 0 auto; }
+      .ov-row { grid-template-columns: 1fr; }
+      .soft-box { padding: 56px 30px 60px; }
+      .cards3 { grid-template-columns: 1fr; }
+      .typo { grid-template-columns: 1fr; padding: 0; }
+      .sw { width: 130px; }
+      .g-in { padding: 50px 18px 24px; }
+
+      /* notes go under the homepage, arrows hidden */
+      .annot { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .annot .web { grid-column: 1 / -1; width: 100%; max-width: 320px; margin-bottom: 10px; }
+      .annot .n { position: static; width: auto; }
+      .curve { display: none; }
+
+      .dt-blog { grid-template-columns: 1fr 1fr; }
+      .dt-blog .n { grid-column: 1 / -1; order: -1; }
+
+      .dt-grid { grid-template-columns: 1fr 1fr; }
+      .dt-grid .stack   { grid-column: 1 / -1; grid-row: 1; flex-direction: row; gap: 16px; }
+      .dt-grid .stack { margin-top: 0; }
+      .dt-grid .stack .n { flex: 1; margin: 0 !important; padding: 18px 20px !important; }
+      .dt-grid .careers { grid-column: 1; grid-row: 2; }
+      .dt-grid .about   { grid-column: 2; grid-row: 2; }
+      .dt-grid .menus   { grid-column: 1 / -1; grid-row: 3; }
+      .dt-grid .pages   { grid-column: 1 / -1; grid-row: 4; grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ---------- 13. Responsive: mobile ---------- */
+    @media (max-width: 720px) {
+      .nav-wrap { padding: 20px 16px 0; }
+      .navbar { height: auto; padding: 14px 16px; flex-direction: column; gap: 12px; border-radius: 30px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .nav-links a { padding: 10px 18px; font-size: 16px; }
+
+      main { padding: 0 16px 60px; }
+      .page-title { margin-top: 44px; }
+      .page-title h1 { font-size: 34px; }
+      .overview { padding: 28px 22px; }
+      .sec-title { font-size: 30px; }
+      .sec-sub { font-size: 16px; }
+      section.block { margin-top: 80px; }
+
+      .wires { grid-template-columns: 1fr; gap: 30px; max-width: 280px; }
+      .arrow { display: none; }
+
+      .typo .fname { font-size: 64px; }
+      .typo .chars { font-size: 20px; }
+      .aa .A { font-size: 140px; }
+      .aa .a { font-size: 112px; }
+      .weights { gap: 16px; font-size: 15px; }
+      .swatches { flex-wrap: wrap; gap: 10px; margin-top: -80px; padding: 0; }
+      .sw { width: 30%; border-width: 6px; }
+      .ds-box { padding-bottom: 110px; }
+
+      .gallery-head { font-size: 22px; }
+      .annot { grid-template-columns: 1fr; }
+      .dt-grid .stack { flex-direction: column; }
+
+      footer { grid-template-columns: 1fr; gap: 22px; text-align: center; padding: 20px 20px; }
+      footer .f-logo img { margin: 0 auto; }
+      footer .social { justify-content: center; flex-wrap: wrap; gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="ux-ui-design.html" class="active" aria-current="page">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero & overview ===== -->
+    <div class="page-title"><h1>DeepThought</h1></div>
+    <div class="hero">
+      <div class="hero-img zoom"><img src="Image/DeepThorught/1.png" alt="DeepThought"></div>
+      <div class="overview">
+        <h2>Product Overview</h2>
+        <p>DeepThought EduTech is an EdTech and DeepTech PaaS startup focused on transforming traditional education through research-driven learning and technology.</p>
+        <div class="ov-row">
+          <fieldset class="fieldset">
+            <legend>Tools</legend>
+            <div class="tools"><img src="Image/Common/Photoshop.png" alt="Photoshop"><img src="Image/Common/Figma.png" alt="Figma"></div>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend>Role</legend>
+            <div class="val">UX/UI DESIGNER | WEBSITE DESIGNER</div>
+          </fieldset>
+        </div>
+        <fieldset class="fieldset">
+          <legend>Focus</legend>
+          <div class="val">UX Architecture | User Flow | Website Design | User Experience | Interactive Design</div>
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- ===== Challenges ===== -->
+    <section class="block">
+      <h2 class="sec-title">The <span>Challenges</span></h2>
+      <p class="sec-sub w-820">Identifying key information and usability challenges to create a clear, engaging website experience that helps users understand DeepThought’s purpose, products, and educational ecosystem.</p>
+      <div class="cards3 outline">
+        <div><h4>Clear Information,<br>Clear Navigation</h4>Users need to easily find information about the company, its products, approach, and opportunities. The challenge was to create a logical information structure that reduces confusion and makes important content easy to discover.</div>
+        <div><h4>Making a Complex Ecosystem<br>Easy to Understand</h4>DeepThought offers multiple products, programs, and solutions. The challenge was to organize this information clearly so users could quickly understand what DeepThought does and how its different offerings connect.</div>
+        <div><h4>Balancing Technology<br>&amp; Education</h4>DeepThought combines education, research, psychology, and technology. The website needed to communicate this unique positioning without overwhelming users with technical or educational jargon.</div>
+      </div>
+    </section>
+
+    <!-- ===== Mapping the experience ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Mapping <span class="alt">the Experience</span></h2>
+      <p class="sec-sub">Mapping the user’s journey through the website to create a clear and intuitive navigation experience.</p>
+      <div class="map-img zoom"><img src="Image/DeepThorught/2.png" alt="Website map"></div>
+    </section>
+
+    <!-- ===== Wireframes ===== -->
+    <section class="block">
+      <h2 class="sec-title">Building the <span>Digital Experience</span></h2>
+      <p class="sec-sub w-640">Create a clear and engaging website experience that makes DeepThought’s programmes, impact, learning approach, and resources easy to explore and understand.</p>
+      <div class="wires">
+        <div class="wire"><div class="shot zoom"><img src="Image/DeepThorught/3.png" alt="Paper wireframe"></div><span>Paper wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/DeepThorught/4.png" alt="Lo-fi wireframe"></div><span>Lo-fi wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/DeepThorught/5.png" alt="Hi-fi wireframe"></div><span>Hi-fi wireframe</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Design system ===== -->
+    <section class="block">
+      <div class="soft-box ds-box">
+        <h2 class="sec-title">Design <span>System</span></h2>
+        <p class="sec-sub">Establishing a consistent visual language through typography, colors, and reusable components to create a clear, accessible, and cohesive website experience.</p>
+        <div class="typo">
+          <div>
+            <h5>Typography</h5>
+            <div class="fname">Poppins</div>
+            <div class="chars">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890</div>
+          </div>
+          <div class="aa-wrap">
+            <div class="aa"><span class="A">A</span><span class="a">a</span></div>
+            <div class="weights"><span>Regular</span><span>Medium</span><span>Semibold</span><span>Bold</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="swatches"><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span></div>
+    </section>
+
+    <!-- ===== UI design ===== -->
+    <section class="block">
+      <h2 class="sec-title">UI <span>Design</span></h2>
+      <p class="sec-sub w-820">A collection of the main website interfaces, showcasing the homepage, product and solution pages, packages, about us, and enquiry experience.</p>
+
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">Website <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+
+          <!-- Homepage with notes (arrow shapes: "up" curves upward, "down" curves downward) -->
+          <div class="annot">
+            <div class="web zoom"><img src="Image/DeepThorught/6.png" alt="Homepage" loading="lazy"></div>
+
+            <div class="n l n1">The hero section immediately communicates DeepThought’s purpose and positions its approach toward building a deep-tech future.
+              <svg class="curve down" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 2 C 4 36, 30 50, 40 30 S 52 26, 60 48"/><path d="M53 47 L60 48 L58 41"/></svg>
+            </div>
+
+            <div class="n o r n2">The “Who we are?” and “What do we do?” sections introduce the organisation, its philosophy, and its learning approach.
+              <svg class="curve down" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 2 C 4 36, 30 50, 40 30 S 52 26, 60 48"/><path d="M53 47 L60 48 L58 41"/></svg>
+            </div>
+
+            <div class="n l n3">The enquiry form provides a direct way for visitors to share their details, select their area of interest, and connect with the DeepThought team.
+              <svg class="curve up" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 54 C 4 20, 30 6, 40 26 S 52 30, 60 8"/><path d="M53 9 L60 8 L58 15"/></svg>
+            </div>
+
+            <div class="n r n4">The Media Presence section builds credibility by highlighting DeepThought’s presence across recognised publications.
+              <svg class="curve up" viewBox="0 0 64 56" aria-hidden="true"><path d="M2 54 C 4 20, 30 6, 40 26 S 52 30, 60 8"/><path d="M53 9 L60 8 L58 15"/></svg>
+            </div>
+          </div>
+
+          <!-- Blog -->
+          <div class="dt-blog">
+            <div class="web zoom"><img src="Image/DeepThorught/7.png" alt="Blog listing" loading="lazy"></div>
+            <div class="web zoom"><img src="Image/DeepThorught/8.png" alt="Blog article" loading="lazy"></div>
+            <div class="n">
+              <h4>Blog</h4>
+              <ul>
+                <li>The blog listing makes it easy for users to discover articles through categories, search, and organised content cards.</li>
+                <li>The article page provides a focused reading experience with detailed content, resources, sharing options, and related articles.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Careers, About us and other pages -->
+          <div class="dt-grid">
+            <div class="web careers zoom"><img src="Image/DeepThorught/9.png" alt="Careers" loading="lazy"></div>
+
+            <div class="stack">
+              <div class="n">The Careers page showcases current job openings with role details and location, helping candidates explore available opportunities.</div>
+              <div class="n o">The About Us page communicates DeepThought’s mission, vision, core values, and leadership team to build trust and explain the organisation’s purpose.</div>
+            </div>
+
+            <div class="web about zoom"><img src="Image/DeepThorught/10.png" alt="About us" loading="lazy"></div>
+
+            <div class="menus">
+              <div class="web zoom"><img src="Image/DeepThorught/11.png" alt="Other page 1" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/DeepThorught/12.png" alt="Other page 2" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/DeepThorught/13.png" alt="Other page 3" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/DeepThorught/14.png" alt="Other page 4" loading="lazy"></div>
+            </div>
+
+            <div class="pages">
+              <div class="web zoom"><img src="Image/DeepThorught/15.png" alt="Other page 5" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/DeepThorught/16.png" alt="Other page 6" loading="lazy"></div>
+              <div class="web zoom"><img src="Image/DeepThorught/17.png" alt="Other page 7" loading="lazy"></div>
+            </div>
+          </div>
+
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Usability testing ===== -->
+    <section class="block">
+      <h2 class="sec-title">Usability <span>Testing</span></h2>
+      <p class="sec-sub w-720">Evaluated key website interactions to understand how easily users could explore DeepThought’s programmes, impact, content, and enquiry options, helping identify usability improvements for a smoother experience.</p>
+      <div class="cards3">
+        <div><h4>Finding the Right<br>Information</h4>Users could quickly locate programmes, impact stories, blogs, and other important sections through clear navigation.</div>
+        <div><h4>Understanding<br>DeepThought</h4>The content structure helped users understand DeepThought’s purpose, approach, programmes, and impact without excessive searching.</div>
+        <div><h4>Taking the Next<br>Step</h4>Clear CTAs and the enquiry form gave users an obvious path to connect, enquire, or explore further.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="copy">© 2026 By Mariyam Nesha</div>
+    <a href="index.html" class="f-logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+    <div class="social">
+      <span>Follow :</span>
+      <a href="https://www.behance.net/mariyamnesha3" target="_blank" rel="noopener" aria-label="Behance"><img src="Image/Common/Behance.png" alt="Behance"></a>
+      <a href="https://dribbble.com/mary333333333" target="_blank" rel="noopener" aria-label="Dribbble"><img src="Image/Common/Dribbble.png" alt="Dribbble"></a>
+      <a href="mailto:mariyamnesha3@gmail.com" aria-label="Gmail"><img src="Image/Common/Gmail.png" alt="Gmail"></a>
+      <a href="https://www.linkedin.com/in/mariyam-nesha-05b04a190/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="Image/Common/LinkedIn.png" alt="LinkedIn"></a>
+    </div>
+  </footer>
+
+  <!-- ===== Lightbox (click an image to enlarge) ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </div>
+
+  <script>
+    /* ----- Collapsible gallery ----- */
+    function fit() {
+      document.querySelectorAll('.gallery-body').forEach(function (b) {
+        b.style.maxHeight = b.scrollHeight + 'px';
+      });
+    }
+
+    document.querySelectorAll('.gallery').forEach(function (g) {
+      var head = g.querySelector('.gallery-head');
+      head.addEventListener('click', function () {
+        fit();
+        var open = g.classList.toggle('open');
+        head.setAttribute('aria-expanded', open);
+      });
+    });
+
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    /* lazy images can change the height after loading – re-measure each time one loads */
+    document.querySelectorAll('.gallery img').forEach(function (img) {
+      img.addEventListener('load', fit);
+    });
+
+    /* ----- Lightbox ----- */
+    var lb = document.getElementById('lightbox');
+    var lbImg = lb.querySelector('img');
+
+    document.querySelectorAll('.zoom').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var img = el.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('show');
+      });
+    });
+
+    function closeLb() { lb.classList.remove('show'); }
+    lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  </script>
+</body>
+</html>

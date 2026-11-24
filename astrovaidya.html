@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AstroVaidya case study by Mariyam Nesha – astrology consultation app UX/UI design: user app, astrologer app and admin dashboard.">
+  <title>AstroVaidya | Mariyam Nesha</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Mariyam Nesha – AstroVaidya case study
+       ========================================================= */
+
+    /* ---------- 1. Variables & reset ---------- */
+    :root {
+      --orange: #F47B20;
+      --brown: #7A3E10;
+      --brown-2: #8C4A10;
+      --text-brown: #5A2A0A;
+      --soft: #FCE8DC;
+      --soft-2: #FDF2EA;
+      --label: #F9CDAE;
+      --dash: #D9B49B;
+      --dark: #161616;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- 2. Navbar ---------- */
+    .nav-wrap { padding: 40px 70px 0; }
+    .navbar {
+      max-width: 1300px; margin: 0 auto; height: 86px; padding: 0 8px 0 34px;
+      background: var(--dark); border-radius: 50px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar .logo img { height: 100px; }   /* same as the other pages (was 30px) */
+    .nav-links { display: flex; list-style: none; gap: 10px; }
+    .nav-links a {
+      display: block; color: #fff; font-size: 20px; padding: 18px 40px; border-radius: 40px;
+      transition: background .25s, color .25s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { background: var(--orange); color: #fff; }
+
+    /* ---------- 3. Layout & section titles ---------- */
+    main { max-width: 1300px; margin: 0 auto; padding: 0 70px 100px; box-sizing: content-box; }
+    section.block { margin-top: 110px; position: relative; }
+    .soft-box { background: var(--soft); border-radius: 36px; padding: 70px 70px 80px; position: relative; }
+
+    .sec-title { text-align: center; font-size: 40px; font-weight: 600; letter-spacing: -0.5px; }
+    .sec-title span { color: var(--orange); }
+    .sec-title span.alt { color: #C0601A; }
+    .sec-sub { text-align: center; font-size: 18px; line-height: 1.6; color: #333; max-width: 760px; margin: 18px auto 0; }
+    .sec-sub.w-860 { max-width: 860px; }
+    .sec-sub.w-820 { max-width: 820px; }
+    .sec-sub.w-780 { max-width: 780px; }
+    .sec-sub.w-720 { max-width: 720px; }
+    .sec-sub.w-640 { max-width: 640px; }
+    .sec-sub.w-560 { max-width: 560px; }
+
+    /* ---------- 4. Hero & overview ---------- */
+    .page-title { display: flex; align-items: center; justify-content: center; margin: 70px 0 44px; }
+    .page-title h1 { font-size: 52px; font-weight: 600; letter-spacing: -0.5px; }
+
+    .hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.65fr); gap: 40px; align-items: stretch; }
+    /* Hero image: same height as the overview box, with a frosted-glass frame (like the Rydio page) */
+    .hero-img {
+      position: relative; border-radius: 26px; overflow: hidden; background: #F1E6DD;
+      min-height: 420px; box-shadow: 0 10px 30px rgba(0,0,0,.10); cursor: zoom-in;
+    }
+    .hero-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-img::after {
+      content: ""; position: absolute; inset: 16px; border-radius: 16px; pointer-events: none;
+      border: 1.5px solid rgba(255,255,255,.6);
+      box-shadow: 0 0 0 40px rgba(255,255,255,.28);
+    }
+
+    .overview { background: var(--soft); border-radius: 26px; padding: 44px 44px 40px; }
+    .overview h2 { color: var(--brown); font-size: 30px; font-weight: 600; margin-bottom: 14px; }
+    .overview > p { font-size: 18px; line-height: 1.6; color: #333; margin-bottom: 30px; }
+    .ov-row { display: grid; grid-template-columns: minmax(0,0.62fr) minmax(0,1fr); gap: 26px; margin-bottom: 26px; }
+
+    .fieldset { min-width: 0; border: 1.5px solid #E2C9B8; border-radius: 14px; padding: 0 22px 18px; position: relative; }
+    .fieldset legend { font-size: 22px; font-weight: 600; padding: 0 8px; margin-left: -8px; }
+    .fieldset .tools { display: flex; gap: 36px; padding: 8px 26px 0; }
+    .fieldset .tools img { width: 50px; height: 50px; border-radius: 10px; }
+    .fieldset .val { font-size: 17px; font-weight: 500; padding-top: 16px; line-height: 1.7; }
+
+    /* ---------- 5. Design process ---------- */
+    .process { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; max-width: 1150px; margin: 50px auto 0; position: relative; }
+    .step {
+      --c: #EF6C98; --bg: #FDE3EE;
+      position: relative; padding: 26px 16px 28px; text-align: center;
+      border: 2px solid var(--c); border-radius: 30px;
+      background: linear-gradient(180deg, var(--bg), #fff 120%);
+      box-shadow: 0 8px 20px rgba(0,0,0,.04);
+    }
+    .step:nth-child(2), .step:nth-child(4) { --c: #F2853A; --bg: #FDE6D6; }
+    .step:nth-child(3) { --c: #F4C23A; --bg: #FFF4D4; }
+    .step .ic {
+      width: 92px; height: 92px; border-radius: 50%; margin: 0 auto 18px;
+      background: rgba(255,255,255,.75); box-shadow: 0 6px 16px rgba(0,0,0,.06);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step .ic svg { width: 46px; height: 46px; }
+    .step h4 { font-size: 20px; font-weight: 600; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 2px dotted var(--c); }
+    .step p { font-size: 15px; font-weight: 500; line-height: 1.45; color: #222; }
+    /* connector line + dots between steps */
+    .step:not(:last-child)::after { content: ""; position: absolute; top: 46%; right: -42px; width: 42px; height: 2px; background: var(--c); }
+    .step:not(:last-child)::before {
+      content: ""; position: absolute; top: calc(46% - 5px); right: -10px; z-index: 1;
+      width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: -20px 0 0 var(--c);
+    }
+
+    /* ---------- 6. Quantitative research (donut charts) ---------- */
+    .charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1000px; margin: 46px auto 0; }
+    .chart {
+      --c: #3B8CE8; padding: 18px 20px 22px; border-radius: 14px;
+      border: 2px dashed color-mix(in srgb, var(--c) 45%, white);
+      background: color-mix(in srgb, var(--c) 4%, white);
+    }
+    .chart h4 { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 600; margin-bottom: 14px; }
+    .chart h4 i {
+      font-style: normal; width: 30px; height: 30px; border-radius: 8px; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: color-mix(in srgb, var(--c) 15%, white);
+    }
+    .chart .body { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; }
+    .donut { width: 120px; aspect-ratio: 1; border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; }
+    .donut::before { content: ""; position: absolute; inset: 26px; background: #fff; border-radius: 50%; }
+    .donut span { position: relative; font-size: 28px; }
+    .legend2 { list-style: none; font-size: 13px; color: #333; display: flex; flex-direction: column; gap: 8px; }
+    .legend2 li { display: grid; grid-template-columns: 12px 1fr auto; gap: 8px; align-items: center; line-height: 1.3; }
+    .legend2 li::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--d); }
+    .legend2 b { font-weight: 600; }
+
+    /* ---------- 7. Competitor analysis ---------- */
+    .comp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 22px; max-width: 1100px; margin: 46px auto 0; }
+    .comp .brand { border-radius: 10px; overflow: hidden; aspect-ratio: 2.5 / 1; background: #fff; border: 3px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,.08); }
+    .comp .brand img { width: 100%; height: 100%; object-fit: cover; }
+    .comp .cell {
+      background: #fff; border-radius: 10px; min-height: 64px; padding: 10px 16px;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      font-size: 16px; font-weight: 500; line-height: 1.35; color: #222; box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    }
+    .comp .cell.head { background: var(--label); border: 3px solid #fff; }
+
+    /* ---------- 8. User persona ---------- */
+    .persona { display: grid; grid-template-columns: 0.75fr 1fr; gap: 22px; max-width: 1100px; margin: 46px auto 0; }
+    .p-col { display: flex; flex-direction: column; gap: 18px; }
+    .p-card { background: var(--soft); border-radius: 22px; padding: 28px 32px; }
+    .p-card h5 { color: #666; font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+    .p-card p, .p-card li { color: var(--text-brown); font-size: 17px; line-height: 1.6; font-weight: 500; }
+    .p-card ul { padding-left: 22px; }
+    .avatar { width: 130px; height: 130px; border-radius: 50%; overflow: hidden; margin: 0 auto 16px; background: #eadbd0; cursor: zoom-in; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .p-name { text-align: center; color: #B5642A; font-size: 24px; font-weight: 600; margin-bottom: 18px; }
+    .facts { display: grid; grid-template-columns: auto 1fr; gap: 12px 40px; font-size: 18px; }
+    .facts dt { color: #777; font-weight: 500; }
+    .facts dd { color: var(--text-brown); font-weight: 600; }
+    .quote { position: relative; padding: 0 20px 22px; font-size: 17px; line-height: 1.6; text-align: center; color: var(--text-brown); font-weight: 500; }
+    .quote::before { content: "“"; position: absolute; left: -6px; top: -16px; font-size: 54px; font-weight: 700; color: #222; }
+    .quote::after  { content: "”"; position: absolute; right: 6px; bottom: -34px; font-size: 54px; font-weight: 700; color: #222; }
+    .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+    .chips span { background: #fff; border-radius: 30px; padding: 8px 22px; font-size: 16px; font-weight: 500; color: var(--text-brown); }
+
+    /* ---------- 9. Storyboard ---------- */
+    .storyboard { max-width: 900px; min-height: 300px; margin: 40px auto 0; border-radius: 6px; overflow: hidden; background: #F2F0EC; cursor: zoom-in; }
+    .storyboard img { width: 100%; height: auto; }
+
+    /* ---------- 10. Empathy map ---------- */
+    .empathy { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; max-width: 1150px; margin: 50px auto 0; }
+    .emp-col { display: flex; flex-direction: column; gap: 22px; }
+    .emp-col.side { padding-top: 54px; }
+    .emp-col.mid  { padding-top: 26px; }
+    .emp { border: 2px dashed var(--dash); border-radius: 22px; padding: 30px 34px 32px; }
+    .emp h4 { color: var(--brown); font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 16px; }
+    .emp h4 .em { font-size: 22px; margin-right: 6px; }
+    .emp ul { padding-left: 20px; }
+    .emp li { font-size: 16px; line-height: 1.75; color: #333; }
+
+    /* ---------- 11. Experience mapping ---------- */
+    .map-list { display: flex; flex-direction: column; gap: 26px; margin-top: 40px; }
+    .map-img { background: var(--soft-2); border-radius: 24px; padding: 26px; cursor: zoom-in; }
+    .map-img img { width: 100%; height: auto; min-height: 200px; margin: 0 auto; object-fit: contain; }
+    .map-cap { text-align: center; font-weight: 500; margin-top: 10px; }
+
+    /* ---------- 12. Wireframes ---------- */
+    .wires { display: grid; grid-template-columns: 1fr 70px 1fr 70px 1fr; align-items: center; max-width: 1050px; margin: 46px auto 0; }
+    .wire { text-align: center; }
+    /* whole wireframe shown as it is: no extra box, background or shadow
+       (your images already have their own rounded corners, frame and shadow) */
+    .wire .shot { cursor: zoom-in; }
+    .wire .shot img { width: 100%; height: auto; }
+    .wire span { display: block; font-size: 18px; margin-top: 18px; }
+    .arrow { height: 2px; background: #C0753E; position: relative; margin: 0 10px; top: -22px; }
+    .arrow::after {
+      content: ""; position: absolute; right: -2px; top: -5px; width: 10px; height: 10px;
+      border-right: 2px solid #C0753E; border-top: 2px solid #C0753E; transform: rotate(45deg);
+    }
+
+    /* ---------- 13. Design system ---------- */
+    .ds-box { padding-bottom: 150px; }
+    .typo { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; margin-top: 50px; padding: 0 60px; }
+    .typo h5 { font-size: 22px; font-weight: 500; }
+    .typo .fname { font-size: 96px; font-weight: 500; line-height: 1.15; margin: 6px 0 14px; }
+    .typo .chars { font-weight: 300; font-size: 30px; line-height: 1.2; color: #8a8a8a; word-break: break-all; }
+
+    .aa-wrap { text-align: center; }
+    .aa {
+      display: inline-flex; align-items: flex-end; gap: 2px; line-height: .8;
+      padding: 18px 14px 10px; position: relative;
+      background-image:   /* dashed frame around "Aa" */
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(90deg, #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px),
+        repeating-linear-gradient(0deg,  #999 0 8px, transparent 8px 16px);
+      background-size: 100% 1.5px, 100% 1.5px, 1.5px 100%, 1.5px 100%;
+      background-position: 0 6px, 0 calc(100% - 4px), 6px 0, calc(100% - 6px) 0;
+      background-repeat: no-repeat;
+    }
+    .aa .A { font-size: 220px; font-weight: 700; color: #7E4A1E; }
+    .aa .a { font-size: 175px; font-weight: 600; color: transparent; -webkit-text-stroke: 3px #7E4A1E; }
+    .weights { display: flex; justify-content: center; gap: 34px; margin-top: 18px; font-size: 18px; }
+    .weights span:nth-child(1) { font-weight: 400; }
+    .weights span:nth-child(2) { font-weight: 500; }
+    .weights span:nth-child(3) { font-weight: 600; }
+    .weights span:nth-child(4) { font-weight: 700; }
+
+    .swatches { display: flex; justify-content: center; gap: 18px; margin-top: -110px; position: relative; z-index: 2; padding: 0 40px; }
+    .sw {
+      width: 170px; aspect-ratio: 1; border: 10px solid #fff; border-radius: 6px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12); transition: transform .3s;
+    }
+    /* AstroVaidya colour palette */
+    .sw:nth-child(1) { background: #FF9934; transform: rotate(-14deg); }
+    .sw:nth-child(2) { background: #FFF8DE; transform: rotate(20deg) translateY(14px); }
+    .sw:nth-child(3) { background: #171717; transform: rotate(-8deg) translateY(6px); }
+    .sw:nth-child(4) { background: #E60000; transform: rotate(24deg) translateY(30px); }
+    .sw:nth-child(5) { background: #3BD855; transform: rotate(-16deg) translateY(14px); }
+    .sw:hover { transform: rotate(0) scale(1.05); }
+
+    /* ---------- 14. UI galleries (collapsible) ---------- */
+    .gallery { margin-top: 56px; border: 1.5px solid #e6e6e6; border-radius: 28px; position: relative; }
+    .gallery:not(.open) { min-height: 40px; }
+    .gallery-head {
+      position: absolute; top: -22px; left: 26px; padding: 0 14px;
+      background: #fff; border: none; cursor: pointer;
+      font-size: 28px; font-weight: 500; color: #111;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .chev {
+      width: 13px; height: 13px; border-left: 3px solid #111; border-top: 3px solid #111;
+      transform: rotate(45deg) translate(3px, 3px); transition: transform .3s;
+    }
+    .gallery:not(.open) .chev { transform: rotate(225deg) translate(3px, 3px); }
+    .gallery-body { overflow: hidden; transition: max-height .45s ease; }
+    .gallery:not(.open) .gallery-body { max-height: 0 !important; }
+    .g-in { padding: 56px 40px 40px; }
+
+    /* Phone screens (user app & astrologer app) */
+    .grid5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .ad-ph { border-radius: 10px; overflow: hidden; background: #fff; aspect-ratio: 9 / 19; border: 1.5px solid #D8DCE3; cursor: zoom-in; }
+    .ad-ph img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+    /* Dashboard screens – shown in full, no cropping, tops aligned (same as AMS) */
+    .dsub { text-align: center; font-size: 26px; font-weight: 600; margin: 50px 0 22px; }
+    .dsub:first-child { margin-top: 10px; }
+    .dgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 860px; margin: 0 auto; align-items: start; }
+    .dgrid:has(> :only-child) { grid-template-columns: 1fr; max-width: 430px; }   /* single image = centred */
+    .dweb { border-radius: 8px; overflow: hidden; background: #fff; border: 1.5px solid #D8DCE3; box-shadow: 0 4px 14px rgba(0,0,0,.08); cursor: zoom-in; }
+    .dweb img { width: 100%; height: auto; }
+
+    /* ---------- 15. Usability testing ---------- */
+    .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 46px; }
+    .cards3 > div { background: var(--soft); border-radius: 22px; padding: 36px 34px; text-align: center; font-size: 17px; line-height: 1.65; color: #333; }
+    .cards3 h4 { color: var(--brown-2); font-size: 22px; font-weight: 600; line-height: 1.4; margin-bottom: 18px; }
+
+    /* ---------- 16. Lightbox ---------- */
+    .lightbox { position: fixed; inset: 0; z-index: 100; padding: 30px; background: rgba(0,0,0,.88); display: none; align-items: center; justify-content: center; }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 10px; }
+    .lightbox .close { position: absolute; top: 20px; right: 28px; background: none; border: none; color: #fff; font-size: 44px; line-height: 1; cursor: pointer; }
+
+    /* ---------- 17. Footer ---------- */
+    footer { background: #000; color: #fff; padding: 16px 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+    footer .copy { font-size: 18px; }
+    footer .f-logo img { height: 100px; }
+    footer .social { display: flex; align-items: center; justify-content: flex-end; gap: 23px; }
+    footer .social span { font-size: 18px; font-weight: 500; margin-right: -8px; }
+    footer .social img { width: 50px; height: 50px; border-radius: 6px; transition: transform .25s; }
+    footer .social a:hover img { transform: translateY(-4px); }
+
+    /* ---------- 18. Responsive: tablet ---------- */
+    @media (max-width: 1100px) {
+      .nav-links a { padding: 14px 24px; font-size: 18px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-img { max-width: 520px; width: 100%; margin: 0 auto; min-height: 0; aspect-ratio: 1 / 1.05; }
+      .ov-row { grid-template-columns: 1fr; }
+      .soft-box { padding: 56px 30px 60px; }
+      .process { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .step::after, .step::before { display: none; }
+      .charts { grid-template-columns: repeat(2, 1fr); }
+      .persona { grid-template-columns: 1fr; }
+      .empathy { grid-template-columns: 1fr; max-width: 560px; }
+      .emp-col.side, .emp-col.mid { padding-top: 0; }
+      .typo { grid-template-columns: 1fr; padding: 0; }
+      .sw { width: 130px; }
+      .g-in { padding: 50px 18px 24px; }
+      .grid5 { grid-template-columns: repeat(3, 1fr); }
+      .cards3 { grid-template-columns: 1fr; }
+    }
+
+    /* ---------- 19. Responsive: mobile ---------- */
+    @media (max-width: 720px) {
+      .nav-wrap { padding: 20px 16px 0; }
+      .navbar { height: auto; padding: 14px 16px; flex-direction: column; gap: 12px; border-radius: 30px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .nav-links a { padding: 10px 18px; font-size: 16px; }
+
+      main { padding: 0 16px 60px; }
+      .page-title { margin-top: 44px; }
+      .page-title h1 { font-size: 34px; }
+      .overview { padding: 28px 22px; }
+      .sec-title { font-size: 30px; }
+      .sec-sub { font-size: 16px; }
+      section.block { margin-top: 80px; }
+
+      .process { grid-template-columns: 1fr 1fr; }
+      .charts { grid-template-columns: 1fr; }
+      .comp { grid-template-columns: repeat(4, minmax(150px, 1fr)); overflow-x: auto; padding-bottom: 8px; }
+      .comp .cell { font-size: 14px; }
+
+      .wires { grid-template-columns: 1fr; gap: 30px; max-width: 280px; }
+      .arrow { display: none; }
+
+      .typo .fname { font-size: 64px; }
+      .typo .chars { font-size: 20px; }
+      .aa .A { font-size: 140px; }
+      .aa .a { font-size: 112px; }
+      .weights { gap: 16px; font-size: 15px; }
+      .swatches { flex-wrap: wrap; gap: 10px; margin-top: -80px; padding: 0; }
+      .sw { width: 30%; border-width: 6px; }
+      .ds-box { padding-bottom: 110px; }
+
+      .gallery-head { font-size: 22px; }
+      .grid5 { grid-template-columns: repeat(2, 1fr); }
+      .dgrid { grid-template-columns: 1fr; }
+
+      footer { grid-template-columns: 1fr; gap: 22px; text-align: center; padding: 20px 20px; }
+      footer .f-logo img { margin: 0 auto; }
+      footer .social { justify-content: center; flex-wrap: wrap; gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="Image/Common/Logo.png" alt="MN logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="ux-ui-design.html" class="active" aria-current="page">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero & overview ===== -->
+    <div class="page-title"><h1>AstroVaidya</h1></div>
+    <div class="hero">
+      <div class="hero-img zoom"><img src="Image/AstroVaidya/1.png" alt="AstroVaidya"></div>
+      <div class="overview">
+        <h2>Product Overview</h2>
+        <p>An astrology consultation app designed to connect users with astrologers for personalized guidance through live consultations, horoscopes, Kundli, matchmaking, and astrology-based products.</p>
+        <div class="ov-row">
+          <fieldset class="fieldset">
+            <legend>Tools</legend>
+            <div class="tools"><img src="Image/Common/Figma.png" alt="Figma"><img src="Image/Common/Photoshop.png" alt="Photoshop"></div>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend>Role</legend>
+            <div class="val">UX/UI DESIGNER | APP DESIGNER</div>
+          </fieldset>
+        </div>
+        <fieldset class="fieldset">
+          <legend>Focus</legend>
+          <div class="val">Mobile App Design | User Flow | Information Architecture | Wireframing | Consultation Experience | Astrology Services</div>
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- ===== Design process ===== -->
+    <section class="block">
+      <h2 class="sec-title">Design <span>Process</span></h2>
+      <p class="sec-sub w-820">Understanding user needs around astrology consultations and guidance helps create a simple experience for discovering astrologers, exploring astrology services, and accessing personalized insights.</p>
+      <div class="process">
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="#EF4F8C"/><path d="M31 17l-4.5 9.5L17 31l4.5-9.5z" fill="#fff"/><circle cx="24" cy="24" r="2" fill="#EF4F8C"/></svg></div>
+          <h4>Discover</h4>
+          <p>User Research, Competitive Analysis</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#F06A1E" stroke-width="4" stroke-linecap="round"><path d="M15 15a14 14 0 1 0 18 0"/><path d="M19.5 20a7.5 7.5 0 1 0 9 0"/><path d="M24 6v14"/><circle cx="24" cy="27" r="2" fill="#F06A1E"/></svg></div>
+          <h4>Define</h4>
+          <p>User Persona, Empathy Map</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M24 5a14 14 0 0 0-8 25.5V35h16v-4.5A14 14 0 0 0 24 5z" fill="#F7B500"/><rect x="17" y="37" width="14" height="3" rx="1.5" fill="#F7B500"/><rect x="19" y="42" width="10" height="3" rx="1.5" fill="#F7B500"/><path d="M19 15l5 6 5-6M24 21v9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Ideate</h4>
+          <p>User Flow</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M30 10l8 8-16 16-9 2 2-9z" fill="#F2622B"/><path d="M14 30c-6 0-8 4-5 6s9-1 4 5" stroke="#F2622B" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></div>
+          <h4>Design</h4>
+          <p>Lo-fi Wireframe, Hi-fi Wireframe</p>
+        </div>
+        <div class="step">
+          <div class="ic"><svg viewBox="0 0 48 48"><path d="M10 5h18l10 10v26a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#EF4F6E"/><path d="M28 5v10h10" fill="#F9A3B3"/><rect x="13" y="22" width="9" height="3" rx="1.5" fill="#fff"/><rect x="13" y="29" width="7" height="3" rx="1.5" fill="#fff"/><circle cx="31" cy="32" r="6" fill="#fff" stroke="#EF4F6E" stroke-width="3"/><path d="M35.5 36.5l5 5" stroke="#EF4F6E" stroke-width="3.5" stroke-linecap="round"/></svg></div>
+          <h4>Test</h4>
+          <p>Usability Testing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Quantitative research ===== -->
+    <section class="block">
+      <h2 class="sec-title">Quantitative <span>Research</span></h2>
+      <p class="sec-sub w-860">Understanding users’ astrology habits, consultation preferences, and reasons for seeking guidance helps create a more accessible experience for discovering astrologers, exploring services, and receiving personalized insights.</p>
+      <div class="charts">
+        <div class="chart" style="--c:#8E62E8">
+          <h4><i>👥</i>Age Group</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#DCCBFA 0% 18%, #B48EF4 18% 60%, #9C6CF0 60% 86%, #7E4FDB 86% 96%, #5B2DB8 96% 100%)"><span>🎂</span></div>
+            <ul class="legend2"><li style="--d:#DCCBFA">18–24<b>18%</b></li><li style="--d:#B48EF4">25–34<b>42%</b></li><li style="--d:#9C6CF0">35–44<b>26%</b></li><li style="--d:#7E4FDB">45–54<b>10%</b></li><li style="--d:#5B2DB8">55+<b>4%</b></li></ul>
+          </div>
+        </div>
+        <div class="chart" style="--c:#F08A3C">
+          <h4><i>👤</i>Gender</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#F6B27A 0% 54%, #F08A3C 54% 97%, #FBDCC2 97% 100%)"><span>👫</span></div>
+            <ul class="legend2"><li style="--d:#F6B27A">Male<b>54%</b></li><li style="--d:#F08A3C">Female<b>43%</b></li><li style="--d:#FBDCC2">Prefer not to say<b>3%</b></li></ul>
+          </div>
+        </div>
+        <div class="chart" style="--c:#5CC45A">
+          <h4><i>📱</i>Primary Device</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#9BDE93 0% 78%, #5CC45A 78% 97%, #2E7D32 97% 100%)"><span>📱</span></div>
+            <ul class="legend2"><li style="--d:#9BDE93">Android<b>78%</b></li><li style="--d:#5CC45A">iOS<b>19%</b></li><li style="--d:#2E7D32">Other<b>3%</b></li></ul>
+          </div>
+        </div>
+        <div class="chart" style="--c:#F2B632">
+          <h4><i>📅</i>Astrology Usage Frequency</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#FFE07A 0% 18%, #F8C94A 18% 45%, #F2B632 45% 79%, #EE8A1F 79% 100%)"><span>🌙</span></div>
+            <ul class="legend2"><li style="--d:#FFE07A">Daily<b>18%</b></li><li style="--d:#F8C94A">Several times a week<b>27%</b></li><li style="--d:#F2B632">2–3 times/month<b>34%</b></li><li style="--d:#EE8A1F">Occasionally<b>21%</b></li></ul>
+          </div>
+        </div>
+        <div class="chart" style="--c:#EE4F96">
+          <h4><i>⏱️</i>Typical Consultation Duration</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#F9C6DD 0% 12%, #F38AB9 12% 44%, #EE5B9C 44% 82%, #E1307A 82% 100%)"><span>🎥</span></div>
+            <ul class="legend2"><li style="--d:#F9C6DD">Under 10 min<b>12%</b></li><li style="--d:#F38AB9">10–20 min<b>32%</b></li><li style="--d:#EE5B9C">21–30 min<b>38%</b></li><li style="--d:#E1307A">Over 30 min<b>18%</b></li></ul>
+          </div>
+        </div>
+        <div class="chart" style="--c:#8E62E8">
+          <h4><i>⭐</i>Most Wanted App Features</h4>
+          <div class="body">
+            <div class="donut" style="background:conic-gradient(#7E4FDB 0% 32%, #9C6CF0 32% 52%, #B48EF4 52% 70%, #C9ADF7 70% 86%, #6A3FC9 86% 94%, #DCCBFA 94% 100%)"><span>▦</span></div>
+            <ul class="legend2"><li style="--d:#7E4FDB">Live astrologer consultation<b>32%</b></li><li style="--d:#9C6CF0">Daily horoscope<b>20%</b></li><li style="--d:#B48EF4">Kundli &amp; reports<b>18%</b></li><li style="--d:#C9ADF7">Matchmaking<b>16%</b></li><li style="--d:#6A3FC9">Astrology products<b>8%</b></li><li style="--d:#DCCBFA">Personalized predictions<b>6%</b></li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Competitor analysis ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Competitor <span class="alt">Analysis</span></h2>
+      <p class="sec-sub">A UX-focused comparison of competing astrology platforms helped identify usability gaps, navigation patterns, and opportunities to create a simpler and more intuitive experience for AstroVaidya.</p>
+      <div class="comp">
+        <div></div>
+        <div class="brand"><img src="Image/AstroVaidya/2.png" alt="AstroTalk"></div>
+        <div class="brand"><img src="Image/AstroVaidya/3.png" alt="AstroSage"></div>
+        <div class="brand"><img src="Image/AstroVaidya/4.png" alt="Anytime Astro"></div>
+
+        <div class="cell head">Navigation</div>
+        <div class="cell">Feature-rich but can feel crowded</div>
+        <div class="cell">Very feature-heavy, many options</div>
+        <div class="cell">Simpler and consultation-focused</div>
+
+        <div class="cell head">Astrologer Discovery</div>
+        <div class="cell">Strong filtering, ratings, pricing &amp; availability</div>
+        <div class="cell">Good, but more information-heavy</div>
+        <div class="cell">Simple astrologer browsing</div>
+
+        <div class="cell head">Information Hierarchy</div>
+        <div class="cell">Strong CTAs, but many competing elements</div>
+        <div class="cell">Dense content and multiple tools</div>
+        <div class="cell">Cleaner, focused hierarchy</div>
+
+        <div class="cell head">Consultation Flow</div>
+        <div class="cell">Clear chat/call entry points</div>
+        <div class="cell">Multiple pathways can make selection feel complex</div>
+        <div class="cell">Straightforward chat/call journey</div>
+
+        <div class="cell head">Kundli Experience</div>
+        <div class="cell">Detailed but relatively accessible</div>
+        <div class="cell">Highly detailed with many calculations</div>
+        <div class="cell">More basic and focused</div>
+
+        <div class="cell head">Visual Design</div>
+        <div class="cell">Colorful, promotional, marketplace-oriented</div>
+        <div class="cell">Information-heavy and utility-focused</div>
+        <div class="cell">Clean and service-oriented</div>
+
+        <div class="cell head">Content Density</div>
+        <div class="cell">Medium-High</div>
+        <div class="cell">High</div>
+        <div class="cell">Medium</div>
+
+        <div class="cell head">Personalization</div>
+        <div class="cell">Strong astrologer recommendations and services</div>
+        <div class="cell">Strong reports/calculations</div>
+        <div class="cell">Primarily consultation-based</div>
+
+        <div class="cell head">E-commerce UX</div>
+        <div class="cell">Integrated spiritual products</div>
+        <div class="cell">Large range of astrology products</div>
+        <div class="cell">Less prominent</div>
+
+        <div class="cell head">UX Opportunity</div>
+        <div class="cell">Reduce visual competition between services</div>
+        <div class="cell">Simplify complex information</div>
+        <div class="cell">Add more depth while retaining simplicity</div>
+      </div>
+    </section>
+
+    <!-- ===== User persona ===== -->
+    <section class="block">
+      <h2 class="sec-title">User <span>Persona</span></h2>
+      <p class="sec-sub w-780">Understanding users’ astrology habits, motivations, and consultation needs helps create a simple experience that makes discovering astrologers, exploring predictions, and seeking guidance more convenient.</p>
+      <div class="persona">
+        <div class="p-col">
+          <div class="p-card">
+            <div class="avatar zoom"><img src="Image/AstroVaidya/5.png" alt="Sneha Verma"></div>
+            <div class="p-name">Sneha Verma</div>
+            <dl class="facts">
+              <dt>Age</dt><dd>28</dd>
+              <dt>Location</dt><dd>Mumbai</dd>
+              <dt>Occupation</dt><dd>Marketing Executive</dd>
+              <dt>Astrology Usage</dt><dd>Occasional / Weekly</dd>
+              <dt>Tech Literacy</dt><dd>High</dd>
+            </dl>
+          </div>
+          <div class="p-card"><p class="quote">I want reliable astrology guidance that is easy to understand, without having to search through too many options.</p></div>
+          <div class="p-card">
+            <h5>Personality</h5>
+            <div class="chips"><span>Curious</span><span>Practical</span><span>Open-minded</span><span>Tech-savvy</span></div>
+          </div>
+        </div>
+        <div class="p-col">
+          <div class="p-card">
+            <h5>Bio</h5>
+            <p>Sneha Verma is a young working professional who uses astrology apps for daily guidance, relationship insights, and important life decisions. She prefers quick access to trustworthy astrologers and simple, easy-to-understand astrology services.</p>
+          </div>
+          <div class="p-card">
+            <h5>Core Needs</h5>
+            <ul>
+              <li>Find trusted astrologers based on expertise, ratings, and pricing.</li>
+              <li>Get quick access to daily horoscope and personalized predictions.</li>
+              <li>View Kundli and matchmaking information easily.</li>
+              <li>Compare astrologers before starting a consultation.</li>
+              <li>Book or start a chat/call without a complicated process.</li>
+            </ul>
+          </div>
+          <div class="p-card">
+            <h5>Frustrations</h5>
+            <ul>
+              <li>Too many services and options can make navigation confusing.</li>
+              <li>Difficulty identifying reliable astrologers.</li>
+              <li>Complex Kundli information is hard to understand.</li>
+              <li>Unclear consultation pricing or charges.</li>
+              <li>Too many promotional elements competing for attention.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Storyboard ===== -->
+    <section class="block">
+      <h2 class="sec-title">Story<span>board</span></h2>
+      <p class="sec-sub w-560">Understanding how users seek astrology guidance helps create a simple journey from discovering an astrologer to receiving personalized guidance.</p>
+      <div class="storyboard zoom"><img src="Image/AstroVaidya/6.png" alt="Storyboard"></div>
+    </section>
+
+    <!-- ===== Empathy map ===== -->
+    <section class="block">
+      <h2 class="sec-title">Empathy <span class="alt">Map</span></h2>
+      <p class="sec-sub">Understanding users’ thoughts, behaviors, emotions, and challenges helps create a more intuitive astrology consultation experience.</p>
+      <div class="empathy">
+        <div class="emp-col side">
+          <div class="emp">
+            <h4><span class="em">👣</span>DOES</h4>
+            <ul><li>Checks daily horoscope and predictions.</li><li>Browses astrologers by rating, expertise, and price.</li><li>Explores Kundli and matchmaking services.</li><li>Starts chat or call consultations.</li><li>Purchases astrology-related products.</li></ul>
+          </div>
+          <div class="emp">
+            <h4><span class="em">😣</span>PAINS</h4>
+            <ul><li>Difficulty finding trustworthy astrologers.</li><li>Complex Kundli information.</li><li>Unclear consultation pricing.</li><li>Too many options and promotional elements.</li><li>Difficulty comparing astrologers.</li></ul>
+          </div>
+        </div>
+        <div class="emp-col mid">
+          <div class="emp">
+            <h4><span class="em">🧠</span>THINKS</h4>
+            <ul><li>“Can I trust this astrologer?”</li><li>“How accurate will the guidance be?”</li><li>“Which astrologer is right for me?”</li><li>“How much will the consultation cost?”</li><li>“Can I understand my Kundli easily?”</li></ul>
+          </div>
+          <div class="emp">
+            <h4><span class="em">❤️</span>FEELS</h4>
+            <ul><li>Curious about future possibilities.</li><li>Hopeful when seeking guidance.</li><li>Confident when information is clear.</li><li>Confused by complex astrology details.</li><li>Frustrated by too many choices.</li></ul>
+          </div>
+        </div>
+        <div class="emp-col side">
+          <div class="emp">
+            <h4><span class="em">💬</span>SAYS</h4>
+            <ul><li>“I want a genuine astrologer.”</li><li>“The pricing should be clear.”</li><li>“I need quick guidance.”</li><li>“I want simple and understandable predictions.”</li><li>“The consultation should be easy to start.”</li></ul>
+          </div>
+          <div class="emp">
+            <h4><span class="em">✨</span>GAINS</h4>
+            <ul><li>Easy access to trusted astrologers.</li><li>Clear pricing and profiles.</li><li>Personalized astrology guidance.</li><li>Simple Kundli and horoscope experience.</li><li>Convenient chat and call consultations.</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Mapping the experience ===== -->
+    <section class="block soft-box">
+      <h2 class="sec-title">Mapping <span class="alt">the Experience</span></h2>
+      <p class="sec-sub">The experience map connects the user’s astrology journey with key interactions and supporting touchpoints to create a simple, trustworthy, and seamless consultation experience.</p>
+      <div class="map-list">
+        <div>
+          <div class="map-img zoom"><img src="Image/AstroVaidya/7.png" alt="User side map"></div>
+          <div class="map-cap">User Side</div>
+        </div>
+        <div>
+          <div class="map-img zoom"><img src="Image/AstroVaidya/8.png" alt="Astrologer side map"></div>
+          <div class="map-cap">Astrologer Side</div>
+        </div>
+        <div>
+          <div class="map-img zoom"><img src="Image/AstroVaidya/9.png" alt="Admin side map"></div>
+          <div class="map-cap">Admin Side</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Wireframes ===== -->
+    <section class="block">
+      <h2 class="sec-title">Building the <span>Digital Experience</span></h2>
+      <p class="sec-sub w-640">Creating a simple and trustworthy astrology experience that helps users discover astrologers, explore personalized insights, and connect for guidance with ease.</p>
+      <div class="wires">
+        <div class="wire"><div class="shot zoom"><img src="Image/AstroVaidya/10.png" alt="Paper wireframe"></div><span>Paper wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/AstroVaidya/11.png" alt="Lo-fi wireframe"></div><span>Lo-fi wireframe</span></div>
+        <div class="arrow"></div>
+        <div class="wire"><div class="shot zoom"><img src="Image/AstroVaidya/12.png" alt="Hi-fi wireframe"></div><span>Hi-fi wireframe</span></div>
+      </div>
+    </section>
+
+    <!-- ===== Design system ===== -->
+    <section class="block">
+      <div class="soft-box ds-box">
+        <h2 class="sec-title">Design <span>System</span></h2>
+        <p class="sec-sub">Establishing a consistent visual language through typography, colors, and reusable components to create a clear, intuitive, and cohesive astrology consultation experience.</p>
+        <div class="typo">
+          <div>
+            <h5>Typography</h5>
+            <div class="fname">Poppins</div>
+            <div class="chars">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890</div>
+          </div>
+          <div class="aa-wrap">
+            <div class="aa"><span class="A">A</span><span class="a">a</span></div>
+            <div class="weights"><span>Regular</span><span>Medium</span><span>Semibold</span><span>Bold</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="swatches"><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span><span class="sw"></span></div>
+    </section>
+
+    <!-- ===== UI design ===== -->
+    <section class="block">
+      <h2 class="sec-title">UI <span>Design</span></h2>
+      <p class="sec-sub">A collection of key screens across the user app, astrologer app, and admin dashboard, showcasing astrologer discovery, consultations, horoscope, Kundli, matchmaking, and store experiences.</p>
+
+      <!-- User app -->
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">User App Design <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+          <div class="grid5">
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/13.png" alt="User app screen 1" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/14.png" alt="User app screen 2" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/15.png" alt="User app screen 3" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/16.png" alt="User app screen 4" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/17.png" alt="User app screen 5" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/18.png" alt="User app screen 6" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/19.png" alt="User app screen 7" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/20.png" alt="User app screen 8" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/21.png" alt="User app screen 9" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/22.png" alt="User app screen 10" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/23.png" alt="User app screen 11" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/24.png" alt="User app screen 12" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/25.png" alt="User app screen 13" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/26.png" alt="User app screen 14" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/27.png" alt="User app screen 15" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/28.png" alt="User app screen 16" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/29.png" alt="User app screen 17" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/30.png" alt="User app screen 18" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/31.png" alt="User app screen 19" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/32.png" alt="User app screen 20" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/33.png" alt="User app screen 21" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/34.png" alt="User app screen 22" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/35.png" alt="User app screen 23" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/36.png" alt="User app screen 24" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/37.png" alt="User app screen 25" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/38.png" alt="User app screen 26" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/39.png" alt="User app screen 27" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/40.png" alt="User app screen 28" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/41.png" alt="User app screen 29" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/42.png" alt="User app screen 30" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/43.png" alt="User app screen 31" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/44.png" alt="User app screen 32" loading="lazy"></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Astrologer app -->
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">Astrologer App Design <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+          <div class="grid5">
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/45.png" alt="Astrologer app screen 1" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/46.png" alt="Astrologer app screen 2" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/47.png" alt="Astrologer app screen 3" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/48.png" alt="Astrologer app screen 4" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/49.png" alt="Astrologer app screen 5" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/50.png" alt="Astrologer app screen 6" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/51.png" alt="Astrologer app screen 7" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/52.png" alt="Astrologer app screen 8" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/53.png" alt="Astrologer app screen 9" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/54.png" alt="Astrologer app screen 10" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/55.png" alt="Astrologer app screen 11" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/56.png" alt="Astrologer app screen 12" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/57.png" alt="Astrologer app screen 13" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/58.png" alt="Astrologer app screen 14" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/59.png" alt="Astrologer app screen 15" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/60.png" alt="Astrologer app screen 16" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/61.png" alt="Astrologer app screen 17" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/62.png" alt="Astrologer app screen 18" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/63.png" alt="Astrologer app screen 19" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/64.png" alt="Astrologer app screen 20" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/65.png" alt="Astrologer app screen 21" loading="lazy"></div>
+            <div class="ad-ph zoom"><img src="Image/AstroVaidya/66.png" alt="Astrologer app screen 22" loading="lazy"></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Admin dashboard -->
+      <div class="gallery open">
+        <button class="gallery-head" type="button" aria-expanded="true">Dashboard <span class="chev"></span></button>
+        <div class="gallery-body"><div class="g-in">
+
+          <h3 class="dsub">Login/Dashboard</h3>
+          <div class="dgrid">
+            <div class="dweb zoom"><img src="Image/AstroVaidya/67.png" alt="Login/Dashboard 1" loading="lazy"></div>
+            <div class="dweb zoom"><img src="Image/AstroVaidya/68.png" alt="Login/Dashboard 2" loading="lazy"></div>
+          </div>
+
+          <h3 class="dsub">User</h3>
+          <div class="dgrid">
+            <div class="dweb zoom"><img src="Image/AstroVaidya/69.png" alt="User 1" loading="lazy"></div>
+            <div class="dweb zoom"><img src="Image/AstroVaidya/70.png" alt="User 2" loading="lazy"></div>
+          </div>
+
+          <h3 class="dsub">Astrologer</h3>
+          <div class="dgrid">
+            <div class="dweb zoom"><img src="Image/AstroVaidya/71.png" alt="Astrologer 1" loading="lazy"></div>
+            <div class="dweb zoom"><img src="Image/AstroVaidya/72.png" alt="Astrologer 2" loading="lazy"></div>
+            <div class="dweb zoom"><img src="Image/AstroVaidya/73.png" alt="Astrologer 3" loading="lazy"></div>
+            <div class="dweb zoom"><img src="Image/AstroVaidya/74.png" alt="Astrologer 4" loading="lazy"></div>
+          </div>
+
+          <h3 class="dsub">Chat</h3>
+          <div class="dgrid">
+            <div class="dweb zoom"><img src="Image/AstroVaidya/75.png" alt="Chat 1" loading="lazy"></div>
+          </div>
+
+          <h3 class="dsub">Product</h3>
+          <div class="dgrid">
+            <div class="dweb zoom"><img src="Image/AstroVaidya/76.png" alt="Product 1" loading="lazy"></div>
+            <div class="dweb zoom"><img src="Image/AstroVaidya/77.png" alt="Product 2" loading="lazy"></div>
+            <div class="dweb zoom"><img src="Image/AstroVaidya/78.png" alt="Product 3" loading="lazy"></div>
+            <div class="dweb zoom"><img src="Image/AstroVaidya/79.png" alt="Product 4" loading="lazy"></div>
+          </div>
+
+          <h3 class="dsub">Testimonials</h3>
+          <div class="dgrid">
+            <div class="dweb zoom"><img src="Image/AstroVaidya/80.png" alt="Testimonials 1" loading="lazy"></div>
+          </div>
+
+          <h3 class="dsub">Blog</h3>
+          <div class="dgrid">
+            <div class="dweb zoom"><img src="Image/AstroVaidya/81.png" alt="Blog 1" loading="lazy"></div>
+            <div class="dweb zoom"><img src="Image/AstroVaidya/82.png" alt="Blog 2" loading="lazy"></div>
+          </div>
+
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Usability testing ===== -->
+    <section class="block">
+      <h2 class="sec-title">Usability <span>Testing</span></h2>
+      <p class="sec-sub w-720">A collection of key astrology interfaces, highlighting astrologer discovery, consultation, horoscope, Kundli, matchmaking, and store experiences.</p>
+      <div class="cards3">
+        <div><h4>Simplified Astrologer<br>Discovery</h4>Users need clear astrologer profiles with expertise, ratings, languages, availability, and pricing to confidently choose the right astrologer.</div>
+        <div><h4>Clear Consultation &amp;<br>Pricing</h4>Consultation options should clearly communicate chat/call availability, per-minute pricing, and relevant charges to help users make informed decisions.</div>
+        <div><h4>Seamless Guidance<br>Experience</h4>Easy navigation, simple astrology information, and clear actions from discovery to consultation can create a smoother and more trustworthy user experience.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="copy">© 2026 By Mariyam Nesha</div>
+    <!-- NOTE: this src starts with a lowercase "image/" – all other pages use "Image/".
+         It may work on your computer but will break on most web hosts. Change it to "Image/Common/Logo.png". -->
+    <a href="index.html" class="f-logo"><img src="image/Common/Logo.png" alt="MN logo"></a>
+    <div class="social">
+      <span>Follow :</span>
+      <a href="https://www.behance.net/mariyamnesha3" target="_blank" rel="noopener" aria-label="Behance"><img src="Image/Common/Behance.png" alt="Behance"></a>
+      <a href="https://dribbble.com/mary333333333" target="_blank" rel="noopener" aria-label="Dribbble"><img src="Image/Common/Dribbble.png" alt="Dribbble"></a>
+      <a href="mailto:mariyamnesha3@gmail.com" aria-label="Gmail"><img src="Image/Common/Gmail.png" alt="Gmail"></a>
+      <a href="https://www.linkedin.com/in/mariyam-nesha-05b04a190/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="Image/Common/LinkedIn.png" alt="LinkedIn"></a>
+    </div>
+  </footer>
+
+  <!-- ===== Lightbox (click an image to enlarge) ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="close" type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </div>
+
+  <script>
+    /* ----- Collapsible galleries ----- */
+    function fit() {
+      document.querySelectorAll('.gallery-body').forEach(function (b) {
+        b.style.maxHeight = b.scrollHeight + 'px';
+      });
+    }
+
+    document.querySelectorAll('.gallery').forEach(function (g) {
+      var head = g.querySelector('.gallery-head');
+      head.addEventListener('click', function () {
+        fit();
+        var open = g.classList.toggle('open');
+        head.setAttribute('aria-expanded', open);
+      });
+    });
+
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    /* lazy images can change the height after loading – re-measure each time one loads */
+    document.querySelectorAll('.gallery img').forEach(function (img) {
+      img.addEventListener('load', fit);
+    });
+
+    /* ----- Lightbox ----- */
+    var lb = document.getElementById('lightbox');
+    var lbImg = lb.querySelector('img');
+
+    document.querySelectorAll('.zoom').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var img = el.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('show');
+      });
+    });
+
+    function closeLb() { lb.classList.remove('show'); }
+    lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  </script>
+</body>
+</html>
