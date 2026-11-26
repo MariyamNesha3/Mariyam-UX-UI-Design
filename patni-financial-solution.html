@@ -126,12 +126,30 @@
     /* ---------- Target audience ---------- */
     .audience { display: grid; grid-template-columns: 0.8fr 1fr 1fr 1fr; gap: 20px; align-items: center; margin-top: 40px; }
     .aud-donut {
+      --r: 104px;                                   /* how far the % labels sit from the centre */
       width: 220px; aspect-ratio: 1; border-radius: 50%; margin: 0 auto; position: relative;
       display: flex; align-items: center; justify-content: center;
-      background: conic-gradient(#F2780C 0 40%, #5CC41E 40% 70%, #1E7CF2 70% 100%);
+      /* small transparent gaps between the segments */
+      background: conic-gradient(
+        #F2780C 1% 39%,  transparent 39% 41%,
+        #5CC41E 41% 69%, transparent 69% 71%,
+        #1E7CF2 71% 99%, transparent 99% 100%
+      );
     }
     .aud-donut::before { content: ""; position: absolute; inset: 44px; border-radius: 50%; background: var(--soft); }
     .aud-donut span { position: relative; font-weight: 600; font-size: 16px; }
+
+    /* percentage pills on the donut */
+    .aud-donut .pct {
+      position: absolute; top: 50%; left: 50%; z-index: 1;
+      background: #fff; color: #111; font-size: 14px; font-weight: 600; font-style: normal;
+      padding: 4px 12px; border-radius: 20px; box-shadow: 0 3px 10px rgba(0,0,0,.12);
+      white-space: nowrap;
+      transform: translate(-50%, -50%) rotate(var(--a)) translateY(calc(var(--r) * -1)) rotate(calc(var(--a) * -1));
+    }
+    .aud-donut .pct.p-orange { --a: 72deg; }    /* middle of orange segment (40%) */
+    .aud-donut .pct.p-green  { --a: 198deg; }   /* middle of green segment (30%) */
+    .aud-donut .pct.p-blue   { --a: 306deg; }   /* middle of blue segment (30%) */
     .aud { border-radius: 18px; padding: 26px 22px; color: #fff; text-align: center; font-size: 16px; line-height: 1.55; }
     .aud.blue   { background: #1E7CF2; }
     .aud.orange { background: #F2780C; }
@@ -251,6 +269,7 @@
       .process { grid-template-columns: repeat(3, 1fr); }
       .step::after { display: none; }
       .audience, .challenges { grid-template-columns: 1fr; }
+      .aud-donut { margin: 20px auto; }
       .typo { grid-template-columns: 1fr; padding: 0; }
       .sw { width: 130px; }
       .g-in { padding: 50px 18px 24px; }
@@ -353,7 +372,12 @@
       <h2 class="sec-title">Target <span>Audience</span></h2>
       <p class="sec-sub">The dashboard is designed for financial teams managing clients, banking information, tasks, documents, and day-to-day financial operations from one centralized platform.</p>
       <div class="audience">
-        <div class="aud-donut"><span>Out of 100</span></div>
+        <div class="aud-donut">
+          <span>Out of 100</span>
+          <em class="pct p-blue">30%</em>
+          <em class="pct p-orange">40%</em>
+          <em class="pct p-green">30%</em>
+        </div>
         <div class="aud blue"><h4>Financial Managers &amp; Business Owners</h4>Oversee clients, banking operations, financial records, and overall business activities.</div>
         <div class="aud orange"><h4>Operations &amp; Admin Teams</h4>Manage client records, documents, bank information, tasks, and day-to-day administrative work.</div>
         <div class="aud green"><h4>Relationship &amp; Support Teams</h4>Handle client communication, follow-ups, document collection, and task coordination.</div>
